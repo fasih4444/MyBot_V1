@@ -198,7 +198,7 @@
             "SEARCHING": "*🔎 Investigando...*",
             "WIKI_DESC": "Busca en Wikipedia.",
             "IMG_DESC": "Ninguna traducción coincide con su búsqueda\nGoogle Pictures toma fotografías.",
-            "IMG": "Subiendo foto ```{}``` número ```{}```..."
+            "IMG": "Subiendo ```{}``` fotos de ```{}```..."
         },
         "sticker": {
             "STICKER_DESC": "Crea un sticker de la foto o el video al que respondiste.",
