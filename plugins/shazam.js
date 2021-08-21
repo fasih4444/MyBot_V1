@@ -42,31 +42,27 @@ if (Config.WORKTYPE == 'private') {
 
     }));
 
-    DrkBox.addCommand({pattern: 'reconb ?(.*)', fromMe: true}, (async (message, match) => {
+    DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => {
 
-        if (match[1] === '') return await message.sendMessage('https://raw.githubusercontent.com/BotPrivateDrk/WhatsAsenaDuplicated/master/media/gif/AUD-20210613-WA0098.mp3');
-            //return await message.sendMessage(errorMessage(Ierr))
+        if (message.reply_message === false) return await message.client.sendMessage(message.jid, bix.UV_REPLY, MessageType.text);
 
-            var data = {
-                'api_token': 'c60a989e5dbe5a900c81eaff534074a2',
-                'url': `${match[1]}`,
-                'return': 'apple_music,spotify',
-            };
+        var location = await message.client.downloadAndSaveMediaMessage({
+            key: {
+                remoteJid: message.reply_message.jid,
+                id: message.reply_message.id
+            },
+            message: message.reply_message.data.quotedMessage
+        });
 
-            axios({
-                method: 'post',
-                url: 'https://api.audd.io/',
-                data: data,
-                headers: { 'Content-Type': 'multipart/form-data' },
+        ffmpeg(location)
+        .format('mp3')
+        .save('lyr.mp3')
+        .on('end', async () => {
+            var data = { 'file': fs.createReadStream('lyr.mp3'), 'return': 'title,artists' };
+            request ({ url: 'https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=', form: data, method: "POST" }, async (err, res, body) => {
+                return await message.client.sendMessage(message.jid, body, MessageType.text);
             })
-            .then(async (response) => {
-                return await message.client.sendMessage(message.jid, response, MessageType.text);
-                 //console.log(response);
-            })
-            .catch(async (error) => {
-                return await message.client.sendMessage(message.jid, error, MessageType.text);
-                //console.log(error);
-            });
+        });
 
     }));
 
