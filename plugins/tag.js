@@ -117,4 +117,14 @@ else if (Config.WORKTYPE == 'public'){
         await message.client.sendMessage(message.jid,mesaj, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }));
 
+   DrkBot.addCommand({pattern: 'stam$', fromMe: false, desc: stag_dsc }, (async (message, match) => {
+    if (!message.reply_message) return await message.client.sendMessage(message.jid,Lang.NEED_REPLY, MessageType.text)
+    grup = await message.client.groupMetadata(message.jid);
+    var jids = [];
+    mesaj = '';
+    grup['participants'].map(async (uye) => {
+        await message.client.sendMessage(uye.jid, message.reply_message.text, MessageType.text)
+    })
+}));
+
 }
