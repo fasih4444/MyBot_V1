@@ -25,7 +25,7 @@ if (Config.WORKTYPE == 'private') {
 
 	DrkBox.addCommand({pattern: 'calendar', fromMe: true}, (async (message, match) => {
 		var image = await axios.get ('https://raw.githubusercontent.com/BotPrivateDrk/WhatsAsenaDuplicated/master/media/gif/calender.jpg', {responseType: 'arraybuffer'})
-		await message.client.sendMessage (message.jid, Buffer.from (image.data), MessageType.image, {mimetype: Mimetype.jpg, caption: `${MLang.by}` })
+		await message.client.sendMessage (message.jid, Buffer.from (image.data), MessageType.image, {mimetype: Mimetype.jpg, quoted: message.data, caption: `${MLang.by}` })
 	}));
 	
 	DrkBox.addCommand({pattern: "sfw ?(.*)", fromMe: true}, (async (message, match) => {
