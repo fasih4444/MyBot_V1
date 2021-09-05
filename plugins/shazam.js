@@ -42,7 +42,10 @@ if (Config.WORKTYPE == 'private') {
 
     }));
 
-    DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => {
+}
+
+else if (Config.WORKTYPE == 'public') {
+DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => {
 
         if (message.reply_message === false) return await message.client.sendMessage(message.jid, bix.UV_REPLY, MessageType.text);
 
@@ -58,14 +61,11 @@ if (Config.WORKTYPE == 'private') {
         .format('mp3')
         .save('lyr.mp3')
         .on('end', async () => {
-            var data = { 'file': fs.createReadStream('lyr.mp3'), 'return': 'title,artists' };
-            request ({ url: 'https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=', form: data, method: "POST" }, async (err, res, body) => {
+            var zdata = {fs.createReadStream('lyr.mp3')};
+            request ({ url: `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${zdata}`}, async (err, res, body) => {
                 return await message.client.sendMessage(message.jid, body, MessageType.text);
             })
         });
 
     }));
-
 }
-
-else if (Config.WORKTYPE == 'public') {}
