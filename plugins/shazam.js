@@ -61,7 +61,7 @@ DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => 
         .format('mp3')
         .save('lyr.mp3')
         .on('end', async () => {
-            var zdata = {fs.createReadStream('lyr.mp3')};
+            var zdata = {'file': fs.createReadStream('lyr.mp3'), 'return': 'title,artist'};
             request ({ url: `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${zdata}`}, async (err, res, body) => {
                 return await message.client.sendMessage(message.jid, body, MessageType.text);
             })
