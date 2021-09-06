@@ -40,9 +40,15 @@ if (Config.WORKTYPE == 'private') {
 
 else if (Config.WORKTYPE == 'public') {
 
-    DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: false, desc: Lang.desc_ss}, (async (message, match) => {
+    DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: true, desc: Lang.desc_ss}, (async (message, match) => {
         if (match[1] === '') return await message.sendMessage(Lang.need_ss);
         var webimage = await axios.get(`https://shot.screenshotapi.net/screenshot?&full_page=true&url=${match[1]}&fresh=true&output=image&file_type=png&dark_mode=true&wait_for_event=load&delay=2000`, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(webimage.data), MessageType.document, {mimetype: Mimetype.png, filename: 'Screenshot'})
+    }));
+
+    DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: false, desc: Lang.desc_ss}, (async (message, match) => {
+        if (match[1] === '') return await message.sendMessage(Lang.need_ss);
+        var webimage = await axios.get(`https://shot.screenshotapi.net/screenshot?token=PVDPV40-9MKMGHM-GP24N8Y-PTFAC6X&url=${match[1]}&output=image&full_page=true&delay=400`, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(webimage.data), MessageType.document, {mimetype: Mimetype.png, filename: 'Screenshot'})
     }));
     /*
