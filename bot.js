@@ -27,6 +27,7 @@ const heroku = new Heroku({
 let baseURI = '/apps/' + config.HEROKU.APP_NAME;
 const Language = require('./language');
 const Lang = Language.getString('updater');
+const MLang = Language.getString('messages');
 
 // Sql
 const WhatsAsenaDB = config.DATABASE.define('WhatsAsenaDuplicated', {
@@ -58,9 +59,6 @@ if (!Date.now) {
     Date.now = function() { return new Date().getTime(); }
 }
 // ==================== End Date Scanner ====================
-
-const Language = require('./language/ES.json');
-const MLang = Language.getString('messages');
 
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
