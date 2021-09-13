@@ -11,7 +11,7 @@ const Config = require('../config');
 const Language = require('../language');
 const Lang = Language.getString('tagall');
 
-//============================== tagall =============================================
+//============================== check admin =============================================
 async function checkImAdmin(message, user = message.client.user.jid) {
     var grup = await message.client.groupMetadata(message.jid);
     var sonuc = grup['participants'].map((member) => {
@@ -20,9 +20,21 @@ async function checkImAdmin(message, user = message.client.user.jid) {
     return sonuc.includes(true);
 }
 
-DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: true, desc: Lang.TAGALL_DESC }, (async (message, match) => {
+async function checkAdmin(message, user = message.data.participant) {
+    var grup = await message.client.groupMetadata(message.jid);
+    var sonuc = grup['participants'].map((member) => {
+        
+        if (member.jid.split("@")[0] == user.split("@")[0] && member.isAdmin) return true; else; return false;
+    });
+    return sonuc.includes(true);
+}
+
+//============================== tagall =============================================
+DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DESC }, (async (message, match) => {
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.ADMİN,MessageType.text);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
 
     if (!message.reply_message) {
         if (match[1] !== '') {
@@ -86,25 +98,15 @@ DrkBot.addCommand({pattern: 'stam$', fromMe: true, desc: stag_dsc }, (async (mes
 }));
 //============================== end tagall=============================================
 
-if (Config.WORKTYPE == 'private'){
+if (Config.WORKTYPE == 'private'){}
 
-    DrkBot.addCommand({pattern: 'tagadmin$', fromMe: true, desc: Lang.TAGADMİN}, (async (message, match) => {
-        let grup = await message.client.groupMetadata(message.jid);
-        var jids = [];
-        mesaj = '';
-        grup['participants'].map(async (uye) => {
-            if (uye.isAdmin) {
-                mesaj += '@' + uye.id.split('@')[0] + '\n';
-                jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
-            }
-        });
-        await message.client.sendMessage(message.jid,mesaj, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
-    }));
-
-}
 else if (Config.WORKTYPE == 'public'){
 
-    DrkBot.addCommand({pattern: 'tagadmin$', fromMe: true, desc: Lang.TAGADMİN}, (async (message, match) => {
+    DrkBot.addCommand({pattern: 'tagadmin$', fromMe: false, desc: Lang.TAGADMİN}, (async (message, match) => {
+            var im = await checkImAdmin(message);
+            var userad = await checkAdmin(message);
+            if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
+            if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
         let grup = await message.client.groupMetadata(message.jid);
         var jids = [];
         mesaj = '';
@@ -118,6 +120,10 @@ else if (Config.WORKTYPE == 'public'){
     }));
 
    DrkBot.addCommand({pattern: 'stam$', fromMe: false, desc: stag_dsc }, (async (message, match) => {
+        var im = await checkImAdmin(message);
+        var userad = await checkAdmin(message);
+        if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
+        if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
     if (!message.reply_message) return await message.client.sendMessage(message.jid,Lang.NEED_REPLY, MessageType.text)
     grup = await message.client.groupMetadata(message.jid);
     var jids = [];
