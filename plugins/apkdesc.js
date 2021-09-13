@@ -52,7 +52,7 @@ DrkBox.addCommand({pattern: "games ?(.*)", fromMe: true}, (async (message, match
 			await message.sendMessage('💎 *Sniper 3D Mod* 💎\n##desc\n⚠️ ##aviso\n📌 https://ouo.io/74OFrB', MessageType.text, {quoted: message.data});
 		}
 		else if (match[1] === "16") {
-			await message.sendMessage('💎 *State Of Survival* 💎\n##desc\n⚠️ ##aviso\n📌 https://ouo.io/zhe7dUr, MessageType.text, {quoted: message.data});
+			await message.sendMessage('💎 *State Of Survival* 💎\n##desc\n⚠️ ##aviso\n📌 https://ouo.io/zhe7dUr', MessageType.text, {quoted: message.data});
 		}
 		else if (match[1] === "17") {
 			await message.sendMessage('💎 *Subway Surfer Mod* 💎\n##desc\n⚠️ ##aviso\n📌 https://ouo.io/grcoQ7', MessageType.text, {quoted: message.data});
