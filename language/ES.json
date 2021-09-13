@@ -213,6 +213,7 @@
         "tagall": {
             "TAGALL_DESC": "Etiqueta a todos en el grupo.",
             "ADMİN": "*¡No soy un administrador en este grupo!*",
+            "USER_NOT_ADMIN": "*¡Comando solo para administradores del grupo!*",
             "SCAN": "Comprueba si el número introducido está registrado en WhatApp.",
             "NO": "*Ingrese cualquier número de teléfono!*\n*Ejemplo:* ```.scan 57xxxx```",
             "SUC": "✅ *El número ingresado usa WhatsApp!*",
