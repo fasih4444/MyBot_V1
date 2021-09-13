@@ -1609,7 +1609,7 @@ DrkBot.addCommand({pattern: 'invite ?(.*)', fromMe: false, onlyGroup: true, desc
     await message.client.sendMessage(message.jid,Lang.INVITE + ' https://chat.whatsapp.com/' + invite, MessageType.text);
 }));
 
-DrkBox.addCommand({pattern: 'vip', fromMe: false, onlyGroup: true}, (async (message, match) => {
+DrkBot.addCommand({pattern: 'vip', fromMe: false, onlyGroup: true}, (async (message, match) => {
     var im = await checkImAdmin(message);
     var userad = await checkAdmin(message);
     if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
