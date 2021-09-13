@@ -12,6 +12,15 @@ const Language = require('../language');
 const Lang = Language.getString('admin');
 const mut = Language.getString('mute');
 
+async function checkAdmin(message, user = message.data.participant) {
+    var grup = await message.client.groupMetadata(message.jid);
+    var sonuc = grup['participants'].map((member) => {
+        
+        if (member.jid.split("@")[0] == user.split("@")[0] && member.isAdmin) return true; else; return false;
+    });
+    return sonuc.includes(true);
+}
+
 async function checkImAdmin(message, user = message.client.user.jid) {
     var grup = await message.client.groupMetadata(message.jid);
     var sonuc = grup['participants'].map((member) => {
@@ -21,8 +30,10 @@ async function checkImAdmin(message, user = message.client.user.jid) {
     return sonuc.includes(true);
 }
 
-DrkBot.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.BAN_DESC}, (async (message, match) => {  
+DrkBot.addCommand({pattern: 'ban ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.BAN_DESC}, (async (message, match) => {  
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
 
     if (Config.BANMSG == 'default') {
@@ -59,8 +70,10 @@ DrkBot.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: La
     }
 }));
 
-DrkBot.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
+DrkBot.addCommand({pattern: 'add(?: |$)(.*)', fromMe: false, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
 
     if (Config.ADDMSG == 'default') {
@@ -93,8 +106,10 @@ DrkBot.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, des
     }
 }));
 
-DrkBot.addCommand({pattern: 'promote ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.PROMOTE_DESC}, (async (message, match) => {    
+DrkBot.addCommand({pattern: 'promote ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.PROMOTE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
 
     if (Config.PROMOTEMSG == 'default') {
@@ -151,8 +166,10 @@ DrkBot.addCommand({pattern: 'promote ?(.*)', fromMe: true, onlyGroup: true, desc
     }
 }));
 
-DrkBot.addCommand({pattern: 'demote ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.DEMOTE_DESC}, (async (message, match) => {    
+DrkBot.addCommand({pattern: 'demote ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.DEMOTE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN);
 
     if (Config.DEMOTEMSG == 'default') {
@@ -209,8 +226,10 @@ DrkBot.addCommand({pattern: 'demote ?(.*)', fromMe: true, onlyGroup: true, desc:
     }
 }));
 
-DrkBot.addCommand({pattern: 'mute ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.MUTE_DESC}, (async (message, match) => {    
+DrkBot.addCommand({pattern: 'mute ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.MUTE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
 
     if (Config.MUTEMSG == 'default') {
@@ -1565,8 +1584,10 @@ DrkBot.addCommand({pattern: 'mute ?(.*)', fromMe: true, onlyGroup: true, desc: L
     }
 }));
 
-DrkBot.addCommand({pattern: 'unmute ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.UNMUTE_DESC}, (async (message, match) => {    
+DrkBot.addCommand({pattern: 'unmute ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.UNMUTE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
 
     if (Config.UNMUTEMSG == 'default') {
@@ -1579,8 +1600,10 @@ DrkBot.addCommand({pattern: 'unmute ?(.*)', fromMe: true, onlyGroup: true, desc:
     }
 }));
 
-DrkBot.addCommand({pattern: 'invite ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.INVITE_DESC}, (async (message, match) => {    
+DrkBot.addCommand({pattern: 'invite ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.INVITE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
     var invite = await message.client.groupInviteCode(message.jid);
     await message.client.sendMessage(message.jid,Lang.INVITE + ' https://chat.whatsapp.com/' + invite, MessageType.text);
