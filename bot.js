@@ -59,6 +59,9 @@ if (!Date.now) {
 }
 // ==================== End Date Scanner ====================
 
+const Language = require('./language');
+const MLang = Language.getString('messages');
+
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -238,7 +241,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                     );
                     await conn.sendMessage(
                         conn.user.jid,
-                        '```Para actualizar el *BOT* escriba``` *.update now*\n\n' + degisiklikler + '```', MessageType.text
+                        `Para actualizar el BOT escribe *${MLang.prefix}update now*\n\n` + degisiklikler + '```', MessageType.text
                     ); 
                 }
             }
