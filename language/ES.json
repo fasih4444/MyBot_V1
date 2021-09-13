@@ -30,6 +30,7 @@
         "admin": {
             "BAN_DESC": "La persona del grupo será baneada. (Responda o etiquete a la persona junto al comando).",
             "IM_NOT_ADMIN": "*¡No soy un administrador en este grupo!*",
+            "USER_NOT_ADMIN": "*¡Comando solo para administradores del grupo!*",
             "BANNED": "Eliminado/a del grupo!",
             "GIVE_ME_USER": "*¡Dame un usuario!*",
             "ADD_DESC": "Agrega personas al grupo.",
@@ -39,7 +40,7 @@
             "PROMOTE_DESC": "Asciende a cualquier persona a administradora.",
             "DEMOTE_DESC": "Reduce la autoridad de cualquier persona.",
             "ALREADY_NOT_ADMIN": "```¿Cómo puedo desautorizar a alguien que aún no es administrador?```",
-            "DEMOTED": "```Se ha reducido la potencia!```",
+            "DEMOTED": "```Ya no es Admin!```",
             "MUTE_DESC": "Chat del grupo cerrado. Ahora sólo los administradores pueden publicar mensajes.\n⌨️ Ejemplo: .mute & .mute 5m etc",
             "MUTED": "```¡El chat está cerrado!```",
             "UNMUTE_DESC": "El chat del grupo está abierto. Ahora cualquiera puede enviar un mensaje.",
