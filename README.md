@@ -114,7 +114,7 @@ By use the DrkBot, you are deemed to have accepted these responsibilities.
 
 ## Developers
 
-[![Ian](https://scontent.fbaq6-1.fna.fbcdn.net/v/t1.6435-9/fr/cp0/e15/q65/65597637_888741314830800_5385622731276419072_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=7aed08&efg=eyJpIjoidCJ9&_nc_ohc=jxotu3Vvdj0AX8BWCf3&_nc_oc=AQn8rDjYlSJQd_lSLOvGk9GqX4fkaqRibslCDU0tg9NBW3Wxr-rVPIDc3_cCgfIHVf4&_nc_ht=scontent.fbaq6-1.fna&tp=14&oh=196f9a6ee008ded756c0b98cc7188c8f&oe=60D01FE1)](#) |
+[![Ian](https://raw.githubusercontent.com/BotPrivateDrk/WhatsAsenaDuplicated/master/media/gif/me.jpg)](#) |
 ----|
 [DarkBox](https://t.me/Dark1522) |
 Modifier, Translator, Bug Fixes |
