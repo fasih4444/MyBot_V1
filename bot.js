@@ -59,7 +59,7 @@ if (!Date.now) {
 }
 // ==================== End Date Scanner ====================
 
-const Language = require('./language');
+const Language = require('./language/ES.json');
 const MLang = Language.getString('messages');
 
 Array.prototype.remove = function() {
