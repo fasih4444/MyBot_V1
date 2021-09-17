@@ -114,7 +114,7 @@ By use the DrkBot, you are deemed to have accepted these responsibilities.
 
 ## Developers
 
-[![Ian](https://raw.githubusercontent.com/BotPrivateDrk/WhatsAsenaDuplicated/master/media/gif/me.jpg)](#) |
+[![Ian](https://github.com/BotPrivateDrk.png?size=150)](#) |
 ----|
 [DarkBox](https://t.me/Dark1522) |
 Modifier, Translator, Bug Fixes |
