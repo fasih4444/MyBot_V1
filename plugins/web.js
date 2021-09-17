@@ -47,7 +47,7 @@ Drkbox.addCommand({pattern: 'speedtest', fromMe: true, desc: Lang.SPEEDTEST_DESC
     );
     await msg.delete();
 }));
-/*
+
 Drkbox.addCommand({pattern: 'ping', fromMe: true, deleteCommand: false, desc: Lang.PING_DESC}, (async (message, match) => {
   var start = new Date().getTime();
   var msg = await message.reply('```¡Ping!```');
@@ -57,7 +57,7 @@ Drkbox.addCommand({pattern: 'ping', fromMe: true, deleteCommand: false, desc: La
   await message.client.sendMessage(
     message.jid,'*¡Pong!*\n```' + (end - start) + 'ms```', MessageType.text);
 }));
-*/
+
 if (Config.WORKTYPE == 'private') {
 
     Drkbox.addCommand({pattern: 'short ?(.*)', fromMe: true, desc: Lang.URL}, (async (message, match) => {
@@ -101,17 +101,7 @@ if (Config.WORKTYPE == 'private') {
     }));
 }
 else if (Config.WORKTYPE == 'public') {
-
-Drkbox.addCommand({on: 'ping', fromMe: true, deleteCommand: false, desc: Lang.PING_DESC}, (async (message, match) => {
-  var start = new Date().getTime();
-  var msg = await message.reply('```¡Ping!```');
-  var end = new Date().getTime();
-
-  await msg.delete();
-  await message.client.sendMessage(
-    message.jid,'*¡Pong!*\n```' + (end - start) + 'ms```', MessageType.text);
-}));
-
+    
     Drkbox.addCommand({pattern: 'short ?(.*)', fromMe: false, desc: Lang.URL}, (async (message, match) => {
 
         if (match[1] === '') return await message.client.sendMessage(message.jid, SLang.LİNK, MessageType.text);
