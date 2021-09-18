@@ -49,16 +49,17 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
     else if (match[1] == 'new') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
-        ini = '══✪〘 REPORTENSE 〙✪══\n';
+        const ini = "══✪〘 REPORTENSE 〙✪══\n"
         mesaj = '';
-        end = '══✪〘 *DrkBot* 〙✪══';
+        const end = "══✪〘 *DrkBot* 〙✪══"
         grup['participants'].map(
             async (uye) => {
                 mesaj += '╠❖ @' + uye.id.split('@')[0] + '\n';
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
+                tga = `${ini}\nmesaj${end}`
             }
         );
-        await message.client.sendMessage(message.jid,`${ini}`,mesaj,`${end}`, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
+        await message.client.sendMessage(message.jid,tga, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }
 }));
 var stag_dsc = ''
