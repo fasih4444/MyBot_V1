@@ -58,7 +58,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
             }
         );
-        await message.client.sendMessage(message.jid,ini,mesaj,end, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
+        await message.client.sendMessage(message.jid,`${ini}`,mesaj,`${end}`, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }
 }));
 var stag_dsc = ''
