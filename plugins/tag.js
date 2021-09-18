@@ -34,7 +34,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.ADMİN,MessageType.text);
 
-    if (match[1] == '') {
+    if (match[1] == 'old') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
         mesaj = '';
@@ -46,7 +46,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
         );
         await message.client.sendMessage(message.jid,mesaj, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }
-    else if (match[1] == 'new') {
+    else if (match[1] == '') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
         const ini = "╔══✪〘 *REPORTENSE* 〙✪══\n"
