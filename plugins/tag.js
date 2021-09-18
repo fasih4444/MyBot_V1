@@ -32,8 +32,10 @@ async function checkAdmin(message, user = message.data.participant) {
 //============================== tagall =============================================
 DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DESC }, (async (message, match) => {
     var im = await checkImAdmin(message);
-    if (!im) return await message.client.sendMessage(message.jid,Lang.ADMİN,MessageType.text);
-
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
+        
     if (match[1] == 'old') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
