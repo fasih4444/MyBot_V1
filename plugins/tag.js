@@ -56,7 +56,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
             async (uye) => {
                 mesaj += '╠❖ @' + uye.id.split('@')[0] + '\n';
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
-                tga = `${ini}\nmesaj${end}`
+                tga = `${ini}${mesaj}${end}`
             }
         );
         await message.client.sendMessage(message.jid,tga, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
