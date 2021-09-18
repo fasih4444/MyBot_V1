@@ -55,7 +55,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
             mesaj = '';
             grup['participants'].map(
                 async (uye) => {
-                    mesaj += '▫️ @' + uye.id.split('@')[0] + '\n';
+                    mesaj += '╔══✪〘 REPORTENSE 〙✪══\n' + '╠❖ @' + uye.id.split('@')[0] + '╚═〘 *DrkBot* 〙';
                     jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
                 }
             );
@@ -112,7 +112,7 @@ else if (Config.WORKTYPE == 'public'){
         mesaj = '';
         grup['participants'].map(async (uye) => {
             if (uye.isAdmin) {
-                mesaj += '@' + uye.id.split('@')[0] + '\n';
+                mesaj += '╔══✪〘 ADMINISTRADORES 〙✪══\n' + '╠❖ @' + uye.id.split('@')[0] + '╚═〘 *DrkBot* 〙';
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
             }
         });
