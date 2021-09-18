@@ -77,13 +77,6 @@ is not responsible for the purpose and method of use of users.
 
 ----
 
-<!--
-### Simple Method
-[![Run on Repl.it](https://repl.it/badge/github/DrkBotPublic/WhatsAsenaDuplicated)](https://replit.com/@Darkbox1522/DrkBot-QR)
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/DrkBotPublic/WhatsAsenaDuplicated)
--->
-
 ## F.A.Q
 Answer a few frequently asked questions;
 ### Can you read my messages?
