@@ -10,6 +10,7 @@ const sql = require('./sql/greetings');
 
 const Language = require('../language');
 const Lang = Language.getString('greetings');
+const adLang = Language.getString('admin');
 
 //============================== check admin =============================================
 async function checkImAdmin(message, user = message.client.user.jid) {
@@ -30,7 +31,12 @@ async function checkAdmin(message, user = message.data.participant) {
 }
 
 
-DrkBot.addCommand({pattern: 'welcome$', fromMe: true, desc: Lang.WELCOME_DESC}, (async (message, match) => {
+DrkBot.addCommand({pattern: 'welcome$', fromMe: false, desc: Lang.WELCOME_DESC}, (async (message, match) => {
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,adLang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,adLang.IM_NOT_ADMIN,MessageType.text);
+
     var hg = await sql.getMessage(message.jid);
     if (hg === false) {
         await message.client.sendMessage(message.jid,Lang.NOT_SET_WELCOME,MessageType.text);
@@ -39,7 +45,12 @@ DrkBot.addCommand({pattern: 'welcome$', fromMe: true, desc: Lang.WELCOME_DESC}, 
     }
 }));
 
-DrkBot.addCommand({pattern: 'welcome (.*)', fromMe: true, dontAddCommandList: true}, (async (message, match) => {
+DrkBot.addCommand({pattern: 'welcome (.*)', fromMe: false, dontAddCommandList: true}, (async (message, match) => {
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,adLang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,adLang.IM_NOT_ADMIN,MessageType.text);
+
     if (match[1] === '') {
         return await message.client.sendMessage(message.jid,Lang.NEED_WELCOME_TEXT);
     } else {
@@ -49,7 +60,12 @@ DrkBot.addCommand({pattern: 'welcome (.*)', fromMe: true, dontAddCommandList: tr
     }
 }));
 
-DrkBot.addCommand({pattern: 'goodbye$', fromMe: true, desc: Lang.GOODBYE_DESC}, (async (message, match) => {
+DrkBot.addCommand({pattern: 'goodbye$', fromMe: false, desc: Lang.GOODBYE_DESC}, (async (message, match) => {
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,adLang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,adLang.IM_NOT_ADMIN,MessageType.text);
+
     var hg = await sql.getMessage(message.jid, 'goodbye');
     if (hg === false) {
         await message.client.sendMessage(message.jid,Lang.NOT_SET_GOODBYE,MessageType.text)
@@ -58,7 +74,12 @@ DrkBot.addCommand({pattern: 'goodbye$', fromMe: true, desc: Lang.GOODBYE_DESC}, 
     }
 }));
 
-DrkBot.addCommand({pattern: 'goodbye (.*)', fromMe: true, dontAddCommandList: true}, (async (message, match) => {
+DrkBot.addCommand({pattern: 'goodbye (.*)', fromMe: false, dontAddCommandList: true}, (async (message, match) => {
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,adLang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,adLang.IM_NOT_ADMIN,MessageType.text);
+
     if (match[1] === '') {
         return await message.client.sendMessage(message.jid,Lang.NEED_GOODBYE_TEXT,MessageType.text);
     } else {
