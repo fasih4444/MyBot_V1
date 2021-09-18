@@ -30,7 +30,7 @@ async function checkAdmin(message, user = message.data.participant) {
 }
 
 //============================== tagall =============================================
-DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: true, desc: Lang.TAGALL_DESC }, (async (message, match) => {
+DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DESC }, (async (message, match) => {
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.ADMİN,MessageType.text);
 
@@ -46,7 +46,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: true, desc: Lang.TAGALL_DESC
         );
         await message.client.sendMessage(message.jid,mesaj, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }
-    else if (match[1] == '.') {
+    else if (match[1] == 'new') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
         ini = '══✪〘 REPORTENSE 〙✪══\n';
@@ -54,7 +54,7 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: true, desc: Lang.TAGALL_DESC
         end = '══✪〘 *DrkBot* 〙✪══';
         grup['participants'].map(
             async (uye) => {
-                mesaj += '╠❖ @' + uye.id.split('@')[0];
+                mesaj += '╠❖ @' + uye.id.split('@')[0] + '\n';
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
             }
         );
