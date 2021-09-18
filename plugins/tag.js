@@ -49,9 +49,9 @@ DrkBot.addCommand({pattern: 'tagall ?(.*)', fromMe: false, desc: Lang.TAGALL_DES
     else if (match[1] == 'new') {
         grup = await message.client.groupMetadata(message.jid);
         var jids = [];
-        const ini = "══✪〘 REPORTENSE 〙✪══\n"
+        const ini = "╔══✪〘 *REPORTENSE* 〙✪══\n"
         mesaj = '';
-        const end = "══✪〘 *DrkBot* 〙✪══"
+        const end = "╚══✪〘 *DrkBot* 〙✪══"
         grup['participants'].map(
             async (uye) => {
                 mesaj += '╠❖ @' + uye.id.split('@')[0] + '\n';
@@ -95,14 +95,17 @@ else if (Config.WORKTYPE == 'public'){
             if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
         let grup = await message.client.groupMetadata(message.jid);
         var jids = [];
+        const ini = "╔══✪〘 *ADMINISTRADORES* 〙✪══\n"
         mesaj = '';
+        const end = "╚══✪〘 *DrkBot* 〙✪══"
         grup['participants'].map(async (uye) => {
             if (uye.isAdmin) {
-                mesaj += '╔══✪〘 ADMINISTRADORES 〙✪══\n' + '╠❖ @' + uye.id.split('@')[0] + '╚═〘 *DrkBot* 〙';
+                mesaj += '╠❖ @' + uye.id.split('@')[0] + '\n';
                 jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
+                tga = `${ini}${mesaj}${end}`
             }
         });
-        await message.client.sendMessage(message.jid,mesaj, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
+        await message.client.sendMessage(message.jid,tga, MessageType.extendedText, {contextInfo: {mentionedJid: jids}, previewType: 0})
     }));
 
    DrkBot.addCommand({pattern: 'stam$', fromMe: false, desc: stag_dsc }, (async (message, match) => {
