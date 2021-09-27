@@ -76,7 +76,7 @@ else if (Config.WORKTYPE == 'public') {
         })
     });
     
-    DrkBox.addCommand({ pattern: 'igstalk ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
+    DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 		const link = match[1]
 		await hx.igdl(`${link}`).then(async (result) => {
 			await message.sendMessage(Buffer.from(result.data), MessageType.document)
