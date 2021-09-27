@@ -11,6 +11,8 @@ const Config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
 
+const hx = require('hxz-api');
+
 const Language = require('../language');
 const Lang = Language.getString('instagram');
 const TLang = Language.getString('tiktok');
@@ -72,5 +74,12 @@ else if (Config.WORKTYPE == 'public') {
         }).catch(async (err) => {
             await message.sendMessage(errorMessage(Lang.iErr))
         })
+    });
+    
+    DrkBox.addCommand({ pattern: 'igstalk ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
+		const link = match[1]
+		await hx.igdl(`${link}`).then(async (result) => {
+			await message.sendMessage(Buffer.from(result.data), MessageType.document)
+		})
     });
 }
