@@ -520,8 +520,8 @@
             "err": "😖 ¡Tenemos un Error!"
         },
         "qr": {
-            "DESC": "Obten un codigo QR del enlace enviado.",
-            "need": "*¡Ingresa algun enlace!*"
+            "DESC": "Obten un codigo QR del texto enviado.",
+            "need": "*¡Ingresa algun texto o enlace!*"
         },
         "keys": {
             "KLH": "f468d76b6668f12ad4d59443",
