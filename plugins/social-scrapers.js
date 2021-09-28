@@ -79,8 +79,8 @@ else if (Config.WORKTYPE == 'public') {
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 		const link = match[1]
 		await hx.igdl(`${link}`).then(async (result) => {
-                    const {data} = result.data
-                    const downig = await axios.get(data, { responseType: 'arraybuffer' })
+                    const {url} = result.data
+                    const downig = await axios.get(url, { responseType: 'arraybuffer' })
                    await message.sendMessage(Buffer.from(downig.data), MessageType.video)
 
 		})
