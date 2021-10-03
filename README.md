@@ -63,7 +63,7 @@ is not responsible for the purpose and method of use of users.
 ```
 
 <div align="center">
-  <img src="https://i.ibb.co/GvXzJSG/20210406-014153.jpg" width="200" height="200">
+  <img src="https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg" width="200" height="200">
   <h1>☢️ DrkBot ☢️</h1>
 </div>
 <p align="center">
