@@ -39,9 +39,7 @@
 </p>
 
 ```
-DrkBot; son nombres que representan el software, se pueden usar indistintamente en el resto del artículo.||
-
-DrkBot es un software de código abierto abierto al desarrollo.
+DrkBot es un software de código abierto.
 El usuario es responsable de todas las consecuencias que pudieran derivarse de un uso incorrecto o indebido.
 Dado que es un proyecto de código abierto, cualquiera puede copiar el software, agregarlo y eliminarlo,
 y utilícelo de forma personalizada.
@@ -51,7 +49,7 @@ El uso es responsabilidad del usuario, así como el sistema operativo no es resp
 por el trabajo realizado con los programas que se instalan posteriormente, DrkBot
 no es responsable del propósito y método de uso de los usuarios.
 
-DrkBot is open source software open to development.
+DrkBot it is open source software.
 The user is responsible for all consequences that may arise from incorrect or improper use.
 Since it is an open source project, anyone can copy the software, add it and remove it,
 and use it in a personalized way.
