@@ -16,6 +16,7 @@ const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require(
 const {Message, StringSession, Image, Video} = require('./whatsasena/');
 const { DataTypes } = require('sequelize');
 const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
+const HeartBot = require('drkbot-npm');
 const got = require('got');
 const simpleGit = require('simple-git');
 const git = simpleGit();
