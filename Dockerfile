@@ -1,4 +1,4 @@
-FROM fusuf/whatsasena:latest
+FROM ian/whatsasena:latest
 
 RUN git clone https://github.com/DrkBotBase/WhatsAsenaDuplicated /root/WhatsAsenaDuplicated
 WORKDIR /root/WhatsAsenaDuplicated/
