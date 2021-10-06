@@ -16,7 +16,7 @@ if (Config.WORKTYPE == 'private') {
   
 	DrkBox.addCommand({pattern: 'simi ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 		if (match[1] === 'xx') return await message.reply(Lang.err_type);
-		const url = `https://api.simsimi.net/v2/?text=${match[1]}&lang=es&cf=true`;
+		const url = `https://api.simsimi.net/v2/?text=${match[1]}&lang=es&cf=true&name=DrkBot`;
 		try {
 			const response = await got(url);
 			const json = JSON.parse(response.body);
@@ -30,7 +30,7 @@ else if (Config.WORKTYPE == 'public') {
 
 	DrkBox.addCommand({pattern: 'simi ?(.*)', fromMe: false, desc: Lang.DESC}, async (message, match) => {
 		if (match[1].includes('xxx', 'porno')) return await message.reply(Lang.err_type, {quoted: message.data});
-		const url = `https://api.simsimi.net/v2/?text=${match[1]}&lang=es&cf=true`;
+		const url = `https://api.simsimi.net/v2/?text=${match[1]}&lang=es&cf=true&name=DrkBot`;
 		try {
 			const response = await got(url);
 			const json = JSON.parse(response.body);
