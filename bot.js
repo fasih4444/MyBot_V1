@@ -89,10 +89,6 @@ async function whatsAsena () {
     const Session = new StringSession();
     DrkBotCN.version = [2, 2126, 14]
     DrkBotCN.setMaxListeners(0);
-    var proxyAgent_var = ''
-    if (config.PROXY.includes('https') || config.PROXY.includes('http')) {
-      DrkBotCN.connectOptions.agent = ProxyAgent (config.PROXY)
-    }
     setInterval(async () => { 
         var getGMTh = new Date().getHours()
         var getGMTm = new Date().getMinutes()
