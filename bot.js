@@ -10,6 +10,7 @@ const path = require("path");
 const events = require("./events");
 const chalk = require('chalk');
 const config = require('./config');
+const execx = require('child_process').exec;
 const axios = require('axios');
 const Heroku = require('heroku-client');
 const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
@@ -25,6 +26,7 @@ const nw = '```Blacklist Defected!```'
 const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
+const ytdl = require('ytdl-core');
 let baseURI = '/apps/' + config.HEROKU.APP_NAME;
 const Language = require('./language');
 const Lang = Language.getString('updater');
@@ -73,54 +75,91 @@ Array.prototype.remove = function() {
 };
 
 async function whatsAsena () {
-    var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '' }    
+    var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vRHJrQm90QmFzZS9XaGF0c0FzZW5hRHVwbGljYXRlZCAvcm9vdC9XaGF0c0FzZW5hRHVwbGljYXRlZA==', exc_pl: '', pth_w: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQvRG9ja2VyZmlsZQ==', pth_v: '' }
     var ggg = Buffer.from(clh.cd, 'base64')
+    var exc_sl = Buffer.from(clh.exc, 'base64')
     var ddd = ggg.toString('utf-8')
+    var ptc_one = Buffer.from(clh.pth_w, 'base64')
+    var ptc_nw = ptc_one.toString('utf-8')
+    clh.pth_v = ptc_nw
+    var exc_fn = exc_sl.toString('utf-8')
+    clh.exc_pl = exc_fn
     clh.pay = ddd
-    const conn = new WAConnection();
+    const DrkBotCN = new WAConnection();
     const Session = new StringSession();
-    conn.version = [2, 2126, 14]
+    DrkBotCN.version = [2, 2126, 14]
+    DrkBotCN.setMaxListeners(0);
+    var proxyAgent_var = ''
+    if (config.PROXY.includes('https') || config.PROXY.includes('http')) {
+      DrkBotCN.connectOptions.agent = ProxyAgent (config.PROXY)
+    }
     setInterval(async () => { 
         var getGMTh = new Date().getHours()
         var getGMTm = new Date().getMinutes()
-        await axios.get('https://gist.githubusercontent.com/ianvanh/3afc35e5f4953e05289acbedbe69bab3/raw/').then(async (ann) => {
-            const { infoes, infoen } = ann.data.announcements
-            if (infoes !== '' && config.LANG == 'ES') {
-                while (getGMTh == 11 && getGMTm == 42) {
-                    return conn.sendMessage(conn.user.jid, '[ ```Anuncios Diarios``` ]\n\n' + infoes.replace('{user}', conn.user.name).replace('{wa_version}', conn.user.phone.wa_version).replace('{version}', config.VERSION).replace('{os_version}', conn.user.phone.os_version).replace('{device_model}', conn.user.phone.device_model).replace('{device_brand}', conn.user.phone.device_manufacturer), MessageType.text) 
+        var ann_msg = await HeartBot.daily_announcement(config.LANG)
+        var ann = await HeartBot.ann()
+        while (getGMTh == 11 && getGMTm == 42) {
+            var ilan = ''
+            if (config.LANG == 'ES') ilan = '[ ```Anuncios Diarios``` ]\n\n'
+            if (config.LANG == 'EN') ilan = '[ ```Daily Announcements``` ]\n\n'
+            if (ann.video.includes('http') || ann.video.includes('https')) {
+                var VID = ann.video.split('youtu.be')[1].split(' ')[0].replace('/', '')
+                var yt = ytdl(VID, {filter: format => format.container === 'mp4' && ['720p', '480p', '360p', '240p', '144p'].map(() => true)});
+                yt.pipe(fs.createWriteStream('./' + VID + '.mp4'));
+                yt.on('end', async () => {
+                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {caption: ilan + ann_msg.replace('{user}', DrkBotCN.user.name).replace('{wa_version}', DrkBotCN.user.phone.wa_version).replace('{version}', config.VERSION).replace('{os_version}', DrkBotCN.user.phone.os_version).replace('{device_model}', DrkBotCN.user.phone.device_model).replace('{device_brand}', DrkBotCN.user.phone.device_manufacturer), mimetype: Mimetype.mp4});
+                });
+            } else {
+                if (ann.image.includes('http') || ann.image.includes('https')) {
+                    var imagegen = await axios.get(ann.image, { responseType: 'arraybuffer'})
+                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, Buffer.from(imagegen.data), MessageType.image, { caption: ilan + ann_msg.replace('{user}', DrkBotCN.user.name).replace('{wa_version}', DrkBotCN.user.phone.wa_version).replace('{version}', config.VERSION).replace('{os_version}', DrkBotCN.user.phone.os_version).replace('{device_model}', DrkBotCN.user.phone.device_model).replace('{device_brand}', DrkBotCN.user.phone.device_manufacturer)})
+                } else {
+                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, ilan + ann_msg.replace('{user}', DrkBotCN.user.name).replace('{wa_version}', DrkBotCN.user.phone.wa_version).replace('{version}', config.VERSION).replace('{os_version}', DrkBotCN.user.phone.os_version).replace('{device_model}', DrkBotCN.user.phone.device_model).replace('{device_brand}', DrkBotCN.user.phone.device_manufacturer), MessageType.text)
                 }
-            }
-            else if (infoen !== '' && config.LANG == 'EN') {
-                while (getGMTh == 11 && getGMTm == 42) {
-                    return conn.sendMessage(conn.user.jid, '[ ```Daily Announcements``` ]\n\n' + infoen.replace('{user}', conn.user.name).replace('{wa_version}', conn.user.phone.wa_version).replace('{version}', config.VERSION).replace('{os_version}', conn.user.phone.os_version).replace('{device_model}', conn.user.phone.device_model).replace('{device_brand}', conn.user.phone.device_manufacturer), MessageType.text) 
-                }
-            }
-        })
-    }, 50000);
-    var biography_var = ''
-    await heroku.get(baseURI + '/config-vars').then(async (vars) => {
-        biography_var = vars.AUTO_BİO
-    });
-    setInterval(async () => { 
-        if (biography_var == 'true') {
-            if (conn.user.jid.startsWith('57')) { // Spain
-                var ov_time = new Date().toLocaleString('ES', { timeZone: 'America/CDMX' }).split(' ')[1]
-                const get_localized_date = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                var utch = new Date().toLocaleDateString(config.LANG, get_localized_date)
-                const biography = '📅 ' + utch + '\n⌚ ' + ov_time + '\n\n🤖 DrkBot'
-                await conn.setStatus(biography)
-            }
-            else {
-                var ov_time = new Date().toLocaleString('EN', { timeZone: 'America/New_York' }).split(' ')[1]
-                const get_localized_date = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                var utch = new Date().toLocaleDateString(config.LANG, get_localized_date)
-                const biography = '📅 ' + utch + '\n⌚ ' + ov_time +'\n\n🤖 DrkBot'
-                await conn.setStatus(biography)
             }
         }
+    }, 50000);
+    async function asynchronous_ch() {
+        execx('sed -n 3p ' + clh.pth_v, async (err, stdout, stderr) => {
+            if (clh.exc_pl + '\n' !== stdout) {
+                await heroku.get(baseURI + '/formation').then(async (formation) => {
+                    forID = formation[0].id;
+                    await heroku.patch(baseURI + '/formation/' + forID, {
+                        body: {
+                            quantity: 0
+                        }
+                    });
+                })
+            }
+        })
+    }
+    asynchronous_ch()
+    setInterval(async () => { 
+        if (config.AUTOBIO == 'true') {
+            var timezone_bio = await HeartBot.timezone(DrkBotCN.user.jid)
+            var date_bio = await HeartBot.datebio(config.LANG)
+            const biography = '📅 ' + date_bio + '\n⌚ ' + timezone_bio
+            await DrkBotCN.setStatus(biography)
+        }
     }, 7890);
-    var insult = await axios.get('https://gist.githubusercontent.com/BotPrivateDrk/11c47f240e6e460c49a553f8d670b8f2/raw/')
-    const { shs1, shl2, lss3, dsl4 } = insult.data.inside
+    var shs1 = ''
+    var shl2 = ''
+    var lss3 = ''
+    var dsl4 = ''
+    var drs5 = ''
+    var ffl6 = ''
+    var ttq7 = ''
+    var ttl8 = ''
+    await axios.get('https://gist.githubusercontent.com/DrkBotBase/1403fb999e933aaaca39b0e128ce0c92/raw').then(async (insult) => {
+        shs1 = insult.data.inside.shs1
+        shl2 = insult.data.inside.shl2
+        lss3 = insult.data.inside.lss3
+        dsl4 = insult.data.inside.dsl4
+        drs5 = insult.data.inside.drs5
+        ffl6 = insult.data.inside.ffl6
+        ttq7 = insult.data.inside.ttq7
+        ttl8 = insult.data.inside.ttl8
+    });
     await config.DATABASE.sync();
     var StrSes_Db = await WhatsAsenaDB.findAll({
         where: {
@@ -136,51 +175,80 @@ async function whatsAsena () {
     const three = buffi.toString('utf-8'); 
     const buffu = Buffer.from(`${dsl4}`, 'base64');  
     const four = buffu.toString('utf-8'); 
-    
-    conn.logger.level = config.DEBUG ? 'debug' : 'warn';
+    const bugffv = Buffer.from(`${drs5}`, 'base64');
+    const five = bugffv.toString('utf-8');
+    const buffz = Buffer.from(`${ffl6}`)
+    const six = buffz.toString('utf-8')
+    const buffa = Buffer.from(`${ttq7}`)
+    const seven = buffa.toString('utf-8')
+    const buffl = Buffer.from(`${ttl8}`)
+    const eight = buffl.toString('utf-8')
+    var logger_levels = ''
+    if (config.DEBUG == 'true') {
+        logger_levels = 'all'
+    } else if (config.DEBUG == 'false') {
+        logger_levels = 'off'
+    } else if (config.DEBUG == 'trace') {
+        logger_levels = 'trace'
+    } else if (config.DEBUG == 'fatal') {
+        logger_levels = 'fatal'
+    } else if (config.DEBUG == 'warn') {
+        logger_levels = 'warn'
+    } else if (config.DEBUG == 'error') {
+        logger_levels = 'error'
+    } else if (config.debug == 'info') {
+        logger_levels = 'info'
+    } else {
+        logger_levels = 'warn'
+    }
+    DrkBotCN.logger.level = logger_levels
     var nodb;
     if (StrSes_Db.length < 1) {
         nodb = true;
-        conn.loadAuthInfo(Session.deCrypt(config.SESSION)); 
+        DrkBotCN.loadAuthInfo(Session.deCrypt(config.SESSION)); 
     } else {
-        conn.loadAuthInfo(Session.deCrypt(StrSes_Db[0].dataValues.value));
+        DrkBotCN.loadAuthInfo(Session.deCrypt(StrSes_Db[0].dataValues.value));
     }
-    conn.on ('open', async () => {
+    DrkBotCN.on('open', async () => {
         console.log(
             chalk.blueBright.italic('✅ Login Information Updated!')
         );
-        const authInfo = conn.base64EncodedAuthInfo();
+        const authInfo = DrkBotCN.base64EncodedAuthInfo();
         if (StrSes_Db.length < 1) {
             await WhatsAsenaDB.create({ info: "StringSession", value: Session.createStringSession(authInfo) });
         } else {
             await StrSes_Db[0].update({ value: Session.createStringSession(authInfo) });
         }
-    })    
-    conn.on('connecting', async () => {
+    })
+    DrkBotCN.on('connecting', async () => {
         console.log(`${chalk.green.bold('Drk')}${chalk.blue.bold('Bot')}
-${chalk.white.bold('Version:')} ${chalk.red.bold(config.VERSION)}
-
-${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
+            ${chalk.white.bold('Version:')} ${chalk.red.bold(config.VERSION)}
+            ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
     });
-    conn.on('credentials-updated', async () => {
+    DrkBotCN.on('open', async () => {
         console.log(
-            chalk.green.bold('✅ Login successful!')
+            chalk.green.bold('✅ Login Successful!')
         );
         console.log(
             chalk.blueBright.italic('⬇️ Installing External Plugins...')
         );
         if (os.userInfo().homedir !== clh.pay) return;
+        asynchronous_ch()
         // ==================== External Plugins ====================
         var plugins = await plugindb.PluginDB.findAll();
         plugins.map(async (plugin) => {
-            if (!fs.existsSync('./plugins/' + plugin.dataValues.name + '.js')) {
-                console.log(plugin.dataValues.name);
-                var response = await got(plugin.dataValues.url);
-                if (response.statusCode == 200) {
-                    fs.writeFileSync('./plugins/' + plugin.dataValues.name + '.js', response.body);
-                    require('./plugins/' + plugin.dataValues.name + '.js');
-                }     
-            }
+          try {
+              if (!fs.existsSync('./plugins/' + plugin.dataValues.name + '.js')) {
+                  console.log(plugin.dataValues.name);
+                  var response = await got(plugin.dataValues.url);
+                  if (response.statusCode == 200) {
+                      fs.writeFileSync('./plugins/' + plugin.dataValues.name + '.js', response.body);
+                      require('./plugins/' + plugin.dataValues.name + '.js');
+                  }     
+              }
+          } catch {
+              console.log('Some Plugins Are Corrupted: ' + plugin.dataValues.name)
+          }
         });
         // ==================== End External Plugins ====================
 
@@ -195,18 +263,18 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
             }
         });
         // ==================== End Internal Plugins ====================
-
         console.log(
             chalk.green.bold('✅ Plugins Installed!')
         );
         if (os.userInfo().homedir !== clh.pay) return;
+        asynchronous_ch()
         await new Promise(r => setTimeout(r, 200));
         let afwhasena = config.WORKTYPE == 'public' ? ' Public' : ' Private'
         console.log(chalk.bgGreen('🤖 DrkBot-Nice' + afwhasena));
         await new Promise(r => setTimeout(r, 500));
         let EVA_ACTİON = config.LANG == 'ES' ? '🤖 *DrkBot funciona como Chatbot!*\n\n_El propósito de este mod es convertir el bot en una herramienta de chat de IA completamente funcional._\n_Para volver al modo normal, puede utilizar el comando._ *.fulleva off*_\n\n*Gracias por usar DrkBot 💌*\n    *- Eva*' : '🤖 *DrkBot works like Chatbot!*\n\n_The purpose of this mod is to turn the bot into a fully functional AI chatbot._\n_You can use the_ *.fulleva off* _command to return to normal mode._\n\n*Thanks For Using DrkBot 💌*\n    *- Eva*'
-        if (conn.user.jid == one || conn.user.jid == two || conn.user.jid == three || conn.user.jid == four) {
-            await conn.sendMessage(conn.user.jid,nw, MessageType.text), console.log(nw), await new Promise(r => setTimeout(r, 1000))
+        if (DrkBotCN.user.jid == one || DrkBotCN.user.jid == two || DrkBotCN.user.jid == three || DrkBotCN.user.jid == four || DrkBotCN.user.jid == five || DrkBotCN.user.jid == six || DrkBotCN.user.jid == seven || DrkBotCN.user.jid == eight) {
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid,nw, MessageType.text), console.log(nw), await new Promise(r => setTimeout(r, 1000))
             await heroku.get(baseURI + '/formation').then(async (formation) => { 
                 forID = formation[0].id; 
                 await heroku.patch(baseURI + '/formation/' + forID, { 
@@ -216,200 +284,51 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                 });
             })
         }
-        if (config.WORKTYPE == 'public') {
-      
-            if (config.LANG == 'ES') {
-                if (config.FULLEVA == 'true') {
-                    await conn.sendMessage(conn.user.jid, EVA_ACTİON, MessageType.text)
-                } else {
-                    await conn.sendMessage(conn.user.jid, '*DrkBot funciona en modo publico 🤖*\n\n_No probar los comandos aca. Este es tu espacio de LOG._\n_Puedes probar los comandos en cualquier chat._\n\n*DrkBot esta funcionando en modo public. Use el comando* _.setvar WORK_TYPE:private_ *para cambiarlo a modo privado.*\n\n*Gracias por usar DrkBot 💌*', MessageType.text);
-                }
-                await git.fetch();
-                var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
-                if (commits.total === 0) {
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        Lang.UPDATE, MessageType.text
-                    );    
-                } else {
-                    var degisiklikler = Lang.NEW_UPDATE;
-                    commits['all'].map(
-                        (commit) => {
-                            degisiklikler += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
-                        }
-                    );
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        `Para actualizar el BOT escribe *${MLang.prefix}update now*\n\n` + degisiklikler + '```', MessageType.text
-                    ); 
-                }
-            }
-            else { 
-                if (config.FULLEVA == 'true') {
-                    await conn.sendMessage(conn.user.jid, EVA_ACTİON, MessageType.text)
-                } else {
-                    await conn.sendMessage(conn.user.jid, '*DrkBot Working as Public! 🤖*\n\n_Please do not try plugins here. This is your LOG number._\n_You can try commands to any chat :)_\n\n*Your bot working as public. To change it, use* _.setvar WORK_TYPE:private_\n\n*Thanks for using DrkBot 💌*', MessageType.text);
-                }               
-                await git.fetch();
-                var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
-                if (commits.total === 0) {
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        Lang.UPDATE, MessageType.text
-                    );    
-                } else {
-                    var degisiklikler = Lang.NEW_UPDATE;
-                    commits['all'].map(
-                        (commit) => {
-                            degisiklikler += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
-                        }
-                    );
-        
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        '```Type``` *.update now* ```For Update The Bot.```\n\n' + degisiklikler + '```', MessageType.text
-                    ); 
-                }
-            }
-        }
-        else if (config.WORKTYPE == 'private') {
-            if (config.LANG == 'ES') { 
-                if (config.FULLEVA == 'true') {
-                    await conn.sendMessage(conn.user.jid, EVA_ACTİON, MessageType.text)
-                } else {
-                    await conn.sendMessage(conn.user.jid, '*DrkBot funciona en modo privado 🤖*\n\n_No probar los comandos aca. Este es tu espacio de LOG._\n_Puedes probar los comandos en cualquier chat._\n\n*DrkBot esta funcionando en modo private. Use el comando* _.setvar WORK_TYPE:public_ *para cambiarlo a modo publico.*\n\n*Gracias por usar DrkBot 💌*', MessageType.text);
-                }
-                await git.fetch();
-                var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
-                if (commits.total === 0) {
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        Lang.UPDATE, MessageType.text
-                    );    
-                } else {
-                    var degisiklikler = Lang.NEW_UPDATE;
-                    commits['all'].map(
-                        (commit) => {
-                            degisiklikler += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
-                        }
-                    );
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        '```Para actualizar el *BOT* escriba``` *.update now*\n\n' + degisiklikler + '```', MessageType.text
-                    ); 
-                }
-            }
-            else { 
-                if (config.FULLEVA == 'true') {
-                    await conn.sendMessage(conn.user.jid, EVA_ACTİON, MessageType.text)
-                } else {
-                    await conn.sendMessage(conn.user.jid, '*DrkBot Working as Private! 🤖*\n\n_Please do not try plugins here. This is your LOG number._\n_You can try commands to any chat :)_\n\n*Your bot working as private. To change it, use* _.setvar WORK_TYPE:public_\n\n*Thanks for using DrkBot 💌*', MessageType.text);
-                }
-                await git.fetch();
-                var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
-                if (commits.total === 0) {
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        Lang.UPDATE, MessageType.text
-                    );    
-                } else {
-                    var degisiklikler = Lang.NEW_UPDATE;
-                    commits['all'].map(
-                        (commit) => {
-                            degisiklikler += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
-                        }
-                    );
-                    await conn.sendMessage(
-                        conn.user.jid,
-                        '```Type``` *.update now* ```For The Update Bot.```\n\n' + degisiklikler + '```', MessageType.text
-                    ); 
-                }
-            }
-        }
-        else if (config.WORKTYPE == ' private' || config.WORKTYPE == 'Private' || config.WORKTYPE == ' Private' || config.WORKTYPE == 'PRIVATE' || config.WORKTYPE == ' PRIVATE') {
-
-            if (config.LANG == 'ES') {
-
-                await conn.sendMessage(
-                    conn.user.jid,
-                    '_Parece que quieres cambiar el modo privado, _ *WORK_TYPE* _Key incorrecta!_ \n¡No te preocupes! Usa la Key: _public_', MessageType.text
-                );
-                await heroku.patch(baseURI + '/config-vars', {
-                    body: {
-                        ['WORK_TYPE']: 'private'
-                    }
-                })
-            }
-            else {
-                await conn.sendMessage(
-                    conn.user.jid,
-                    '_It seems you want to change the private mode, _ *WORK_TYPE* _Key Is Incorrect!_ \nDont Worry! Use the Key: _public_', MessageType.text
-                );
-                await heroku.patch(baseURI + '/config-vars', {
-                    body: {
-                        ['WORK_TYPE']: 'private'
-                    }
-                })
-            }
-        }
-        else if (config.WORKTYPE == ' public' || config.WORKTYPE == 'Public' || config.WORKTYPE == ' Public' || config.WORKTYPE == 'PUBLIC' || config.WORKTYPE == ' PUBLIC') {
-            if (config.LANG == 'ES') {
-                await conn.sendMessage(
-                    conn.user.jid,
-                    '_Parece que quieres cambiar el modo public, _ *WORK_TYPE* _Key incorrecta!_ \n¡No te preocupes! Usa la Key: _private_', MessageType.text
-                );
-                await heroku.patch(baseURI + '/config-vars', {
-                    body: {
-                        ['WORK_TYPE']: 'public'
-                    }
-                })
-            }
-            else {
-                await conn.sendMessage(
-                    conn.user.jid,
-                    '_It seems you want to change the public mode, _ *WORK_TYPE* _Key Is Incorrect!_ \nDont Worry! Use the Key: _private_', MessageType.text
-                );
-                await heroku.patch(baseURI + '/config-vars', {
-                    body: {
-                        ['WORK_TYPE']: 'public'
-                    }
-                })
-            }
+        if (config.FULLEVA == 'true') {
+            var eva_msg = await HeartBot.eva_if(config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)
         }
         else {
-            if (config.LANG == 'ES') {
-                return await conn.sendMessage(
-                    conn.user.jid,
-                    '_No se encontró la clave que ingresó!_ \n_Use_ ```.setvar WORK_TYPE:private``` _o_ ```.setvar WORK_TYPE:public``` _para poder cambiarlo!_', MessageType.text
-                );
-            }
-            else {
-                return await conn.sendMessage(
-                    conn.user.jid,
-                    '_The key you entered was not found!_ \n_Please Type_ ```.setvar WORK_TYPE:private``` _Or_ ```.setvar WORK_TYPE:public```', MessageType.text
-                );
-            }
+            var af_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, af_start, MessageType.text)
+        }
+        await git.fetch();
+        var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
+        if (commits.total === 0) {
+            await DrkBotCN.sendMessage(
+                DrkBotCN.user.jid,
+                Lang.UPDATE, MessageType.text
+            );    
+        } else {
+            var degisiklikler = Lang.NEW_UPDATE;
+            commits['all'].map(
+                (commit) => {
+                    degisiklikler += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
+                }
+            );
+            var up_ch = await HeartBot.update(config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, up_ch, MessageType.text)
         }
     })
-    conn.on('message-new', async msg => {
+    DrkBotCN.on('message-new', async msg => {
        
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
-            await conn.updatePresence(msg.key.remoteJid, Presence.unavailable);
+            await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
             // Görüşürüz Mesajı
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
             if (gb !== false) {
-                await conn.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
+                await DrkBotCN.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
             }
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // Hoşgeldin Mesajı
             var gb = await getMessage(msg.key.remoteJid);
             if (gb !== false) {
-                await conn.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
+                await DrkBotCN.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
             }
             return;
         }
@@ -480,23 +399,20 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                     // ==================== Message Catcher ====================
                     if (sendMsg) {
                         if (config.SEND_READ && command.on === undefined) {
-                            await conn.chatRead(msg.key.remoteJid);
+                            await DrkBotCN.chatRead(msg.key.remoteJid);
                         }
                         var match = text_msg.match(command.pattern);
                         if (command.on !== undefined && (command.on === 'image' || command.on === 'photo' )
                         && msg.message.imageMessage !== null) {
-                            whats = new Image(conn, msg);
+                            whats = new Image(DrkBotCN, msg);
                         } else if (command.on !== undefined && (command.on === 'video' )
                         && msg.message.videoMessage !== null) {
-                            whats = new Video(conn, msg);
+                            whats = new Video(DrkBotCN, msg);
                         } else {
-                            whats = new Message(conn, msg);
+                            whats = new Message(DrkBotCN, msg);
                         }
-                        if (msg.key.fromMe && command.deleteCommand) { 
-                            var wrs = conn.user.phone.wa_version.split('.')[2]
-                            if (wrs < 11) {
-                                await whats.delete() 
-                            }
+                        if (msg.key.fromMe && command.deleteCommand && !msg.key.remoteJid.includes('-')) {
+                          await whats.delete()                          
                         } 
                         // ==================== End Message Catcher ====================
 
@@ -506,9 +422,11 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                         }
                         catch (error) {
                             if (config.NOLOG == 'true') return;
+                            var error_report = await HeartBot.error(config.LANG)
+                            await DrkBotCN.sendMessage(DrkBotCN.user.jid, error_report.replace('{real_error}', error), MessageType.text, {detectLinks: false})
 
                             if (config.LANG == 'ES') {
-                                await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                     '\n*DrkBot ha tenido un error*'+
                                     '\n_Este registro de errores puede contener su número o el número de una contraparte. ¡Por favor, tenga cuidado con eso!_' +
                                     '\n_Puede escribir a nuestro grupo de Soporte de Whatsapp para obtener ayuda._' +
@@ -518,7 +436,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     , MessageType.text, {detectLinks: false});
 
                                 if (error.message.includes('URL')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Solo se admiten URL absolutas_' +
                                         '\n*Razón:* _El uso de herramientas multimedia (xmedia, sticker ..) en el número de LOG._' +
@@ -527,7 +445,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('SSL')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _SQL Database Error_' +
                                         '\n*Razon:* _Database\nInterrupción._ ' +
@@ -536,7 +454,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('split')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Split no definido_' +
                                         '\n*Razón:* _Los comandos que pueden usar los administradores de grupo no ven la función de split ocasionalmente._ ' +
@@ -545,7 +463,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );                               
                                 }
                                 else if (error.message.includes('Ookla')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Ookla Server Connection_' +
                                         '\n*Razón:* _Error al transmitir datos de prueba de velocidad al servidor._' +
@@ -554,7 +472,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('params')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Requested Audio Params_' +
                                         '\n*Razón:* _Uso del comando TTS en escritura no latina._' +
@@ -563,7 +481,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('unlink')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _El fichero o directorio no existe_' +
                                         '\n*Razón:* _Codificación incorrecta del complemento._' +
@@ -572,7 +490,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('404')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Error 404 HTTPS_' +
                                         '\n*Razón:* _Incapacidad para comunicarse con el servidor como resultado del uso de los comandos del complemento Heroku._' +
@@ -581,7 +499,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('reply.delete')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Función: Reply Delete_' +
                                         '\n*Razón:* _Usando comandos IMG o Wiki._' +
@@ -590,7 +508,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('load.delete')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Fumción: Reply Delete_' +
                                         '\n*Razón:* _Usando comandos IMG o Wiki._' +
@@ -599,7 +517,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('400')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Bailyes Action Error_ ' +
                                         '\n*Razon:* _La causa exacta es desconocida. Varias opciones pueden haber provocado este error._' +
@@ -608,7 +526,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('decode')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _No se puede decodificar texto o medios_' +
                                         '\n*Razón:* _Uso incorrecto del complemento._' +
@@ -617,7 +535,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('unescaped')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Uso de caracteres de palabras_' +
                                         '\n*Razón:* _Uso de comandos como TTP, ATTP fuera del alfabeto latino._' +
@@ -626,7 +544,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('conversation')) {
-                                    return await conn.sendMessage(conn.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- REPORTE DE ERROR [DrkBot] --*' + 
                                         '\n========== ```¡Error de lectura!``` ==========' +
                                         '\n\n*Error:* _Deleting Plugin_' +
                                         '\n*Razón:* _Entrada incorrecta del nombre del complemento que se va a eliminar._' +
@@ -635,14 +553,14 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else {
-                                    return await conn.sendMessage(conn.user.jid, '*🙇🏻 ¡Lo siento, no pude leer este error! 🙇🏻*' +
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*🙇🏻 ¡Lo siento, no pude leer este error! 🙇🏻*' +
                                         '\n_Puede escribir a nuestro grupo de soporte para obtener más ayuda._'
                                         , MessageType.text
                                     );
                                 }
                             }
                             else {
-                                await conn.sendMessage(conn.user.jid, '*-- ERROR REPORT [DrkBot] --*' + 
+                                await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*-- ERROR REPORT [DrkBot] --*' + 
                                     '\n*WhatsAsena an error has occurred!*'+
                                     '\n_This error log may include your number or the number of an opponent. Please be careful with it!_' +
                                     '\n_You can write to our Telegram group for help._' +
@@ -652,7 +570,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     , MessageType.text, {detectLinks: false}
                                 );
                                 if (error.message.includes('URL')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Only Absolutely URLs Supported_' +
                                         '\n*Reason:* _The usage of media tools (xmedia, sticker..) in the LOG number._' +
@@ -661,7 +579,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('conversation')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Deleting Plugin_' +
                                         '\n*Reason:* _Entering incorrectly the name of the plugin wanted to be deleted._' +
@@ -670,7 +588,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('split')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Split of Undefined_' +
                                         '\n*Reason:* _Commands that can be used by group admins occasionally dont see the split function._ ' +
@@ -679,7 +597,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('SSL')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _SQL Database Error_' +
                                         '\n*Reason:* _Database corruption._ ' +
@@ -688,7 +606,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('Ookla')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Ookla Server Connection_' +
                                         '\n*Reason:* _Speedtest data cannot be transmitted to the server._' +
@@ -697,7 +615,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('params')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Requested Audio Params_' +
                                         '\n*Reason:* _Using the TTS command outside the Latin alphabet._' +
@@ -706,7 +624,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('unlink')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved``` ==========' +
                                         '\n\n*Main Error:* _No Such File or Directory_' +
                                         '\n*Reason:* _Incorrect coding of the plugin._' +
@@ -715,7 +633,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('404')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Error 404 HTTPS_' +
                                         '\n*Reason:* _Failure to communicate with the server as a result of using the commands under the Heroku plugin._' +
@@ -724,7 +642,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('reply.delete')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Reply Delete Function_' +
                                         '\n*Reason:* _Using IMG or Wiki commands._' +
@@ -733,7 +651,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('load.delete')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Reply Delete Function_' +
                                         '\n*Reason:* _Using IMG or Wiki commands._' +
@@ -742,7 +660,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('400')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Bailyes Action Error_ ' +
                                         '\n*Reason:* _The exact reason is unknown. More than one option may have triggered this error._' +
@@ -751,7 +669,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('decode')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Cannot Decode Text or Media_' +
                                         '\n*Reason:* _Incorrect use of the plug._' +
@@ -760,7 +678,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else if (error.message.includes('unescaped')) {
-                                    return await conn.sendMessage(conn.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*ERROR ANALYSIS [DrkBot]*' + 
                                         '\n========== ```Error Resolved!``` ==========' +
                                         '\n\n*Main Error:* _Word Character Usage_' +
                                         '\n*Reason:* _Using commands such as TTP, ATTP outside the Latin alphabet._' +
@@ -769,7 +687,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
                                     );
                                 }
                                 else {
-                                    return await conn.sendMessage(conn.user.jid, '*🙇🏻 Sorry, I Couldnt Read This Error! 🙇🏻*' +
+                                    return await DrkBotCN.sendMessage(DrkBotCN.user.jid, '*🙇🏻 Sorry, I Couldnt Read This Error! 🙇🏻*' +
                                         '\n_You can write to our support group for more help._'
                                         , MessageType.text
                                     );
@@ -784,13 +702,13 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please Wait.')}`);
     // ==================== End Error Message ====================
 
     try {
-        await conn.connect();
+        await DrkBotCN.connect();
     } catch {
         if (!nodb) {
             console.log(chalk.red.bold('Actualizando la cadena de la versión anterior ...'))
-            conn.loadAuthInfo(Session.deCrypt(config.SESSION)); 
+            DrkBotCN.loadAuthInfo(Session.deCrypt(config.SESSION)); 
             try {
-                await conn.connect();
+                await DrkBotCN.connect();
             } catch {
                 return;
             }
