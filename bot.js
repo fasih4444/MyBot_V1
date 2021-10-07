@@ -407,8 +407,11 @@ async function whatsAsena () {
                         } else {
                             whats = new Message(DrkBotCN, msg);
                         }
-                        if (msg.key.fromMe && command.deleteCommand && !msg.key.remoteJid.includes('-')) {
-                          await whats.delete()                          
+                        if (msg.key.fromMe && command.deleteCommand) { 
+                            var wrs = DrkBotCN.user.phone.wa_version.split('.')[2]
+                            if (wrs < 11) {
+                                await whats.delete() 
+                            }
                         } 
                         // ==================== End Message Catcher ====================
 
