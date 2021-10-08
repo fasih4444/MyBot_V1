@@ -4,32 +4,32 @@
 - [Instagram](https://www.instagram.com/iand_tv)
 
 <p align="center">
-  <a href="https://github.com/BotPrivateDrk/WhatsAsenaDuplicated/fork">
-    <img src="https://img.shields.io/github/forks/BotPrivateDrk/WhatsAsenaDuplicated?label=Fork&style=social">
+  <a href="https://github.com/DrkBotBase/WhatsAsenaDuplicated/fork">
+    <img src="https://img.shields.io/github/forks/DrkBotBase/WhatsAsenaDuplicated?label=Fork&style=social">
   </a>
-  <a href="https://github.com/BotPrivateDrk/DrkBotPublic/stargazers">
-    <img src="https://img.shields.io/github/stars/BotPrivateDrk/WhatsAsenaDuplicated?style=social">
+  <a href="https://github.com/DrkBotBase/stargazers">
+    <img src="https://img.shields.io/github/stars/DrkBotBase/WhatsAsenaDuplicated?style=social">
   </a>
-  <a href="https://github.com/BotPrivateDrk/WhatsAsenaDuplicated/commits/master">
-    <img src="https://img.shields.io/github/commit-activity/m/BotPrivateDrk/WhatsAsenaDuplicated?style=social">
+  <a href="https://github.com/DrkBotBase/WhatsAsenaDuplicated/commits/master">
+    <img src="https://img.shields.io/github/commit-activity/m/DrkBotBase/WhatsAsenaDuplicated?style=social">
   </a>
 </p>
 
 <p align="center">
-  <a href="httsp://github.com/BotPrivateDrk/WhatsAsenaDuplicated">
-    <img src="https://img.shields.io/github/repo-size/BotPrivateDrk/WhatsAsenaDuplicated?color=purple&label=Peso%20Repositorio&style=plastic">
+  <a href="httsp://github.com/DrkBotBase/WhatsAsenaDuplicated">
+    <img src="https://img.shields.io/github/repo-size/DrkBotBase/WhatsAsenaDuplicated?color=purple&label=Peso%20Repositorio&style=plastic">
 
   </a>
-  <a href="https://github.com/BotPrivateDrk/WhatsAsenaDuplicated/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/BotPrivateDrk/WhatsAsenaDuplicated?color=purple&label=Lisencia&style=plastic">
+  <a href="https://github.com/DrkBotBase/WhatsAsenaDuplicated/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/DrkBotBase/WhatsAsenaDuplicated?color=purple&label=Lisencia&style=plastic">
 
   </a>
-  <a href="https://github.com/BotPrivateDrk/WhatsAsenaDuplicated">
-    <img src="https://img.shields.io/github/languages/top/BotPrivateDrk/WhatsAsenaDuplicated?color=purple&label=Javascript&style=plastic">
+  <a href="https://github.com/DrkBotBase/WhatsAsenaDuplicated">
+    <img src="https://img.shields.io/github/languages/top/DrkBotBase/WhatsAsenaDuplicated?color=purple&label=Javascript&style=plastic">
 
   </a>
-  <a href="https://github.com/BotPrivateDrk">
-    <img src="https://img.shields.io/static/v1?label=Author&message=DarkBox&color=purple&style=plastic">
+  <a href="https://github.com/ianvanh">
+    <img src="https://img.shields.io/static/v1?label=Author&message=Ian&color=purple&style=plastic">
 
   </a>
   <a href="https://t.me/Dark1522">
