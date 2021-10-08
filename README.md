@@ -105,7 +105,7 @@ By use the DrkBot, you are deemed to have accepted these responsibilities.
 
 ## Developers
 
-[![Ian](https://github.com/BotPrivateDrk.png?size=150)](#) |
+[![Ian](https://github.com/ianvanh.png?size=150)](#) |
 ----|
 [DarkBox](https://t.me/Dark1522) |
 Modifier, Translator, Bug Fixes |
