@@ -29,7 +29,7 @@ if (Config.WORKTYPE == 'private') {
 else if (Config.WORKTYPE == 'public') {
 
 	DrkBox.addCommand({pattern: 'simi ?(.*)', fromMe: false, desc: Lang.DESC}, async (message, match) => {
-		if (match[1].includes('xxx') || match[1].includes('porno')) return await message.reply(message.jid, Lang.err_type, {quoted: message.data});
+		if (match[1].includes('xxx') || match[1].includes('porno')) await message.sendMessage(Lang.err_type, MessageType.text, {quoted: message.data});
 		const url = `https://api.simsimi.net/v2/?text=${match[1]}&lc=es&cf=true`;
 		try {
 			const response = await got(url);
