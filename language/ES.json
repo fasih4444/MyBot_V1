@@ -512,7 +512,7 @@
         },
         "simi": {
             "DESC": "Una inteligencia artificial con la que podras hablar.",
-            "err_type": "*Cuida tus palabras*",
+            "err_type": "🤖 *Cuida tus palabras*",
             "iErr": "*Error de solicitud*"
         },
         "apk": {
