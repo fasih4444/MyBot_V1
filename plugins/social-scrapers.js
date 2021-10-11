@@ -11,7 +11,7 @@ const Config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
 
-const hx = require('hxz-api');
+const HeartBot = require('drkbot-api');
 
 const Language = require('../language');
 const Lang = Language.getString('instagram');
@@ -78,7 +78,7 @@ else if (Config.WORKTYPE == 'public') {
     
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 		const link = match[1]
-		await hx.igdl(`${link}`).then(async (result) => {
+		await HeartBot.igdl(`${link}`).then(async (result) => {
                     const json = JSON.parse(result.body);
                     await message.sendMessage(json.medias[0].downloadUrl, MessageType.text)
 
