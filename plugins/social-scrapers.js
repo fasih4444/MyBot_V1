@@ -77,11 +77,13 @@ else if (Config.WORKTYPE == 'public') {
     });
     
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
-		const link = match[1]
-		await HeartBot.igdl(`${link}`).then(async (result) => {
-                    const json = JSON.parse(result.body);
-                    await message.sendMessage(json.medias[0].downloadUrl, MessageType.text)
-
-		})
+	 const link = match[1]
+	 const buffer = await HeartBot.igdl(`${link}`(message)[0])
+         for (let i of buffer ? buffer : buffer.medias){
+         if(i.url.includes('.mp4')){
+             await message.sendMessage(Buffer.from(buffer.medias), MessageType.video)
+         } else {
+             await message.sendMessage(Buffer.from(buffer.medias), MessageType.image)
+         }
     });
 }
