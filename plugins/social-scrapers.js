@@ -80,10 +80,11 @@ else if (Config.WORKTYPE == 'public') {
 	 const link = match[1]
 	 const buffer = await HeartBot.igdl(`${link}`(message)[0])
          for (let i of buffer ? buffer : buffer.medias){
-         if(i.url.includes('.mp4')){
-             await message.sendMessage(Buffer.from(buffer.medias), MessageType.video)
-         } else {
-             await message.sendMessage(Buffer.from(buffer.medias), MessageType.image)
+             if(i.url.includes('.mp4')){
+                 await message.sendMessage(Buffer.from(buffer.medias), MessageType.video)
+             } else {
+                 await message.sendMessage(Buffer.from(buffer.medias), MessageType.image)
+             }
          }
     });
 }
