@@ -11,7 +11,7 @@ const Config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
 
-const HeartBot = require('drkbot-api');
+const dbot = require('dbot-api')
 
 const Language = require('../language');
 const Lang = Language.getString('instagram');
@@ -78,7 +78,7 @@ else if (Config.WORKTYPE == 'public') {
     
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 	 const link = match[1]
-	 const buffer = await HeartBot.igdl(`${link}`(message)[0])
+	 const buffer = await dbot.igdl(`${link}`(message)[0])
          for (let i of buffer ? buffer : buffer.medias){
              if(i.url.includes('.mp4')){
                  await message.sendMessage(Buffer.from(buffer.medias), MessageType.video)
