@@ -5,7 +5,7 @@ DrkBot - Ian VanH
 */
 
 const DrkBox = require('../events')
-const { MessageType, Mimetype } = require('@adiwajshing/baileys')
+const { MessageType, Mimetype, GroupSettingChange } = require('@adiwajshing/baileys')
 const { errorMessage, infoMessage } = require('../helpers')
 const axios = require('axios')
 const Config = require('../config');
@@ -62,10 +62,11 @@ else if (Config.WORKTYPE == 'public') {
     }));
 
     DrkBox.addCommand({on: 'text', fromMe: false}, (async (message, match) => {
-        if (message.message.includes('dbox')) {
-            await message.sendMessage('🤖 Hola soy *DrkBot*', MessageType.text, {quoted: message.data});
-        } else if (message.message.includes('eco')) {
-            await message.sendMessage('🤖 Debes hacerle mantenimiento.', MessageType.text, {quoted: message.data});
+        if (message.message.includes('github.com')) {
+            await message.sendMessage('🤖 Enlace de GitHub detectado.\nCerrando chat.', MessageType.text, {quoted: message.data});
+            await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, true);
+        } else if (message.message.includes('darkbox')) {
+            await message.sendMessage('🤖 hey así se llama mi creador.', MessageType.text, {quoted: message.data});
         }
     }));
 }
