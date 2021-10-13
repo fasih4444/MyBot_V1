@@ -18,22 +18,22 @@ DrkBox.addCommand({pattern: 'clear ?(.*)', fromMe: false, desc: clear_desc, usag
         var client_id = message.reply_message.data.participant
         var payload = await HeartBot.clear(Config.LANG, message.client.user.jid)
         await message.client.sendMessage(client_id, payload.Action, MessageType.text);
-        await message.client.modifyChat(client_id, ChatModification.delete);
         await message.client.sendMessage(client_id, payload.Finish, MessageType.text);
+        await message.client.modifyChat(client_id, ChatModification.delete);
     } else {
         if (match[1] == '') {
             var client_id = message.jid
             var payload = await HeartBot.clear(Config.LANG, message.client.user.jid)
             await message.client.sendMessage(client_id, payload.Action, MessageType.text);
-            await message.client.modifyChat(client_id, ChatModification.delete);
             await message.client.sendMessage(client_id, payload.Finish, MessageType.text);
+            await message.client.modifyChat(client_id, ChatModification.delete);
         } else if (match[1] !== '') {
             let if_group = message.jid.includes('-') ? '' : '@s.whatsapp.net'
             var client_id = match[1] + if_group
             var payload = await HeartBot.clear(Config.LANG, message.client.user.jid)
             await message.client.sendMessage(client_id, payload.Action, MessageType.text);
-            await message.client.modifyChat(client_id, ChatModification.delete);
             await message.client.sendMessage(client_id, payload.Finish, MessageType.text);
+            await message.client.modifyChat(client_id, ChatModification.delete);
         }
     }
 }));
