@@ -13,7 +13,7 @@ var clear_desc = ''
 if (Config.LANG == 'ES') clear_desc = 'Borra todos los mensajes del chat.'
 if (Config.LANG == 'EN') clear_desc = 'Clears all the messages from the chat.'
 
-DrkBox.addCommand({pattern: 'clear ?(.*)', fromMe: true, desc: clear_desc, usage: '/clear // /clear 57300xxx // /clear 57300xxx-12345@g.us'}, (async (message, match) => {
+DrkBox.addCommand({pattern: 'clear ?(.*)', fromMe: false, desc: clear_desc, usage: '/clear // /clear 57300xxx // /clear 57300xxx-12345@g.us'}, (async (message, match) => {
     if (message.reply_message) {
         var client_id = message.reply_message.data.participant
         var payload = await HeartBot.clear(Config.LANG, message.client.user.jid)
