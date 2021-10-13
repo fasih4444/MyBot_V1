@@ -33,3 +33,69 @@ DrkBox.addCommand({pattern: 'textdg ?(.*)', fromMe: wk, dontAddCommandList: true
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
+
+DrkBox.addCommand({pattern: 'textchr ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/glossy-chrome-text-effect-online-424.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textglass ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/write-text-on-wet-glass-online-589.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'texthack ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-anonymous-hacker-avatars-cyan-neon-677.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textviettel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/logo-viettel-156.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textgraffiti ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/graffiti-color-199.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textlogteam ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-football-team-logo-online-free-671.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'texthollywood ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/print-name-on-hollywood-walk-of-fame-star-451.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textlogmtl ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/metal-mascots-logo-maker-486.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'texttv ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/write-text-on-vintage-television-online-670.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textdevil ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/neon-devil-wings-text-effect-online-683.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
+
+DrkBox.addCommand({pattern: 'textboom ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/boom-text-comic-style-text-effect-675.html')
+    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+}));
