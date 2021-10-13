@@ -11,7 +11,7 @@ const Config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
 
-const dbot = require('dbot-api')
+const dbot = require('dbot-api');
 
 const Language = require('../language');
 const Lang = Language.getString('instagram');
@@ -75,7 +75,7 @@ else if (Config.WORKTYPE == 'public') {
             await message.sendMessage(errorMessage(Lang.iErr))
         })
     });
-    
+    /*
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 	 const link = match[1]
 	 const buffer = await dbot.igdl(`${link}`(message)[0])
@@ -86,5 +86,5 @@ else if (Config.WORKTYPE == 'public') {
                  await message.sendMessage(Buffer.from(buffer.medias), MessageType.image)
              }
          }
-    });
+    }); */
 }
