@@ -61,7 +61,8 @@ else if (Config.WORKTYPE == 'public') {
         await message.sendMessage(Buffer.from(ttinullimage.data), MessageType.image, { mimetype: Mimetype.jpg, caption: `${MLang.by}` })
     }));
 
-    DrkBox.addCommand({on: 'text', fromMe: false}, (async (message, match) => {
+// No Prefix
+    DrkBox.addCommand({on: 'text', fromMe: false, onlyGroup: true}, (async (message, match) => {
         if (message.message.includes('github.com')) {
             await message.sendMessage('🤖 Enlace de GitHub detectado.\nCerrando chat.', MessageType.text, {quoted: message.data});
             await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, true);
