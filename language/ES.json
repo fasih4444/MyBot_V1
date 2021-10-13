@@ -266,7 +266,7 @@
             "WIND": "Velocidad del viento",
             "CLOUD": "Nubes",
             "NOT_FOUND": "```No pude encontrar una ciudad con ese nombre. 😖```",
-            "what": "Pais",
+            "What": "Pais",
             "Sky": "Clima"
         },
         "web": {
