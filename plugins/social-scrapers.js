@@ -79,7 +79,7 @@ else if (Config.WORKTYPE == 'public') {
 DrkBox.addCommand({pattern: 'fondo ?(.*)', fromMe: true}, (async (message, match) => {
     var img = await dbot.wallpaper(`match[1]`)
     var buffer_data = await axios.get(img.result, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data.resolve), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data.result[0]), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
 
     /*
