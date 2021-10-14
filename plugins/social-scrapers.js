@@ -75,14 +75,15 @@ else if (Config.WORKTYPE == 'public') {
             await message.sendMessage(errorMessage(Lang.iErr))
         })
     });
-
+/*
 DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: true}, (async (message, match) => {
     var igdesc = await dbot.igdl(`match[1]`)
     var buffer_data = await axios.get(igdesc.url, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.medias), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
+*/
 
-    /*
+    
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 	 const link = match[1]
 	 const buffer = await dbot.igdl(`${link}`(message)[0])
@@ -93,5 +94,5 @@ DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: true}, (async (message, matc
                  await message.sendMessage(Buffer.from(buffer.medias), MessageType.image)
              }
          }
-    }); */
+    });
 }
