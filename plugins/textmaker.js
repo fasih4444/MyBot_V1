@@ -114,11 +114,6 @@ DrkBox.addCommand({pattern: 'textgold ?(.*)', fromMe: wk, dontAddCommandList: tr
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
-DrkBox.addCommand({pattern: 'text3space ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/galaxy-text-effect-116.html')
-    var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
-}));
 DrkBox.addCommand({pattern: 'textangel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/wings-galaxy-206.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
@@ -132,7 +127,7 @@ DrkBox.addCommand({pattern: 'text2pink ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textabear ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-funny-animations-of-a-traveling-bear-701.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text6neon ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-light-effects-green-neon-online-429.html')
@@ -142,7 +137,7 @@ DrkBox.addCommand({pattern: 'text6neon ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textheart ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/write-name-on-heart-with-wings-gifs-430.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/text-graffiti-3d-208.html')
@@ -152,7 +147,7 @@ DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textpuppy ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-puppy-cute-animated-online-478.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'textroad ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-glowing-text-effects-online-706.html')
