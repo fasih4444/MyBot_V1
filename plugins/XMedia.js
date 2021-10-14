@@ -875,7 +875,7 @@ if (Config.WORKTYPE == 'private') {
     }));
 }
 else if (Config.WORKTYPE == 'public') {
-DrkBot.addCommand({pattern: 'gif', fromMe: false, dontAddCommandList: true}, (async (message, match) => {    
+    DrkBot.addCommand({pattern: 'gif', fromMe: false, dontAddCommandList: true}, (async (message, match) => {    
         if (message.reply_message === false) return await message.sendMessage('¡Responde a un video!');
         var downloading = await message.client.sendMessage(message.jid,'```Convirtiendo en Gif...```',MessageType.text);
         var location = await message.client.downloadAndSaveMediaMessage({
@@ -888,6 +888,27 @@ DrkBot.addCommand({pattern: 'gif', fromMe: false, dontAddCommandList: true}, (as
 
         ffmpeg(location)
             .noAudio()
+            .fps(13)
+            .videoBitrate(500)
+            .save('output_gif.mp4')
+            .on('end', async () => {
+                await message.sendMessage(fs.readFileSync('output_gif.mp4'), MessageType.video, {mimetype: Mimetype.gif, caption: `${MLang.by}`});
+            });
+        return await message.client.deleteMessage(message.jid, {id: downloading.key.id, remoteJid: message.jid, fromMe: true})
+    }));
+
+    DrkBot.addCommand({pattern: 'agif', fromMe: false, dontAddCommandList: true}, (async (message, match) => {    
+        if (message.reply_message === false) return await message.sendMessage('¡Responde a un video!');
+        var downloading = await message.client.sendMessage(message.jid,'```Convirtiendo en Gif...```',MessageType.text);
+        var location = await message.client.downloadAndSaveMediaMessage({
+            key: {
+                remoteJid: message.reply_message.jid,
+                id: message.reply_message.id
+            },
+            message: message.reply_message.data.quotedMessage
+        });
+
+        ffmpeg(location)
             .fps(13)
             .videoBitrate(500)
             .save('output_gif.mp4')
