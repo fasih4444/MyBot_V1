@@ -86,7 +86,7 @@ DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: true}, (async (message, matc
     
     DrkBox.addCommand({ pattern: 'igdown ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
 	 const link = match[1]
-	 const buffer = await dbot.igdl(`${link}`(message)[0])
+	 const buffer = await dbot.igdl(`${link}`)
          for (let i of buffer ? buffer : buffer.medias){
              if(i.url.includes('.mp4')){
                  await message.sendMessage(Buffer.from(buffer.url), MessageType.video)
