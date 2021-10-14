@@ -132,17 +132,17 @@ DrkBox.addCommand({pattern: 'text2pink ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textabear ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-funny-animations-of-a-traveling-bear-701.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.png, caption: `${MLang.by}`, mimetype: Mimetype.gif })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text6neon ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-light-effects-green-neon-online-429.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}`})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'textheart ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/write-name-on-heart-with-wings-gifs-430.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.png, caption: `${MLang.by}`, mimetype: Mimetype.gif })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/text-graffiti-3d-208.html')
@@ -152,7 +152,7 @@ DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textpuppy ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-puppy-cute-animated-online-478.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.png, caption: `${MLang.by}`, mimetype: Mimetype.gif })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'textroad ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-glowing-text-effects-online-706.html')
@@ -172,10 +172,10 @@ DrkBox.addCommand({pattern: 'text3pubg ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textpubg ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var vid = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-pubg-style-glitch-video-avatar-554.html')
     var buffer_data = await axios.get(vid.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.png, caption: `${MLang.by}`, mimetype: Mimetype.mp4 })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text2pubg ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var vid = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/lightning-pubg-video-logo-maker-online-615.html')
     var buffer_data = await axios.get(vid.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.png, caption: `${MLang.by}`, mimetype: Mimetype.mp4 })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
 }));
