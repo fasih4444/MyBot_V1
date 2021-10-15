@@ -195,3 +195,518 @@ DrkBox.addCommand({pattern: 'text2devil ?(.*)', fromMe: wk, dontAddCommandList: 
           } 
     });
 }));
+
+DrkBox.addCommand({pattern: 'textblood ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/horror-blood-text-effect-online-883.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/bld.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/bld.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text2blood ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/blood-text-on-the-frosted-glass-941.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/cbld.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/cbld.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'texthub ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = '';
+    }
+    HeartBot.textpro("https://textpro.me/pornhub-style-logo-online-generator-free-977.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/hub.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/hub.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textretro ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = '';
+    }
+    HeartBot.textpro("https://textpro.me/video-game-classic-8-bit-text-effect-1037.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/retr.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/retr.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+
+DrkBox.addCommand({pattern: 'text3graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/break-wall-text-effect-871.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/t3gr.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/t3gr.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textberry ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-berry-text-effect-online-free-1033.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/bry.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/bry.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text4sand ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-a-summery-sand-writing-text-effect-988.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/t4snd.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/t4snd.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text2fire ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/halloween-fire-text-effect-940.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/fh.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/fh.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textmagma ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-a-magma-hot-text-effect-online-1030.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/magma.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/magma.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textpaper ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-art-paper-cut-text-effect-online-1022.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/papert.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/papert.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text2harry ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-harry-potter-text-effect-online-1025.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/hp2n.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/hp2n.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textwolf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = '';
+    }
+    HeartBot.textpro("https://textpro.me/create-wolf-logo-galaxy-online-936.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/wolf.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/wolf.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textjoker ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/create-logo-joker-online-934.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/joker.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/joker.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+DrkBox.addCommand({pattern: 'textninja ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = '';
+    }
+    HeartBot.textpro("https://textpro.me/create-ninja-logo-online-935.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/ninja.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/ninja.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textmarvel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-logo-style-marvel-studios-online-971.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/marvel.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/marvel.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+DrkBox.addCommand({pattern: 'text2marvel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-3d-avengers-logo-online-974.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/mar2.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/mar2.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text2glitch ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-a-glitch-text-effect-online-free-1026.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/t2gl.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/t2gl.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textglitch ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-glitch-text-effect-style-tik-tok-983.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/tt2.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/tt2.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textgraf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-cool-wall-graffiti-text-effect-online-1009.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/ttgra.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/ttgra.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'text2graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-a-cool-graffiti-text-on-the-wall-1010.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/t2gra.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/t2gra.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
+
+DrkBox.addCommand({pattern: 'textlion ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    var topText, bottomText; 
+    if (match[1].includes(';')) {
+        var split = match[1].split(';');
+        topText = split[0];
+        bottomText = split[1];
+    } else {
+        topText = match[1];
+        bottomText = 'ㅤ';
+    }
+    HeartBot.textpro("https://textpro.me/create-lion-logo-mascot-online-938.html",
+        [`${topText}`, `${bottomText}`]
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/lion.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/lion.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
+}));
