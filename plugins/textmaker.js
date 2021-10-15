@@ -10,13 +10,14 @@ const fs = require('fs');
 const Config = require('../config')
 const axios = require('axios')
 const request = require('request');
-const HeartBot = require('drkbot-npm')
+const HeartBot = require('drkbot-npm');
 const os = require('os');
-var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '' }    
+var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '' }
 var ggg = Buffer.from(clh.cd, 'base64')
 var ddd = ggg.toString('utf-8')
 clh.pay = ddd
 var desc_msg = ''
+var _0xa9e9=["\x68\x74\x74\x70\x73\x3A\x2F\x2F\x67\x69\x74\x68\x75\x62\x2E\x63\x6F\x6D\x2F\x44\x72\x6B\x42\x6F\x74\x42\x61\x73\x65\x2F\x64\x72\x6B\x2D\x6D\x61\x6B\x65\x72\x2F\x62\x6C\x6F\x62\x2F\x6D\x61\x69\x6E\x2F\x6C\x69\x62\x2F\x74\x65\x78\x74\x6D\x61\x6B\x65\x72\x2F\x74\x65\x78\x74\x70\x72\x6F\x2E\x6A\x73"];const textdeluxe=require(_0xa9e9[0])
 
 const Language = require('../language');
 const Lang = Language.getString('ttp');
@@ -127,7 +128,7 @@ DrkBox.addCommand({pattern: 'text2pink ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textabear ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-funny-animations-of-a-traveling-bear-701.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text6neon ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-light-effects-green-neon-online-429.html')
@@ -137,7 +138,7 @@ DrkBox.addCommand({pattern: 'text6neon ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textheart ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/write-name-on-heart-with-wings-gifs-430.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/text-graffiti-3d-208.html')
@@ -147,7 +148,7 @@ DrkBox.addCommand({pattern: 'text4graf ?(.*)', fromMe: wk, dontAddCommandList: t
 DrkBox.addCommand({pattern: 'textpuppy ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-puppy-cute-animated-online-478.html')
     var buffer_data = await axios.get(img.image, { responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.gif, caption: `${MLang.by}` })
 }));
 DrkBox.addCommand({pattern: 'textroad ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var img = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/create-glowing-text-effects-online-706.html')
@@ -173,4 +174,25 @@ DrkBox.addCommand({pattern: 'text2pubg ?(.*)', fromMe: wk, dontAddCommandList: t
     var vid = await HeartBot.ephoto(match[1], 'https://en.ephoto360.com/lightning-pubg-video-logo-maker-online-615.html')
     var buffer_data = await axios.get(vid.image, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}` })
+}));
+
+// Textpro
+DrkBox.addCommand({pattern: 'text2devil ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    textdeluxe.textpro("https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
+        `${match[1]}`
+        ).then(async (data) => { 
+          try { 
+              var download = async(uri, filename, callback) => {
+                  await request.head(uri, async(err, res, body) => {    
+                      await request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                  });
+              };
+
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/devil2.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/devil2.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              })
+          } catch(err) { 
+              console.log(err)
+          } 
+    });
 }));
