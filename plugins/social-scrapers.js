@@ -78,7 +78,7 @@ else if (Config.WORKTYPE == 'public') {
 
 DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: true}, (async (message, match) => {
     var igdesc = await dbot.igdl(match[1])
-    var buffer_data = await axios.get(igdesc.media.url, { responseType: 'arraybuffer'})
+    var buffer_data = await axios.get(igdesc.medias.url, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
 
