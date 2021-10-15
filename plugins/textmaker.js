@@ -292,6 +292,7 @@ DrkBox.addCommand({pattern: 'textretro ?(.*)', fromMe: wk, dontAddCommandList: t
               console.log(err)
           } 
     });
+}));
 
 DrkBox.addCommand({pattern: 'text3graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     HeartBot.textpro("https://textpro.me/break-wall-text-effect-871.html",
@@ -481,6 +482,7 @@ DrkBox.addCommand({pattern: 'textjoker ?(.*)', fromMe: wk, dontAddCommandList: t
           } 
     });
 }));
+
 DrkBox.addCommand({pattern: 'textninja ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
     if (match[1].includes(';')) {
@@ -538,6 +540,7 @@ DrkBox.addCommand({pattern: 'textmarvel ?(.*)', fromMe: wk, dontAddCommandList: 
           } 
     });
 }));
+
 DrkBox.addCommand({pattern: 'text2marvel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
     if (match[1].includes(';')) {
