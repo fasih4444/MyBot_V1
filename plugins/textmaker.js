@@ -11,7 +11,6 @@ const Config = require('../config')
 const axios = require('axios')
 const request = require('request');
 const HeartBot = require('drkbot-npm');
-const textdeluxe = require('https://raw.githubusercontent.com/DrkBotBase/drk-maker/main/src/index.js');
 const os = require('os');
 var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '' }
 var ggg = Buffer.from(clh.cd, 'base64')
@@ -178,7 +177,7 @@ DrkBox.addCommand({pattern: 'text2pubg ?(.*)', fromMe: wk, dontAddCommandList: t
 
 // Textpro
 DrkBox.addCommand({pattern: 'text2devil ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    textdeluxe.textpro("https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
+    HeartBot.textpro("https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
         `${match[1]}`
         ).then(async (data) => { 
           try { 
