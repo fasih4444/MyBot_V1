@@ -265,18 +265,9 @@ DrkBox.addCommand({pattern: 'texthub ?(.*)', fromMe: wk, dontAddCommandList: tru
     });
 }));
 
-DrkBox.addCommand({pattern: 'textretro ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    var topText, bottomText; 
-    if (match[1].includes(';')) {
-        var split = match[1].split(';');
-        topText = split[0];
-        bottomText = split[1];
-    } else {
-        topText = match[1];
-        bottomText = '';
-    }
-    HeartBot.textpro("https://textpro.me/video-game-classic-8-bit-text-effect-1037.html",
-        [`${topText}`, `${bottomText}`]
+DrkBox.addCommand({pattern: 'textminion ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+    HeartBot.textpro("https://textpro.me/minion-text-effect-3d-online-978.html",
+        `${match[1]}`
         ).then(async (data) => { 
           try { 
               var download = async(uri, filename, callback) => {
@@ -285,8 +276,8 @@ DrkBox.addCommand({pattern: 'textretro ?(.*)', fromMe: wk, dontAddCommandList: t
                   });
               };
 
-              await download(`${data}`, '/root/WhatsAsenaDuplicated/retr.png', async() => {                          
-                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/retr.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+              await download(`${data}`, '/root/WhatsAsenaDuplicated/t3gr.png', async() => {                          
+                  await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/t3gr.png'), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
               })
           } catch(err) { 
               console.log(err)
