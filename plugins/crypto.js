@@ -19,33 +19,17 @@ const Language = require('../language');
 const Lang = Language.getString('crypto');
 const KLang = Language.getString('keys');
 
-if (Config.WORKTYPE == 'private') {
+let wk = Config.WORKTYPE == 'public' ? false : true
 
-	DrkBox.addCommand({ pattern: 'price ?(.*)', fromMe: true, desc: Lang.DESC}, async (message, match) => {
-		const userDrk = match[1]
-		if (userDrk === '') return await message.sendMessage(infoMessage(Lang.need))
+DrkBox.addCommand({ pattern: 'price ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
+	const userDrk = match[1]
+	if (userDrk === '') return await message.sendMessage(infoMessage(Lang.need))
 
-		await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${userDrk}&tsyms=USD,COP&api_key={${KLang.CC}}`).then(async (response) => {
-			const {USD, COP} = response.data
-			const msg = `*Token:* ${userDrk}\n\n*USD:* ${USD}\n*COP:* ${COP}`
-			await message.sendMessage(msg)
-		}).catch(async (err) => {
-			await message.sendMessage(errorMessage(Lang.iErr))
-		   })
-	});
-}
-else if (Config.WORKTYPE == 'public') {
-
-	DrkBox.addCommand({ pattern: 'price ?(.*)', fromMe: false, desc: Lang.DESC}, async (message, match) => {
-		const userDrk = match[1]
-		if (userDrk === '') return await message.sendMessage(infoMessage(Lang.need))
-
-		await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${userDrk}&tsyms=USD,COP&api_key={${KLang.CC}}`).then(async (response) => {
-			const {USD, COP} = response.data
-			const msg = `*Token:* ${userDrk}\n\n*USD:* ${USD}\n*COP:* ${COP}`
-			await message.sendMessage(msg)
-		}).catch(async (err) => {
-			await message.sendMessage(errorMessage(Lang.iErr))
-		   })
-	});
-}
+	await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${userDrk}&tsyms=USD,COP&api_key={${KLang.CC}}`).then(async (response) => {
+		const {USD, COP} = response.data
+		const msg = `*Token:* ${userDrk}\n\n*USD:* ${USD}\n*COP:* ${COP}`
+		await message.sendMessage(msg)
+	}).catch(async (err) => {
+		await message.sendMessage(errorMessage(Lang.iErr))
+	   })
+});
