@@ -86,9 +86,9 @@ DrkBot.addCommand({pattern: 'zbin ?(.*)', fromMe: wk}, async (message, match) =>
                     ' *PAIS:*\n' + 
                     json.country.name + '\n' + 
                     json.country.emoji + '\n' + 
-		    json.country.currency + '\n'
+		    json.country.currency + '\n' + 
                     ' *BANCO:*\n' + 
-                    json.bank.name + '\n' + , MessageType.text);
+                    json.bank.name, MessageType.text);
 	    } catch {
 		    return await message.client.sendMessage(message.jid, iErr, MessageType.text);
 	    }
