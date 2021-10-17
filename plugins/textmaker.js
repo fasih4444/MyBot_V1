@@ -238,7 +238,7 @@ DrkBox.addCommand({pattern: 'text2blood ?(.*)', fromMe: wk, dontAddCommandList: 
 
 DrkBox.addCommand({pattern: 'texthub ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -427,7 +427,7 @@ DrkBox.addCommand({pattern: 'text2harry ?(.*)', fromMe: wk, dontAddCommandList: 
 
 DrkBox.addCommand({pattern: 'textwolf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -476,7 +476,7 @@ DrkBox.addCommand({pattern: 'textjoker ?(.*)', fromMe: wk, dontAddCommandList: t
 
 DrkBox.addCommand({pattern: 'textninja ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -505,7 +505,7 @@ DrkBox.addCommand({pattern: 'textninja ?(.*)', fromMe: wk, dontAddCommandList: t
 
 DrkBox.addCommand({pattern: 'textmarvel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -534,7 +534,7 @@ DrkBox.addCommand({pattern: 'textmarvel ?(.*)', fromMe: wk, dontAddCommandList: 
 
 DrkBox.addCommand({pattern: 'text2marvel ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -563,7 +563,7 @@ DrkBox.addCommand({pattern: 'text2marvel ?(.*)', fromMe: wk, dontAddCommandList:
 
 DrkBox.addCommand({pattern: 'text2glitch ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -591,7 +591,7 @@ DrkBox.addCommand({pattern: 'text2glitch ?(.*)', fromMe: wk, dontAddCommandList:
 
 DrkBox.addCommand({pattern: 'textglitch ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -620,7 +620,7 @@ DrkBox.addCommand({pattern: 'textglitch ?(.*)', fromMe: wk, dontAddCommandList: 
 
 DrkBox.addCommand({pattern: 'textgraf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -649,7 +649,7 @@ DrkBox.addCommand({pattern: 'textgraf ?(.*)', fromMe: wk, dontAddCommandList: tr
 
 DrkBox.addCommand({pattern: 'text2graf ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
@@ -678,7 +678,7 @@ DrkBox.addCommand({pattern: 'text2graf ?(.*)', fromMe: wk, dontAddCommandList: t
 
 DrkBox.addCommand({pattern: 'textlion ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
-    if (match[1].includes(';')) {
+    if (match[1].includes(',')) {
         var split = match[1].split(';');
         topText = split[0];
         bottomText = split[1];
