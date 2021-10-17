@@ -45,7 +45,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 	  try {
 		  const response = await got(url);
 		  const json = JSON.parse(response.body);
-		  if (response.statusCode === 200) return await message.client.sendMessage(message.jid, '*Insulto Random:* 👿🤬\n' +'*' + json.insult + '*', MessageType.text);
+		  if (response.statusCode === 200) return await message.client.sendMessage(message.jid, '*Insulto Random:* 👿🤬\n\n' + json.insult, MessageType.text);
 	  } catch {
 		  return await message.client.sendMessage(message.jid, iErr, MessageType.text);
 	  }
