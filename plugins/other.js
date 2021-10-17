@@ -64,9 +64,32 @@ let wk = Config.WORKTYPE == 'public' ? false : true
         if (match[1] === '') return await message.sendMessage(infoMessage(sBin))
         await axios.get(`https://lookup.binlist.net/${match[1]}`).then(async (response) => {
             const {scheme, type, brand, country.name, country.emoji, country.currency, bank.name} = response.data
-            const msg = `*BIN: ${match[1]}*\n*TIPO:*\n${scheme}\n${type}\n${brand}\n\n*PAIS*\n${country.name}\n${county.emoji}\n${country.currency}\n\n*BANCO*${country.bank.name}`
+            const msg = `*BIN: ${match[1]}*\n*TIPO:*\n${scheme}\n${type}\n${brand}\n\n*PAIS*\n${country.name}\n${county.emoji}\n${country.currency}\n\n*BANCO*${bank.name}`
             await message.sendMessage(msg)
         }).catch(async (err) => {
             await message.sendMessage(errorMessage(iErr))
           })
+    });
+
+DrkBot.addCommand({pattern: 'zbin ?(.*)', fromMe: wk}, async (message, match) => {
+	    if (match[1] === '') return await message.sendMessage(infoMessage("🤖 Necesito el BIN!"))
+	    const url = `https://lookup.binlist.net/${match[1]}`;
+	    try {
+		    const response = await got(url);
+		    const json = JSON.parse(response.body);
+		    if (response.statusCode === 200) return await message.client.sendMessage(message.jid,
+		    `💳 *BIN:* ${match[1]}\n` + 
+		    ' *TIPO:*\n' + 
+		    json.scheme + '\n' + 
+		    json.type + '\n' + 
+		    json.brand + '\n' + 
+                    ' *PAIS:*\n' + 
+                    json.country.name + '\n' + 
+                    json.country.emoji + '\n' + 
+		    json.country.currency + '\n'
+                    ' *BANCO:*\n' + 
+                    json.bank.name + '\n' + , MessageType.text);
+	    } catch {
+		    return await message.client.sendMessage(message.jid, iErr, MessageType.text);
+	    }
     });
