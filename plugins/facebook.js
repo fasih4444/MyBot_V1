@@ -15,7 +15,9 @@ var fb_need = ''
 if (Config.LANG == 'ES') fb_desc = 'Descarga videos de Facebook.', fb_need = '*¡Ingrese un enlace de video válido!*'
 if (Config.LANG == 'EN') fb_desc = 'Downloads videos from Facebook.', fb_need = '*Please Enter a Valid Video Link!*'
 
-DrkBox.addCommand({pattern: 'fb ?(.*)', fromMe: false, desc: fb_desc, usage: 'fb https://www.facebook.com/Google/videos/10156367314197838'}, (async (message, match) => {
+let wk = Config.WORKTYPE == 'public' ? false : true
+
+DrkBox.addCommand({pattern: 'fb ?(.*)', fromMe: wk, desc: fb_desc, usage: 'fb https://www.facebook.com/Google/videos/10156367314197838'}, (async (message, match) => {
   var reg = new RegExp(/^http(?:s?):\/\/(?:www\.|web\.|m\.)?facebook\.com\/([A-z0-9\.]+)\/videos(?:\/[0-9A-z].+)?\/(\d+)(?:.+)?$/, 'gm')
   var is_valid = reg.test(match[1])
   if (!is_valid) return await message.client.sendMessage(message.jid, fb_need, MessageType.text)
