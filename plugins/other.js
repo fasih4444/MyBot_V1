@@ -9,6 +9,7 @@ const { MessageType, Mimetype, GroupSettingChange } = require('@adiwajshing/bail
 const { errorMessage, infoMessage } = require('../helpers')
 const axios = require('axios')
 const Config = require('../config');
+const got = require('got');
 const fs = require('fs');
 
 const Language = require('../language')
@@ -60,18 +61,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
         }
     }));
 
-    DrkBox.addCommand({ pattern: 'bin ?(.*)', fromMe: wk}, async (message, match) => {
-        if (match[1] === '') return await message.sendMessage(infoMessage(sBin))
-        await axios.get(`https://lookup.binlist.net/${match[1]}`).then(async (response) => {
-            const {scheme, type, brand, country.name, country.emoji, country.currency, bank.name} = response.data
-            const msg = `*BIN: ${match[1]}*\n*TIPO:*\n${scheme}\n${type}\n${brand}\n\n*PAIS*\n${country.name}\n${county.emoji}\n${country.currency}\n\n*BANCO*${bank.name}`
-            await message.sendMessage(msg)
-        }).catch(async (err) => {
-            await message.sendMessage(errorMessage(iErr))
-          })
-    });
-
-DrkBot.addCommand({pattern: 'zbin ?(.*)', fromMe: wk}, async (message, match) => {
+    DrkBox.addCommand({pattern: 'bin ?(.*)', fromMe: wk}, async (message, match) => {
 	    if (match[1] === '') return await message.sendMessage(infoMessage("🤖 Necesito el BIN!"))
 	    const url = `https://lookup.binlist.net/${match[1]}`;
 	    try {
