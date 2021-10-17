@@ -63,7 +63,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
     DrkBox.addCommand({ pattern: 'bin ?(.*)', fromMe: wk}, async (message, match) => {
         if (match[1] === '') return await message.sendMessage(infoMessage(sBin))
         await axios.get(`https://lookup.binlist.net/${match[1]}`).then(async (response) => {
-            const {scheme, type, brand, country.name, country.emoji, country.currency, country.bank.name} = response.data
+            const {scheme, type, brand, country.name, country.emoji, country.currency, bank.name} = response.data
             const msg = `*BIN: ${match[1]}*\n*TIPO:*\n${scheme}\n${type}\n${brand}\n\n*PAIS*\n${country.name}\n${county.emoji}\n${country.currency}\n\n*BANCO*${country.bank.name}`
             await message.sendMessage(msg)
         }).catch(async (err) => {
