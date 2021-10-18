@@ -47,8 +47,8 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
         const {format, result,} = response.data
         const profileBuffer = await axios.get(result, {responseType: 'arraybuffer'})
         const msg = `${format}`
-    if (msg === 'Image/jpg or png') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, {caption: msg,})}
-    if (msg === 'video/mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, {caption: msg,})}
+    if (msg === 'Image/jpg or png') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
+    if (msg === 'video/mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
 
     }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
