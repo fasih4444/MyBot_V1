@@ -41,7 +41,7 @@ DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async 
 DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, desc: "Descargas de twitter" }, async (message, match) => {
     const twtLink = match[1]
     if (!twtLink) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
-    await message.sendMessage(infoMessage(i.Load))
+    await message.sendMessage(infoMessage(iLoad))
 
     await axios.get(`https://api-anoncybfakeplayer.herokuapp.com/twdown?url=${twtLink}`).then(async (response) => {
         const {format, result,} = response.data
