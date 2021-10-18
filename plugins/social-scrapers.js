@@ -57,9 +57,9 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
 
 DrkBox.addCommand({pattern: 'igd ?(.*)', fromMe: wk}, async (message, match) => {
     if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
-    const { status, type, data } = await instagram(match[1], 'julie')
+    const { status, type, data } = await instagram(match[1], 'drkbot')
     if (!status) return await message.sendMessage(Lang.iErr)
-    await message.client.sendMessage(message.jid, i.Load, MessageType.text, { quoted: message.data });
+    await message.client.sendMessage(message.jid, iLoad, MessageType.text, { quoted: message.data });
     if (type === 'image') return await message.sendMessage(data, MessageType.image, { caption: `${MLang.by}`, quoted: message.data })
     if (type === 'video') return await message.sendMessage(data, MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
 });
