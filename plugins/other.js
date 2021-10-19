@@ -87,9 +87,9 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
     const response = await dbot.mediafire(match[1]);
-    const { title, size, link } = response.data
+    const { title, size, link } = response.data.$
     const profileBuffer = await axios.get(link, {responseType: 'arraybuffer'})
     const msg = `*Nombre:* ${title}\n*Peso:* ${size}`
     await message.sendMessage(msg, MessageType.text)
-    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)
+    // await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)
 });
