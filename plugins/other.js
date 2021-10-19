@@ -9,6 +9,7 @@ const { MessageType, Mimetype, GroupSettingChange } = require('@adiwajshing/bail
 const { errorMessage, infoMessage } = require('../helpers')
 const axios = require('axios')
 const Config = require('../config');
+const dbot = require('dbot-api');
 const got = require('got');
 const fs = require('fs');
 
@@ -83,3 +84,12 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 		    return await message.client.sendMessage(message.jid, iErr, MessageType.text);
 	    }
     });
+
+DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
+    const response = await dbot.mediafire(match[1]);
+    const { title, size, link } = response.data
+    const profileBuffer = await axios.get(link, {responseType: 'arraybuffer'})
+    const msg = `*Nombre:* ${title}\n*Peso:* ${size}`
+    await message.sendMessage(msg, MessageType.text)
+    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)
+});
