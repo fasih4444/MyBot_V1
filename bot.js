@@ -88,7 +88,7 @@ async function whatsAsena () {
     const DrkBotCN = new WAConnection();
     const Session = new StringSession();
     DrkBotCN.version = [2, 2123, 8]
-    DrkBotCN.setMaxListeners(0);
+   // DrkBotCN.setMaxListeners(0);
     setInterval(async () => { 
         var getGMTh = new Date().getHours()
         var getGMTm = new Date().getMinutes()
