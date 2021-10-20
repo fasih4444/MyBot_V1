@@ -3,7 +3,7 @@ Licensed under the  GPL-3.0 License;
 you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
-
+/*
 const chalk = require('chalk');
 const { WAConnection } = require('@adiwajshing/baileys');
 const { StringSession } = require('./whatsasena/');
@@ -50,3 +50,4 @@ async function whatsAsena () {
 }
 
 whatsAsena()
+*/
