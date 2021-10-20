@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/DrkBotBase/WhatsAsenaDuplicated#readme",
   "dependencies": {
-    "@adiwajshing/baileys": "3.4.1",
     "dbot-api": "^1.2.1",
     "drkbot-npm": "^1.2.1",
     "@lh2020/speedtest-net": "^2.1.1",
