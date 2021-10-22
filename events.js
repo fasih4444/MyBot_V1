@@ -40,6 +40,19 @@ function addCommand(info, func) {
     return infos;
 }
 
+export class Setting  {
+        async Function(m) {
+	m.message = (Object.keys(m.message)[0] === 'ephemeralMessage') ? m.message.ephemeralMessage.message : m.message
+	m.chats = (Object.keys(m.message)[0] === 'conversation') ? m.message.conversation : (Object.keys(m.message)[0] === 'extendedTextMessage') ? m.message.extendedTextMessage.text : (Object.keys(m.message)[0] === 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedDisplayText : ''
+	m.id = m.key.remoteJid
+	m.Group = m.id.endsWith('@g.us')
+	m.Gc = m.Group ? await dbot.groupMetadata(m.id) : ''
+	m.NamaGC = m.Group ?  m.Gc.subject : ''
+	m.From = m.NamaGC ? m.NamaGC : m.id
+	return m
+}
+}
+
 module.exports = {
     addCommand: addCommand,
     commands: Commands
