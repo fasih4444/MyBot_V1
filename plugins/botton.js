@@ -38,13 +38,13 @@ DrkBox.addCommand({on: 'text', fromMe: true}, (async (message, match) => {
 		  buttons: buttons,
 		  headerType: 1
 		}
-		await message.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
+		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
 	}
         else if (message.message.includes('OWNER')) {
-		await message.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
+		await message.client.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
 	else if (message.message.includes('UPDATE')) {
-		await message.sendMessage(message.jid, dapdate, MessageType.text);
+		await message.client.sendMessage(message.jid, dapdate, MessageType.text);
 	}
         else if (message.message.includes('dbot2')) {
 		const rows = [
@@ -61,7 +61,7 @@ DrkBox.addCommand({on: 'text', fromMe: true}, (async (message, match) => {
 	 	 listType: 1
 		}
 
-		await message.sendMessage(message.jid, button, MessageType.listMessage)
+		await message.client.sendMessage(message.jid, button, MessageType.listMessage)
 	}
 }));
 /*################# FIN #################*/
