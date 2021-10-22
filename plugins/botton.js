@@ -25,7 +25,7 @@ const button = async (test,id1,id2 ,foots = 'DrkBot') => {
 	]
 
 	let buttonMessage = {
-		contentText: `${commands}`},
+		contentText: `${commands}`,
 		footerText: foots,
 		buttons: buttons,
 		headerType: 1
