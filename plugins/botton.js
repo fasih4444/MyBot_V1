@@ -12,7 +12,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 
 /*################# BOTON #################*/
-async button(teks,id1,id2 ,foots = 'DrkBot') {
+const button = async (teks,id1,id2 ,foots = 'DrkBot') {
 	let buttons = [
 		{buttonId: 'id1', buttonText: {displayText: id1}, type: 1},
 		{buttonId: 'id2', buttonText: {displayText: id2}, type: 1}
