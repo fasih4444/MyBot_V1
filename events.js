@@ -64,7 +64,7 @@ export class Setting  {
 			buttons: buttons,
 			headerType: 1
 		}
-                await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
+                await message.sendMessage(id, buttonMessage, MessageType.buttonsMessage);
        }
 }
 
