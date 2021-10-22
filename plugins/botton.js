@@ -18,14 +18,14 @@ const dapdate = '┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤�
 
 
 /*################# BOTON #################*/
-const button = async (teks = `${commands}`,id1,id2 ,foots = 'DrkBot') => {
+const button = async (test,id1,id2 ,foots = 'DrkBot') => {
 	let buttons = [
 		{buttonId: 'id1', buttonText: {displayText: id1}, type: 1},
 		{buttonId: 'id2', buttonText: {displayText: id2}, type: 1}
 	]
 
 	let buttonMessage = {
-		contentText: teks,
+		contentText: `${commands}`},
 		footerText: foots,
 		buttons: buttons,
 		headerType: 1
@@ -46,7 +46,7 @@ const vCard = 'BEGIN:VCARD\n'
 /*################# CHAT #################*/
 DrkBox.addCommand({on: 'text', fromMe: wk, onlyGroup: true}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
-		button(teks,'OWNER','UPDATE')
+		button('OWNER','UPDATE')
 	} else if (message.message.includes('OWNER')) {
 		await message.sendMessage({displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
