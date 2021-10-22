@@ -6,7 +6,7 @@ DrkBot - Ian VanH
 
 const DrkBox = require('../events')
 const Config = require('../config');
-const { MessageType, MessageOptions, Mimetype } = require('@adiwajshing/baileys')
+const { MessageType } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 const id = '573046793853@s.whatsapp.net'
@@ -40,12 +40,14 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 		  headerType: 1
 		}
 		await message.sendMessage(id, buttonMessage, MessageType.buttonsMessage);
-	} else if (message.message.includes('OWNER')) {
+	}
+        else if (message.message.includes('OWNER')) {
 		await message.sendMessage(id, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
 	else if (message.message.includes('UPDATE')) {
 		await message.sendMessage(id, dapdate, MessageType.text);
-	} /*else if (message.message.includes('dbot2')) {
+	}
+        else if (message.message.includes('dbot2')) {
 		const rows = [
 		 {title: 'Row 1', description: "Hello it's description 1", rowId:"rowid1"},
 		 {title: 'Row 2', description: "Hello it's description 2", rowId:"rowid2"}
@@ -61,6 +63,6 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 		}
 
 		await message.sendMessage(id, button, MessageType.listMessage)
-	}*/
+	}
 }));
 /*################# FIN #################*/
