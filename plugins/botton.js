@@ -4,11 +4,13 @@ you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
 
-const DrkBox = require('../events')
+import { Setting } from '../events';
+const DrkBox = require('../events');
 const Config = require('../config');
 const { MessageType } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
+let { button } = new Setting()
 
 /*################# MENSAJES #################*/
 const comands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
@@ -46,22 +48,9 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	else if (message.message.includes('Update')) {
 		await message.client.sendMessage(message.jid, dapdate, MessageType.text, {quoted: message.data});
 	}
-        else if (message.message.includes('dbot2')) {
-		const rows = [
-		 {title: '/alive', description: "Mira si el BOT esta funcionando.", rowId:"rowid1"},
-		 {title: 'Update', description: "Muestra las actualizaciones recientes.", rowId:"rowid2"}
-		]
-
-		const sections = [{title: "Section 1", rows: rows}]
-
-		const button = {
-		 buttonText: 'MENU',
-		 description: "COMANDOS SIN PREFIJO",
-	 	 sections: sections,
-	 	 listType: 1
-		}
-
-		await message.sendMessage(button, MessageType.listMessage, {quoted: message.data})
+        else if (chats.toLowerCase() === 'menu' || chats.match('@573046793853')) {
+		let { chats, id, Group, From } = m
+                button(id,comand,'Owner','Update')
 	}
 }));
 /*################# FIN #################*/
