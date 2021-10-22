@@ -4,13 +4,11 @@ you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
 
-import { Setting } from '../events';
 const DrkBox = require('../events');
 const Config = require('../config');
 const { MessageType } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-let { button } = new Setting()
 
 /*################# MENSAJES #################*/
 const comands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
@@ -31,8 +29,8 @@ const vCard = 'BEGIN:VCARD\n'
 DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
 		let buttons = [
-		  {buttonId: 'id1', buttonText: {displayText: 'Owner'}, type: 1},
-		  {buttonId: 'id2', buttonText: {displayText: 'Update'}, type: 1}
+		  {buttonId: 'id1', buttonText: {displayText: vCard}, type: 1},
+		  {buttonId: 'id2', buttonText: {displayText: dapdate}, type: 1}
 		]
 		let buttonMessage = {
 		  contentText: comands,
@@ -47,10 +45,6 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	}
 	else if (message.message.includes('Update')) {
 		await message.client.sendMessage(message.jid, dapdate, MessageType.text, {quoted: message.data});
-	}
-        else if (chats.toLowerCase() === 'menu' || chats.match('@573046793853')) {
-		let { chats, id, Group, From } = m
-                button(id,comand,'Owner','Update')
 	}
 }));
 /*################# FIN #################*/
