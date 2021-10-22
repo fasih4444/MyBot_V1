@@ -40,7 +40,7 @@ function addCommand(info, func) {
     return infos;
 }
 
-export class Setting  {
+function class Setting  {
       async Function(m) {
 	m.message = (Object.keys(m.message)[0] === 'ephemeralMessage') ? m.message.ephemeralMessage.message : m.message
 	m.chats = (Object.keys(m.message)[0] === 'conversation') ? m.message.conversation : (Object.keys(m.message)[0] === 'extendedTextMessage') ? m.message.extendedTextMessage.text : (Object.keys(m.message)[0] === 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedDisplayText : ''
@@ -72,3 +72,4 @@ module.exports = {
     addCommand: addCommand,
     commands: Commands
 }
+module.exports = { Setting: Setting }
