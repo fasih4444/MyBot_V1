@@ -9,7 +9,6 @@ const Config = require('../config');
 const { MessageType } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-const id = '573046793853@s.whatsapp.net'
 
 /*################# MENSAJES #################*/
 const comands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
@@ -27,7 +26,7 @@ const vCard = 'BEGIN:VCARD\n'
 /*################# FIN #################*/
 
 /*################# CHAT #################*/
-DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
+DrkBox.addCommand({on: 'text', fromMe: true}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
 		let buttons = [
 		  {buttonId: 'id1', buttonText: {displayText: 'OWNER'}, type: 1},
@@ -39,13 +38,13 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 		  buttons: buttons,
 		  headerType: 1
 		}
-		await message.sendMessage(id, buttonMessage, MessageType.buttonsMessage);
+		await message.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
 	}
         else if (message.message.includes('OWNER')) {
-		await message.sendMessage(id, {displayname: "Ian", vcard: vCard}, MessageType.contact);
+		await message.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
 	else if (message.message.includes('UPDATE')) {
-		await message.sendMessage(id, dapdate, MessageType.text);
+		await message.sendMessage(message.jid, dapdate, MessageType.text);
 	}
         else if (message.message.includes('dbot2')) {
 		const rows = [
@@ -62,7 +61,7 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	 	 listType: 1
 		}
 
-		await message.sendMessage(id, button, MessageType.listMessage)
+		await message.sendMessage(message.jid, button, MessageType.listMessage)
 	}
 }));
 /*################# FIN #################*/
