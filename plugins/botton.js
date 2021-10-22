@@ -6,7 +6,7 @@ DrkBot - Ian VanH
 
 const DrkBox = require('../events')
 const Config = require('../config');
-const { MessageType } = require('@adiwajshing/baileys')
+const { MessageType, MessageOptions, Mimetype } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
