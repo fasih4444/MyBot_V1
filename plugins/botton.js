@@ -26,11 +26,11 @@ const vCard = 'BEGIN:VCARD\n'
 /*################# FIN #################*/
 
 /*################# CHAT #################*/
-DrkBox.addCommand({on: 'text', fromMe: true}, (async (message, match) => {
+DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
 		let buttons = [
-		  {buttonId: 'id1', buttonText: {displayText: 'OWNER'}, type: 1},
-		  {buttonId: 'id2', buttonText: {displayText: 'UPDATE'}, type: 1}
+		  {buttonId: 'id1', buttonText: {displayText: 'Owner'}, type: 1},
+		  {buttonId: 'id2', buttonText: {displayText: 'Update'}, type: 1}
 		]
 		let buttonMessage = {
 		  contentText: comands,
@@ -38,30 +38,30 @@ DrkBox.addCommand({on: 'text', fromMe: true}, (async (message, match) => {
 		  buttons: buttons,
 		  headerType: 1
 		}
-		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
+		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage, {quoted: message.data});
 	}
-        else if (message.message.includes('OWNER')) {
-		await message.client.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
+        else if (message.message.includes('Owner')) {
+		await message.client.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact, {quoted: message.data});
 	}
-	else if (message.message.includes('UPDATE')) {
-		await message.client.sendMessage(message.jid, dapdate, MessageType.text);
+	else if (message.message.includes('Update')) {
+		await message.client.sendMessage(message.jid, dapdate, MessageType.text, {quoted: message.data});
 	}
         else if (message.message.includes('dbot2')) {
 		const rows = [
-		 {title: 'Row 1', description: "Hello it's description 1", rowId:"rowid1"},
-		 {title: 'Row 2', description: "Hello it's description 2", rowId:"rowid2"}
+		 {title: '/alive', description: "Mira si el BOT esta funcionando.", rowId:"rowid1"},
+		 {title: 'Update', description: "Muestra las actualizaciones recientes.", rowId:"rowid2"}
 		]
 
 		const sections = [{title: "Section 1", rows: rows}]
 
 		const button = {
-		 buttonText: 'Click Me!',
-		 description: "Hello it's list message",
+		 buttonText: 'MENU',
+		 description: "COMANDOS SIN PREFIJO",
 	 	 sections: sections,
 	 	 listType: 1
 		}
 
-		await message.client.sendMessage(message.jid, button, MessageType.listMessage)
+		await message.sendMessage(button, MessageType.listMessage, {quoted: message.data})
 	}
 }));
 /*################# FIN #################*/
