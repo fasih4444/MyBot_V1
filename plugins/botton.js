@@ -26,7 +26,7 @@ const vCard = 'BEGIN:VCARD\n'
 /*################# FIN #################*/
 
 /*################# CHAT #################*/
-DrkBox.addCommand({on: 'text', fromMe: wk, onlyGroup: true}, (async (message, match) => {
+DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
 		let buttons = [
 		  {buttonId: 'id1', buttonText: {displayText: 'OWNER'}, type: 1},
