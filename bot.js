@@ -306,7 +306,10 @@ async function whatsAsena () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, up_ch, MessageType.text)
         }
     })
-    DrkBotCN.on('message-new', async msg => {
+    DrkBotCN.on('chat-update', async m => {
+        if (!m.hasNewMessage) return;
+        if (!m.messages && !m.count) return;
+        let msg = m.messages.all()[0];
        
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
@@ -314,19 +317,46 @@ async function whatsAsena () {
         }
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
-            // Görüşürüz Mesajı
+
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
             if (gb !== false) {
-                await DrkBotCN.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
+                if (gb.message.includes('{pp}')) {
+                let pp 
+                try { pp = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await DrkBotCN.getProfilePicture(); }
+                 var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
+                await DrkBotCN.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) }); });                           
+            } else if (gb.message.includes('{gif}')) {
+                var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                //created by afnanplk
+                    var plkpinky = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
+                await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) });
+            } else {
+                var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                   await DrkBotCN.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name), MessageType.text);
             }
+          }   
             return;
-        } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
-            // Hoşgeldin Mesajı
-            var gb = await getMessage(msg.key.remoteJid);
+          } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
+            // welcome
+             var gb = await getMessage(msg.key.remoteJid);
             if (gb !== false) {
-                await DrkBotCN.sendMessage(msg.key.remoteJid, gb.message, MessageType.text);
+                if (gb.message.includes('{pp}')) {
+                let pp
+                try { pp = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await DrkBotCN.getProfilePicture(); }
+                    var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
+                    //created by afnanplk
+                await DrkBotCN.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) }); });                           
+            } else if (gb.message.includes('{gif}')) {
+                var plkpinky = await axios.get(config.WEL_GIF, { responseType: 'arraybuffer' })
+                await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) });
+            } else {
+                   var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                   await DrkBotCN.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name), MessageType.text);
             }
-            return;
+          }         
+            return;                               
         }
         // ==================== End Greetings ====================
 
