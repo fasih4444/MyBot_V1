@@ -9,6 +9,7 @@ const Config = require('../config');
 const { MessageType, MessageOptions, Mimetype } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
+const id = '573046793853@s.whatsapp.net'
 
 /*################# MENSAJES #################*/
 const comands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
@@ -38,12 +39,12 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 		  buttons: buttons,
 		  headerType: 1
 		}
-		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
+		await message.client.sendMessage(id, buttonMessage, MessageType.buttonsMessage);
 	} else if (message.message.includes('OWNER')) {
-		await message.client.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
+		await message.client.sendMessage(id, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
 	else if (message.client.includes('UPDATE')) {
-		await message.client.sendMessage(message.jid, dapdate, MessageType.text);
+		await message.client.sendMessage(id, dapdate, MessageType.text);
 	} else if (message.message.includes('dbot1')) {
 		const rows = [
 		 {title: 'Row 1', description: "Hello it's description 1", rowId:"rowid1"},
@@ -59,7 +60,7 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	 	 listType: 1
 		}
 
-		await message.client.sendMessage(message.jid, button, MessageType.listMessage)
+		await message.sendMessage(id, button, MessageType.listMessage)
 	}
 }));
 /*################# FIN #################*/
