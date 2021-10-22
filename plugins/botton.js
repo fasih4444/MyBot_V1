@@ -11,7 +11,7 @@ const { MessageType } = require('@adiwajshing/baileys')
 let wk = Config.WORKTYPE == 'public' ? false : true
 
 /*################# MENSAJES #################*/
-const commands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
+const comands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
 
 const dapdate = '┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */qr*\nObten un codigo QR de algún texto o enlace enviado.\n\n*/apkmod*\nActualización del menú de aplicaciones.\n\n*/vip*\nYa los admin de grupos pueden usar los comandos vip por medio del *BOT*, para eso *DrkBot* necesita ser admin de ese grupo.\n┗━━━━━━━━━━━━'
 /*################# FIN #################*/
@@ -33,7 +33,7 @@ DrkBox.addCommand({on: 'text', fromMe: wk, onlyGroup: true}, (async (message, ma
 		  {buttonId: 'id2', buttonText: {displayText: 'UPDATE'}, type: 1}
 		]
 		let buttonMessage = {
-		  contentText: `${commands}`,
+		  contentText: comands,
 		  footerText: 'DrkBot',
 		  buttons: buttons,
 		  headerType: 1
