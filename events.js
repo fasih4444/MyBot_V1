@@ -40,36 +40,7 @@ function addCommand(info, func) {
     return infos;
 }
 
-function Setting  {
-      async Function(m) {
-	m.message = (Object.keys(m.message)[0] === 'ephemeralMessage') ? m.message.ephemeralMessage.message : m.message
-	m.chats = (Object.keys(m.message)[0] === 'conversation') ? m.message.conversation : (Object.keys(m.message)[0] === 'extendedTextMessage') ? m.message.extendedTextMessage.text : (Object.keys(m.message)[0] === 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedDisplayText : ''
-	m.id = m.key.remoteJid
-	m.Group = m.id.endsWith('@g.us')
-	m.Gc = m.Group ? await dbot.groupMetadata(m.id) : ''
-	m.NamaGC = m.Group ?  m.Gc.subject : ''
-	m.From = m.NamaGC ? m.NamaGC : m.id
-	return m
-      }
-
-      async button(id,teks,id1,id2 ,foots = 'DrkBot') {
-		let buttons = [
-			{buttonId: 'id1', buttonText: {displayText: id1}, type: 1},
-			{buttonId: 'id2', buttonText: {displayText: id2}, type: 1}
-	        ]
-			  
-		let buttonMessage = {
-			contentText: teks,
-			footerText: foots,
-			buttons: buttons,
-			headerType: 1
-		}
-                await message.sendMessage(id, buttonMessage, MessageType.buttonsMessage);
-       }
-}
-
 module.exports = {
     addCommand: addCommand,
     commands: Commands
 }
-module.exports = { Setting: Setting }
