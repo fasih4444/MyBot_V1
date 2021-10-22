@@ -10,9 +10,15 @@ const { MessageType } = require('@adiwajshing/baileys')
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
+/*################# MENSAJES #################*/
+const commands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
+
+const dapdate = '┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */qr*\nObten un codigo QR de algún texto o enlace enviado.\n\n*/apkmod*\nActualización del menú de aplicaciones.\n\n*/vip*\nYa los admin de grupos pueden usar los comandos vip por medio del *BOT*, para eso *DrkBot* necesita ser admin de ese grupo.\n┗━━━━━━━━━━━━'
+/*################# FIN #################*/
+
 
 /*################# BOTON #################*/
-const button = async (teks,id1,id2 ,foots = 'DrkBot') => {
+const button = async (teks = `${commands}`,id1,id2 ,foots = 'DrkBot') => {
 	let buttons = [
 		{buttonId: 'id1', buttonText: {displayText: id1}, type: 1},
 		{buttonId: 'id2', buttonText: {displayText: id2}, type: 1}
@@ -37,17 +43,10 @@ const vCard = 'BEGIN:VCARD\n'
             + 'END:VCARD'
 /*################# FIN #################*/
 
-/*################# MENSAJES #################*/
-const commands = '┏━━━━━━━━━━━━━━━━━━━\n┃〘 *PRUEBA* 〙\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━'
-
-const dapdate = '┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */qr*\nObten un codigo QR de algún texto o enlace enviado.\n\n*/apkmod*\nActualización del menú de aplicaciones.\n\n*/vip*\nYa los admin de grupos pueden usar los comandos vip por medio del *BOT*, para eso *DrkBot* necesita ser admin de ese grupo.\n┗━━━━━━━━━━━━'
-/*################# FIN #################*/
-
-
 /*################# CHAT #################*/
 DrkBox.addCommand({on: 'text', fromMe: wk, onlyGroup: true}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
-		button(commands,'OWNER','UPDATE')
+		button(teks,'OWNER','UPDATE')
 	} else if (message.message.includes('OWNER')) {
 		await message.sendMessage({displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
