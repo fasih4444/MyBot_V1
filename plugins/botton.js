@@ -39,11 +39,11 @@ DrkBox.addCommand({on: 'text', fromMe: wk, onlyGroup: true}, (async (message, ma
 		  headerType: 1
 		}
 		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
-	} else if (message.message.includes('OWNER')) {
-		return await message.sendMessage({displayname: "Ian", vcard: vCard}, MessageType.contact);
+	} else if (message.message === "OWNER") {
+		await message.reply({displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
-	else if (message.message.includes('UPDATE')) {
-		return await message.sendMessage(dapdate, MessageType.text);
+	else if (message.message.client === "UPDATE") {
+		await message.reply(dapdate, MessageType.text);
 	}
 }));
 /*################# FIN #################*/
