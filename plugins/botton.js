@@ -43,9 +43,9 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	} else if (message.message.includes('OWNER')) {
 		await message.client.sendMessage(id, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
-	else if (message.client.includes('UPDATE')) {
+	else if (message.message.client.includes('UPDATE')) {
 		await message.client.sendMessage(id, dapdate, MessageType.text);
-	} else if (message.message.includes('dbot1')) {
+	} else if (message.message.includes('dbot2')) {
 		const rows = [
 		 {title: 'Row 1', description: "Hello it's description 1", rowId:"rowid1"},
 		 {title: 'Row 2', description: "Hello it's description 2", rowId:"rowid2"}
