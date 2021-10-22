@@ -40,10 +40,10 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 		}
 		await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage);
 	} else if (message.message.includes('OWNER')) {
-		await message.client.sendMessage({displayname: "Ian", vcard: vCard}, MessageType.contact);
+		await message.client.sendMessage(message.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
 	}
 	else if (message.message.client.includes('UPDATE')) {
-		await message.client.sendMessage(dapdate, MessageType.text);
+		await message.client.sendMessage(message.jid, dapdate, MessageType.text);
 	}
 }));
 /*################# FIN #################*/
