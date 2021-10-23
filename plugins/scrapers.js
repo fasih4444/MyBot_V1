@@ -7,6 +7,7 @@ DrkBot - Ian VanH
 const DrkBot = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
 const HeartBot = require('drkbot-npm')
+const dbot = require('dbot-api')
 const translatte = require('translatte');
 const config = require('../config');
 const LanguageDetect = require('languagedetect');
@@ -917,43 +918,18 @@ else if (config.WORKTYPE == 'public') {
     DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
 
         if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
-        
-        var img_list = await HeartBot.search_image(match[1])
-        await message.client.sendMessage(message.jid, Lang.IMG.format(5, match[1]), MessageType.text);
-        try {
-          var img1 = await axios.get(img_list.link1, {responseType: 'arraybuffer'})
-          await message.sendMessage(Buffer.from(img1.data), MessageType.image, { mimetype: Mimetype.png })
-        } catch {
-          return;
-        }
+        gis(match[1], async (error, result) => {
+            for (var i = 0; i < (result.length < 10 ? result.length : 10); i++) {
+                var get = got(result[i].url, {https: {rejectUnauthorized: false}});
+                var stream = get.buffer();
+                
+                stream.then(async (image) => {
+                    await message.client.sendMessage(message.jid,image, MessageType.image);
+                });
+            }
 
-        try {
-          var img2 = await axios.get(img_list.link2, {responseType: 'arraybuffer'})
-          await message.sendMessage(Buffer.from(img2.data), MessageType.image, { mimetype: Mimetype.png })
-        } catch {
-          return;
-        }
-
-        try {
-          var img3 = await axios.get(img_list.link3, {responseType: 'arraybuffer'})
-          await message.sendMessage(Buffer.from(img3.data), MessageType.image, { mimetype: Mimetype.png })
-        } catch {
-          return;
-        }
-
-        try {
-          var img4 = await axios.get(img_list.link4, {responseType: 'arraybuffer'})
-          await message.sendMessage(Buffer.from(img4.data), MessageType.image, { mimetype: Mimetype.png })
-        } catch {
-          return;
-        }
-      
-        try {
-          var img5 = await axios.get(img_list.link5, {responseType: 'arraybuffer'})
-          await message.sendMessage(Buffer.from(img5.data), MessageType.image, { mimetype: Mimetype.png })
-        } catch {
-          return;
-        }
+            message.reply(Lang.IMG.format((result.length < 5 ? result.length : 5), match[1]));
+        });
     }));
     
     DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
@@ -1018,5 +994,22 @@ else if (config.WORKTYPE == 'public') {
 
         await message.client.sendMessage(message.jid, Buffer.from(buffer.data),  MessageType.image, {caption: `*${Slang.ARAT}* ` + '```' + `${match[1]}` + '```' + `\n*${Slang.BUL}* ` + '```' + tit + '```' + `\n*${Slang.AUT}* ` + '```' + son + '```' + `\n*${Slang.SLY}*\n\n` + aut });
 
+    }));
+
+    DrkBot.addCommand({pattern: 'aimg ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
+
+        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
+        dbot.wallpaper(match[1], async (result) => {
+            for (var i = 0; i < (result.length < 5 ? result.length : 5); i++) {
+                var get = got(result[i], {https: {rejectUnauthorized: false}});
+                var stream = get.buffer();
+                
+                stream.then(async (image) => {
+                    await message.client.sendMessage(message.jid,image, MessageType.image);
+                });
+            }
+
+            message.reply(Lang.IMG.format((result.length < 5 ? result.length : 5), match[1]));
+        });
     }));
 }
