@@ -6,7 +6,7 @@ DrkBot - Ian VanH
 
 const DrkBot = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
-const HearBot = require('drkbot-npm')
+const HeartBot = require('drkbot-npm')
 const translatte = require('translatte');
 const config = require('../config');
 const LanguageDetect = require('languagedetect');
