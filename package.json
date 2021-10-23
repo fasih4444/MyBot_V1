@@ -28,7 +28,7 @@
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
     "dbot-api": "^1.2.1",
-    "drkbot-npm": "^1.2.8",
+    "drkbot-npm": "^1.2.9",
     "@lh2020/speedtest-net": "^2.1.1",
     "browser-id3-writer": "^4.4.0",
     "playstore-scraper": "^1.0.0",
