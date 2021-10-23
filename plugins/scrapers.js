@@ -928,7 +928,7 @@ else if (config.WORKTYPE == 'public') {
                 });
             }
 
-            message.reply(Lang.IMG.format((result.length < 5 ? result.length : 5), match[1]));
+            message.reply(Lang.IMG.format((result.length < 10 ? result.length : 10), match[1]));
         });
     }));
     
