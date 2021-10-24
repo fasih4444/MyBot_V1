@@ -26,7 +26,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
     const userName = match[1]
-    if (userName === '') return await message.sendMessage(errorMessage(Lang.need))
+    if (!userName) return await message.sendMessage(errorMessage(Lang.need))
     await message.sendMessage(infoMessage(Lang.loading))
     await axios.get(`https://megayaa.herokuapp.com/api/igstalk?username=${userName}`).then(async (response) => {
         const { username, fullName, subscribersCount, subscribtions, profilePicHD } = response.data
@@ -44,7 +44,7 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
     await message.sendMessage(infoMessage(iLoad))
 
     await axios.get(`https://api-anoncybfakeplayer.herokuapp.com/twdown?url=${twtLink}`).then(async (response) => {
-        const {format, result,} = response.data
+        const { format, result } = response.data
         const profileBuffer = await axios.get(result, {responseType: 'arraybuffer'})
         const msg = `${format}`
     	if (msg === 'Image/jpg or png') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
@@ -55,11 +55,11 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
 });
 
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
-    if (match[1] === '') await message.sendMessage(infoMessage("🤖 Necesito un link!"));
+    if (!match[1]) await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
 
     await axios.get(`https://megayaa.herokuapp.com/api/igdl?url=${match[1]}`).then(async (response) => {
-        const { url, type } = response.data.resul[0]
+        const { url, type } = response.data.resul
         const profileBuffer = await axios.get(url, {responseType: 'arraybuffer'})
         const msg = `${type}`
         if (msg === 'jpg') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
@@ -69,13 +69,11 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
     });
 });
 
-/*
-DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) => {
+DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: wk}, async (message, match) => {
     if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
     const { status, type, data } = await instagram(match[1], 'drkbot')
     if (!status) return await message.sendMessage(Lang.iErr)
-    await message.client.sendMessage(message.jid, iLoad, MessageType.text, { quoted: message.data });
+    await message.client.sendMessage(message.jid, iLoad, MessageType.text);
     if (type === 'image') return await message.sendMessage(data, MessageType.image, { caption: `${MLang.by}`, quoted: message.data })
     if (type === 'video') return await message.sendMessage(data, MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
 });
-*/
