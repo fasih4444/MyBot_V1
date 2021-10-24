@@ -58,7 +58,7 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) => {
   if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
 
-  await dbot.igdl(match[1]).then(result => {
+  await dbot.igdl(match[1]).then async (result => {
     var { type, downloadUrl } = result[0]
     const msg = `*Tipo:* ${type}\n*Url:* ${downloadUrl}`
     await message.sendMessage(msg, MessageType.text, {quoted: message.data});
