@@ -10,7 +10,7 @@ const { errorMessage, infoMessage } = require('../helpers');
 const Config = require('../config');
 const axios = require('axios');
 const fs = require('fs');
-const igdl = require ('../data/ian');
+const igdl = require('../data/ian');
 
 const Language = require('../language');
 const Lang = Language.getString('instagram');
