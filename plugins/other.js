@@ -86,10 +86,15 @@ let wk = Config.WORKTYPE == 'public' ? false : true
     });
 
 DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
-    const response = await dbot.mediafire(match[1]);
-    const { title, size, link } = response.data.$
-    const profileBuffer = await axios.get(link, {responseType: 'arraybuffer'})
-    const msg = `*Nombre:* ${title}\n*Peso:* ${size}`
-    await message.sendMessage(msg, MessageType.text)
-    // await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)
+  if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
+
+  await dbot.mediafire(match[1]).then(async (result) => {
+	  var { title, size, link } = result
+	  var msg = `${size}`
+    	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
+    if (msg <= '99MB') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)}
+    if (msg >= '100MB') { await message.sendMessage(`🤖 El tamaño de descarga supera los limites de WhatsApp.\nDescarga Externa: ${link}`, MessageType.text)}
+  }).catch (async (err) => {
+     await message.sendMessage(errorMessage(iErr))
+    });
 });
