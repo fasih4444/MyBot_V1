@@ -9,7 +9,6 @@ const { MessageType } = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
 const Config = require('../config');
 const axios = require('axios');
-const got = require('got');
 const fs = require('fs');
 
 const Language = require('../language');
@@ -48,26 +47,26 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
         const {format, result,} = response.data
         const profileBuffer = await axios.get(result, {responseType: 'arraybuffer'})
         const msg = `${format}`
-    if (msg === 'Image/jpg or png') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
-    if (msg === 'video/mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
-
+    	if (msg === 'Image/jpg or png') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
+    	if (msg === 'video/mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
     }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
     });
 });
 
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
-        if (match[1] === '') await message.sendMessage(infoMessage("🤖 Necesito un link!"));
-	const url = `https://megayaa.herokuapp.com/api/igdl?url=${match[1]}`;
-     try {
-		const response = await got(url);
-		const json = JSON.parse(response.body);
-        var dwl = await (json.result[0].url, {responseType: 'arraybuffer'})
-  	if (json.result[0].type === 'jpg') { await message.sendMessage(Buffer.from(dwl.data), MessageType.image) }
-        if (json.result[0].type === 'mp4') { await message.sendMessage(Buffer.from(dwl.data), MessageType.video) }
-     } catch {
-  	await message.sendMessage(errorMessage(Lang.iErr))
-       }
+    if (match[1] === '') await message.sendMessage(infoMessage("🤖 Necesito un link!"));
+    await message.sendMessage(infoMessage(iLoad))
+
+    await axios.get(`https://megayaa.herokuapp.com/api/igdl?url=${match[1]}`).then(async (response) => {
+        const { url, type } = response.data.resul[0]
+        const profileBuffer = await axios.get(url, {responseType: 'arraybuffer'})
+        const msg = `${type}`
+        if (msg === 'jpg') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
+        if (msg === 'mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
+    }).catch (async (err) => {
+     await message.sendMessage(errorMessage(Lang.iErr))
+    });
 });
 
 /*
