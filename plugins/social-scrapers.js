@@ -9,8 +9,8 @@ const { MessageType } = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
 const Config = require('../config');
 const axios = require('axios');
+const got = require('got');
 const fs = require('fs');
-const igdl = require('../data/ian');
 
 const Language = require('../language');
 const Lang = Language.getString('instagram');
