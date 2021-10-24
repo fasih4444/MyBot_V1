@@ -8,6 +8,7 @@ const DrkBox = require('../events');
 const { MessageType } = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
 const Config = require('../config');
+const dbot = require('dbot-api');
 const axios = require('axios');
 const fs = require('fs');
 
@@ -54,6 +55,20 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
     });
 });
 
+DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) => {
+  if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
+
+  await dbot.igdl(match[1]).then(result => {
+    var { type, downloadUrl } = result[0]
+    const msg = `*Tipo:* ${type}\n*Url:* ${downloadUrl}`
+    await message.sendMessage(msg, MessageType.text, {quoted: message.data});
+  }).catch (async (err) => {
+     await message.sendMessage(errorMessage(Lang.iErr))
+    });
+});
+
+
+/*
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
     if (!match[1]) await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
@@ -77,3 +92,4 @@ DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: wk}, async (message, match) 
     if (type === 'image') return await message.sendMessage(data, MessageType.image, { caption: `${MLang.by}`, quoted: message.data })
     if (type === 'video') return await message.sendMessage(data, MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
 });
+*/
