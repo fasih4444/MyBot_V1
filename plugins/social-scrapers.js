@@ -68,7 +68,7 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) =>
 */
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) => {
     const response = await igdl.igDownloader(match[1]);
-    const { link, desc } = response.data.result
+    const { link, desc } = response.data
     const profileBuffer = await axios.get(link, {responseType: 'arraybuffer'})
     const msg = `${desc}`
     await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: msg })
