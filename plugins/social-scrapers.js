@@ -59,9 +59,11 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) =>
   if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
 
   await dbot.igdl(match[1]).then(async (result) => {
-    var { type, downloadUrl } = result[0]
-    const msg = `*Tipo:* ${type}\n*Url:* ${downloadUrl}`
-    await message.sendMessage(msg, MessageType.text, {quoted: message.data});
+    const { type, downloadUrl } = result[0]
+    const down = await axios.get(downloadUrl, { responseType: 'arraybuffer' })
+    const msg = `${type}`
+    if (msg === 'image') { await message.sendMessage(Buffer.from(down.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
+    if (msg === 'video') { await message.sendMessage(Buffer.from(down.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
   }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
     });
