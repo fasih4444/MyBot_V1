@@ -57,11 +57,11 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
     await message.sendMessage(infoMessage(iLoad))
 
     await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { downloadUrl } = response.data.result
+        const { downloadUrl, type } = response.data.result
         const profileBuffer = await axios.get(downloadUrl, {responseType: 'arraybuffer'})
-        const msg = `${downloadUrl}`
-        if (msg.includes('.mp4')) { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
-        if (msg.includes('.jpg')) { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
+        const msg = `${type}`
+        if (msg === 'video') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
+        if (msg === 'image') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
     }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
     });
