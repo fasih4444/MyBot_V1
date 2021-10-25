@@ -22,14 +22,12 @@ const iErr = '🤖 Parece que hay un error'
 let wk = Config.WORKTYPE == 'public' ? false : true
 
     DrkBox.addCommand({ pattern: 'ip ?(.*)', fromMe: wk, desc: Lang.descIp}, async (message, match) => {
-        const userIp = match[1]
-        if (userIp === '') return await message.sendMessage(errorMessage(Lang.needIp))
+        if (!match[1]) return await message.sendMessage(errorMessage(Lang.needIp))
         await message.sendMessage(infoMessage(Lang.search))
-        await axios.get(`https://api-melodicxt-2.herokuapp.com/api/ipchecker?ip=${userIp}&apiKey=${KLang.KM}`).then(async (response) => {
-            const {ip, country_name, region_code, city, postal, org } = response.data.result.result
-            const ipscrap = await axios.get ('https://raw.githubusercontent.com/BotPrivateDrk/WhatsAsenaDuplicated/master/media/gif/ip.png', {responseType: 'arraybuffer'})
-            const msg = `*Ip:* ${ip} \n\n*Pais:* ${country_name} \n*Region:* ${region_code} \n*Ciudad:* ${city} \n*Zip Code:* ${postal} \n*Servicio:* ${org}`
-            await message.sendMessage(Buffer.from(ipscrap.data), MessageType.image, { caption: msg })
+        await axios.get(`http://ip-api.com/json/${match[1]}?fields=status,message,country,regionName,city,zip,timezone,currency,org,mobile,query`).then(async (response) => {
+            const {query, country, regionName, city, zip, timezone, currency, org, mobile} = response.data
+            const msg = `*Ip:* ${query} \n\n*Pais:* ${country}\n*Region:* ${regionName}\n*Ciudad:* ${city}\n*Zip Code:* ${zip}\n*Timezone:* ${timezone}\n*Moneda:* ${currency}\n*Servicio:* ${org}\n*Mobile:* ${mobile}`
+            await message.sendMessage(msg, MessageType.text)
         }).catch(async (err) => {
             await message.sendMessage(errorMessage(iErr))
           })
