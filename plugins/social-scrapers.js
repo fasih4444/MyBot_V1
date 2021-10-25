@@ -53,7 +53,7 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
 });
 
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
-    if (!match[1]) await message.sendMessage(infoMessage("🤖 Necesito un link!"));
+    if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
 
     await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
