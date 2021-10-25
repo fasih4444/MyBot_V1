@@ -90,8 +90,8 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
         const { title, size, link } = response.data.result
     	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
         const msg = `${size}`
-    if (msg < '99.00MB') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)}
-    if (msg > '99.90MB') { await message.sendMessage(`🤖 El tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\n*Link:* ${link}`, MessageType.text)}
+    if (msg < '99MB') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)}
+    if (msg > '100MB') { await message.sendMessage(`🤖 El tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\n*Link:* ${link}`, MessageType.text)}
   }).catch (async (err) => {
      await message.sendMessage(errorMessage(iErr))
     });
