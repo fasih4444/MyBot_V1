@@ -1609,6 +1609,26 @@ DrkBot.addCommand({pattern: 'invite ?(.*)', fromMe: false, onlyGroup: true, desc
     await message.client.sendMessage(message.jid,Lang.INVITE + ' https://chat.whatsapp.com/' + invite, MessageType.text);
 }));
 
+DrkBot.addCommand({pattern: 'rename ?(.*)', fromMe: false, onlyGroup: true, desc: Lang.RENAME_DESC}, (async (message, match) => {
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
+    if (!match[1]) return await message.client.sendMessage(message.jid,'🤖 Nombre a cambiar.?',MessageType.text);
+    await message.client.groupUpdateSubject(message.jid, match[1]);
+    await message.client.sendMessage(message.jid,'🤖 Nombre del grupo cambiado a:  ```' + match[1] + '```' ,MessageType.text);
+    }
+));
+
+DrkBot.addCommand({pattern: 'revoke', fromMe: false, onlyGroup: true, desc: Lang.REVOKE_DESC}, (async (message, match) => {    
+    var im = await checkImAdmin(message);
+    var userad = await checkAdmin(message);
+    if (!userad) return await message.client.sendMessage(message.jid,Lang.USER_NOT_ADMIN,MessageType.text);
+    if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN, MessageType.text);
+    await message.client.revokeInvite(message.jid)
+    await message.client.sendMessage(message.jid, Lang.REVOKED, MessageType.text);
+}))
+
 DrkBot.addCommand({pattern: 'vip', fromMe: false, onlyGroup: true}, (async (message, match) => {
     var im = await checkImAdmin(message);
     var userad = await checkAdmin(message);
