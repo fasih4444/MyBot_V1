@@ -46,7 +46,10 @@
             "UNMUTE_DESC": "El chat del grupo está abierto. Ahora cualquiera puede enviar un mensaje.",
             "UNMUTED": "¡Se abrió el chat del grupo!",
             "INVITE_DESC": "Trayendo el enlace de invitación del grupo...",
-            "INVITE": "```Enlace de invitación:```"
+            "INVITE": "```Enlace de invitación:```",
+            "RENAME_DESC": "Cambia el nombre del grupo...",
+            "REVOKE_DESC": "Cambia el link de invitación del grupo...",
+            "REVOKED": "Link del grupo reiniciado..."
         },
         "locate": {
             "L_DESC": "Envía tu ubicación",
