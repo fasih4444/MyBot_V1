@@ -19,11 +19,8 @@ const KLang = Language.getString('keys');
 const MLang = Language.getString('messages');
 const iLoad = "🤖 Un momento, estoy buscando..."
 
-const instagram = async (url, key) => {
-    const _0x4a94a8 = _0x185a; function _0x3f3b() { const _0x37037c = ['drk', 'htt', 'ps:', 'nti', 'ouy', 'aw.', 'kit', '/in', 'sta', '?ur', 'dat', 'get', 'arr']; _0x3f3b = function () { return _0x37037c; }; return _0x3f3b(); } function _0x185a(_0x38e93d, _0x3f3b83) { const _0x185a5f = _0x3f3b(); _0x185a = function (_0x829ec5, _0x405d60) { _0x829ec5 = _0x829ec5 - 0xe5; let _0x20f676 = _0x185a5f[_0x829ec5]; return _0x20f676; }; return _0x185a(_0x38e93d, _0x3f3b83); } if (key != _0x4a94a8(0xe5) + 'bot') throw new Error('Drk' + 'bot'); const response = await axios(_0x4a94a8(0xe6) + _0x4a94a8(0xe7) + '//u' + _0x4a94a8(0xe8) + 'tle' + 'd-1' + _0x4a94a8(0xe9) + 'r1r' + 'szh' + _0x4a94a8(0xea) + 'run' + _0x4a94a8(0xeb) + '.sh' + _0x4a94a8(0xec) + _0x4a94a8(0xed) + _0x4a94a8(0xee) + 'l=' + url); const { status, result } = response[_0x4a94a8(0xef) + 'a']; if (!status) return { 'status': status }; const { type, data } = result[0x0]; const res = await axios[_0x4a94a8(0xf0)](data, { 'responseType': _0x4a94a8(0xf1) + 'ayb' + 'uff' + 'er' }); return { 'type': type, 'data': res[_0x4a94a8(0xef) + 'a'], 'status': status };
-}
-
 let wk = Config.WORKTYPE == 'public' ? false : true
+
 
 DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
     const userName = match[1]
@@ -55,43 +52,16 @@ DrkBox.addCommand({ pattern: 'twt ?(.*)', fromMe: wk, dontAddCommandList: true, 
     });
 });
 
-DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk}, async (message, match) => {
-  if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
-
-  await dbot.igdl(match[1]).then(async (result) => {
-    const { type, downloadUrl } = result[0]
-    const profileBuffer = await axios.get(downloadUrl, { responseType: 'arraybuffer' })
-    const msg = `${type}`
-    if (msg === 'image') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image)}
-    if (msg === 'video') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video)}
-  }).catch (async (err) => {
-     await message.sendMessage(errorMessage(err))
-    });
-});
-
-
-/*
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
     if (!match[1]) await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
 
-    await axios.get(`https://megayaa.herokuapp.com/api/igdl?url=${match[1]}`).then(async (response) => {
-        const { url, type } = response.data.resul
-        const profileBuffer = await axios.get(url, {responseType: 'arraybuffer'})
-        const msg = `${type}`
-        if (msg === 'jpg') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
-        if (msg === 'mp4') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
+    await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { downloadUrl } = response.data.resul
+        const profileBuffer = await axios.get(downloadUrl, {responseType: 'arraybuffer'})
+        if (downloadUrl.includes('.mp4')) { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })}
+        if (downloadUrl.includes('.jpg')) { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
     }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
     });
 });
-
-DrkBox.addCommand({pattern: 'igdown ?(.*)', fromMe: wk}, async (message, match) => {
-    if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
-    const { status, type, data } = await instagram(match[1], 'drkbot')
-    if (!status) return await message.sendMessage(Lang.iErr)
-    await message.client.sendMessage(message.jid, iLoad, MessageType.text);
-    if (type === 'image') return await message.sendMessage(data, MessageType.image, { caption: `${MLang.by}`, quoted: message.data })
-    if (type === 'video') return await message.sendMessage(data, MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
-});
-*/
