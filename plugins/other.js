@@ -88,12 +88,12 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
   if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
 
-  await dbot.mediafire(match[1]).then(async (result) => {
-	  var { title, size, link } = result
-	  var msg = `${size}`
+  await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/mediafire?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { title, size, link } = response.data.result
     	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
+        const msg = `${size}`
     if (msg <= '99MB') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)}
-    if (msg >= '100MB') { await message.sendMessage(`🤖 El tamaño de descarga supera los limites de WhatsApp.\nDescarga Externa: ${link}`, MessageType.text)}
+    if (msg >= '100MB') { await message.sendMessage(`🤖 El tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\n*Link:* ${link}`, MessageType.text)}
   }).catch (async (err) => {
      await message.sendMessage(errorMessage(iErr))
     });
