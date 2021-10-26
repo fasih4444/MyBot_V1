@@ -89,7 +89,7 @@ DrkBox.addCommand({pattern: 'ymp4 ?(.*)', fromMe: wk}, async (message, match) =>
 
         await message.sendMessage(`*Titulo:* ${title}`, messageType.text)
         await message.sendMessage(Buffer.from(profileA.data), MessageType.audio, { quoted: message.data })
-        await message.sendMessage(Buffer.from(profileV.data), MessageType.video, { caption: ${MLang.by}`, quoted: message.data })
+        await message.sendMessage(Buffer.from(profileV.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
   }).catch (async (err) => {
     await message.sendMessage(errorMessage(Lang.iErr))
     });
