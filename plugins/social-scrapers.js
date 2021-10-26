@@ -78,3 +78,15 @@ DrkBox.addCommand({pattern: 'tiktok ?(.*)', fromMe: wk}, async (message, match) 
     await message.sendMessage(errorMessage(Lang.iErr))
     });
 });
+
+DrkBox.addCommand({pattern: 'ymp4 ?(.*)', fromMe: wk}, async (message, match) => {
+     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
+
+     await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/youtube?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { title, link } = response.data.result
+    	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `*Titulo: ${title}\n${MLang.by}`, quoted: message.data })
+  }).catch (async (err) => {
+    await message.sendMessage(errorMessage(Lang.iErr))
+    });
+});
