@@ -66,3 +66,15 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
      await message.sendMessage(errorMessage(Lang.iErr))
     });
 });
+
+DrkBox.addCommand({pattern: 'tiktok ?(.*)', fromMe: wk}, async (message, match) => {
+     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
+
+     await axios.get(`https://drkbot-rest.herokuapp.com/api/tiktok?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { message, nowm } = response.data.result
+    	const profileBuffer = await axios.get(nowm, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `*Api: ${message}\n${MLang.by}`, quoted: message.data })
+  }).catch (async (err) => {
+    await message.sendMessage(errorMessage(Lang.iErr))
+    });
+});
