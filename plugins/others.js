@@ -87,10 +87,9 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
   if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
 
   await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/mediafire?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, size, link } = response.data.result
+        const { title, link } = response.data.result
     	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
-        const msg = `${size}`
-        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)}
+        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document)
   }).catch (async (err) => {
      await message.sendMessage(iErr, `o el tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\n*Link:* ${link}`, MessageType.text)}
     });
