@@ -825,8 +825,8 @@ else if (config.WORKTYPE == 'public') {
     }));
 
     DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_TEXT_SONG,MessageType.text);    
+        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
+        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_TEXT_SONG,MessageType.text);    
         let arama = await yts(match[1]);
         arama = arama.all;
         if(arama.length < 1) return await message.client.sendMessage(message.jid,Lang.NO_RESULT,MessageType.text);
@@ -854,12 +854,12 @@ else if (config.WORKTYPE == 'public') {
 
                 reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
                 await message.client.sendMessage(message.jid,Buffer.from(writer.arrayBuffer), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false});
-            });
+            });*/
     }));
 
     DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
+        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
+        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
     
         var VID = '';
         try {
@@ -881,7 +881,7 @@ else if (config.WORKTYPE == 'public') {
         yt.on('end', async () => {
             reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
             await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
-        });
+        });*/
     }));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
@@ -916,8 +916,8 @@ else if (config.WORKTYPE == 'public') {
     }));
 
     DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
+        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
+        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
         gis(match[1], async (error, result) => {
             for (var i = 0; i < (result.length < 10 ? result.length : 10); i++) {
                 var get = got(result[i].url, {https: {rejectUnauthorized: false}});
@@ -929,7 +929,7 @@ else if (config.WORKTYPE == 'public') {
             }
 
             message.reply(Lang.IMG.format((result.length < 10 ? result.length : 10), match[1]));
-        });
+        });*/
     }));
     
     DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
