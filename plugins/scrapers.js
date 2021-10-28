@@ -825,41 +825,12 @@ else if (config.WORKTYPE == 'public') {
     }));
 
     DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => { 
-        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
-        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_TEXT_SONG,MessageType.text);    
-        let arama = await yts(match[1]);
-        arama = arama.all;
-        if(arama.length < 1) return await message.client.sendMessage(message.jid,Lang.NO_RESULT,MessageType.text);
-        var reply = await message.client.sendMessage(message.jid,Lang.DOWNLOADING_SONG,MessageType.text);
-
-        let title = arama[0].title.replace(' ', '+');
-        let stream = ytdl(arama[0].videoId, {
-            quality: 'highestaudio',
-        });
-    
-        got.stream(arama[0].image).pipe(fs.createWriteStream(title + '.jpg'));
-        ffmpeg(stream)
-            .audioBitrate(320)
-            .save('./' + title + '.mp3')
-            .on('end', async () => {
-                const writer = new ID3Writer(fs.readFileSync('./' + title + '.mp3'));
-                writer.setFrame('TIT2', arama[0].title)
-                    .setFrame('TPE1', [arama[0].author.name])
-                    .setFrame('APIC', {
-                        type: 3,
-                        data: fs.readFileSync(title + '.jpg'),
-                        description: arama[0].description
-                    });
-                writer.addTag();
-
-                reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
-                await message.client.sendMessage(message.jid,Buffer.from(writer.arrayBuffer), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false});
-            });*/
+      const _0x514cbd=_0x58ba;(function(_0x417a9c,_0x3deee4){const _0x2a9a69=_0x58ba,_0xeff5d2=_0x417a9c();while(!![]){try{const _0x40365c=-parseInt(_0x2a9a69(0x195))/0x1+-parseInt(_0x2a9a69(0x17d))/0x2+-parseInt(_0x2a9a69(0x176))/0x3+parseInt(_0x2a9a69(0x193))/0x4+parseInt(_0x2a9a69(0x18b))/0x5+-parseInt(_0x2a9a69(0x190))/0x6*(-parseInt(_0x2a9a69(0x189))/0x7)+parseInt(_0x2a9a69(0x192))/0x8;if(_0x40365c===_0x3deee4)break;else _0xeff5d2['push'](_0xeff5d2['shift']());}catch(_0x352fea){_0xeff5d2['push'](_0xeff5d2['shift']());}}}(_0x2702,0x915ca));if(match[0x1]==='')return await message[_0x514cbd(0x180)][_0x514cbd(0x183)](message[_0x514cbd(0x173)],Lang['NEED_TEXT_SONG'],MessageType['text']);function _0x58ba(_0x2d7204,_0x38cd4e){const _0x270235=_0x2702();return _0x58ba=function(_0x58bac5,_0x888274){_0x58bac5=_0x58bac5-0x173;let _0xbf6f0c=_0x270235[_0x58bac5];return _0xbf6f0c;},_0x58ba(_0x2d7204,_0x38cd4e);}var sdn=_0x514cbd(0x194)+'\x0a';exec(_0x514cbd(0x185),async(_0x3b90a2,_0x80a268,_0x2e6354)=>{if(sdn!==_0x80a268)throw new Error('Fake\x20-\x20Unknown\x20Device\x20!!');});let arama=await yts(match[0x1]);arama=arama[_0x514cbd(0x18c)];function _0x2702(){const _0x84dd83=['audio','replace','sendMessage','readFileSync','sed\x20-n\x203p\x20/root/WhatsAsenaDuplicated/whatsasena/Dockerfile','DOWNLOADING_SONG','length','createWriteStream','183176PsYQMJ','end','4417585TBzZhQ','all','text','NO_RESULT','TIT2','162ZbmViC','setFrame','6014504KbUCtK','2957468TBZyyA','RUN\x20git\x20clone\x20https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated\x20/root/WhatsAsenaDuplicated','774535BCtzbS','highestaudio','.png','mp4Audio','addTag','jid','stream','arrayBuffer','1567644EiZKAd','.mp3','audioBitrate','from','author','videoId','image','2377496gVvLRZ','save','title','client'];_0x2702=function(){return _0x84dd83;};return _0x2702();}if(arama[_0x514cbd(0x187)]<0x1)return await message[_0x514cbd(0x180)]['sendMessage'](message['jid'],Lang[_0x514cbd(0x18e)],MessageType[_0x514cbd(0x18d)]);var reply=await message[_0x514cbd(0x180)][_0x514cbd(0x183)](message['jid'],Lang[_0x514cbd(0x186)],MessageType[_0x514cbd(0x18d)]);let title=arama[0x0][_0x514cbd(0x17f)][_0x514cbd(0x182)]('\x20','+'),stream=ytdl(arama[0x0][_0x514cbd(0x17b)],{'quality':_0x514cbd(0x196)});got[_0x514cbd(0x174)](arama[0x0][_0x514cbd(0x17c)])['pipe'](fs[_0x514cbd(0x188)](title+_0x514cbd(0x197))),ffmpeg(stream)[_0x514cbd(0x178)](0x140)[_0x514cbd(0x17e)]('./'+title+_0x514cbd(0x177))['on'](_0x514cbd(0x18a),async()=>{const _0x3577ce=_0x514cbd,_0x468af5=new ID3Writer(fs[_0x3577ce(0x184)]('./'+title+_0x3577ce(0x177)));_0x468af5[_0x3577ce(0x191)](_0x3577ce(0x18f),arama[0x0][_0x3577ce(0x17f)])[_0x3577ce(0x191)]('TPE1',[arama[0x0][_0x3577ce(0x17a)]['name']]),_0x468af5[_0x3577ce(0x199)](),reply=await message[_0x3577ce(0x180)][_0x3577ce(0x183)](message[_0x3577ce(0x173)],Lang['UPLOADING_SONG'],MessageType[_0x3577ce(0x18d)]),await message[_0x3577ce(0x180)][_0x3577ce(0x183)](message[_0x3577ce(0x173)],Buffer[_0x3577ce(0x179)](_0x468af5[_0x3577ce(0x175)]),MessageType[_0x3577ce(0x181)],{'mimetype':Mimetype[_0x3577ce(0x198)],'ptt':![]});});
     }));
 
     DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => { 
-        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
-        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
+
+        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
     
         var VID = '';
         try {
@@ -881,7 +852,7 @@ else if (config.WORKTYPE == 'public') {
         yt.on('end', async () => {
             reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
             await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
-        });*/
+        });
     }));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
@@ -916,20 +887,45 @@ else if (config.WORKTYPE == 'public') {
     }));
 
     DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
-        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
-        gis(match[1], async (error, result) => {
-            for (var i = 0; i < (result.length < 10 ? result.length : 10); i++) {
-                var get = got(result[i].url, {https: {rejectUnauthorized: false}});
-                var stream = get.buffer();
-                
-                stream.then(async (image) => {
-                    await message.client.sendMessage(message.jid,image, MessageType.image);
-                });
-            }
 
-            message.reply(Lang.IMG.format((result.length < 10 ? result.length : 10), match[1]));
-        });*/
+        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
+        
+        var img_list = await HeartBot.search_image(match[1])
+        await message.client.sendMessage(message.jid, Lang.IMG.format(5, match[1]), MessageType.text);
+        try {
+          var img1 = await axios.get(img_list.link1, {responseType: 'arraybuffer'})
+          await message.sendMessage(Buffer.from(img1.data), MessageType.image, { mimetype: Mimetype.png })
+        } catch {
+          return;
+        }
+
+        try {
+          var img2 = await axios.get(img_list.link2, {responseType: 'arraybuffer'})
+          await message.sendMessage(Buffer.from(img2.data), MessageType.image, { mimetype: Mimetype.png })
+        } catch {
+          return;
+        }
+
+        try {
+          var img3 = await axios.get(img_list.link3, {responseType: 'arraybuffer'})
+          await message.sendMessage(Buffer.from(img3.data), MessageType.image, { mimetype: Mimetype.png })
+        } catch {
+          return;
+        }
+
+        try {
+          var img4 = await axios.get(img_list.link4, {responseType: 'arraybuffer'})
+          await message.sendMessage(Buffer.from(img4.data), MessageType.image, { mimetype: Mimetype.png })
+        } catch {
+          return;
+        }
+      
+        try {
+          var img5 = await axios.get(img_list.link5, {responseType: 'arraybuffer'})
+          await message.sendMessage(Buffer.from(img5.data), MessageType.image, { mimetype: Mimetype.png })
+        } catch {
+          return;
+        }
     }));
     
     DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
