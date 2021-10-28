@@ -4,34 +4,35 @@ you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
 
-const DrkBot = require('../events');
 const { MessageType, Mimetype } = require('@adiwajshing/baileys');
-const axios = require('axios');
+const DrkBot = require('../events');
 const Config = require('../config');
-const Sr = "Busca en Google."
+const gis = require('g-i-s');
+const got = require("got");
 
-if (Config.WORKTYPE == 'private') {
+let wk = Config.WORKTYPE == 'public' ? false : true
 
-DrkBot.addCommand({pattern: 'search ?(.*)', fromMe: true, desc: Sr}, (async (message, match) => {
 
-    if (match[1] === '') return await message.client.sendMessage(message.jid,'```¡Debes ingresar lo que quieres buscar!```', MessageType.text);
- 
-    Sea.google(`${match[1]}`).then(async(result) => {
-        
-        await message.client.sendMessage(message.jid,result[0], MessageType.text);
-      });
-  }));
-}
+DrkBot.addCommand({pattern: 'search ?(.*)', fromMe: wk}, async (message, match) => {
+    if (!match[1]) return await message.client.sendMessage(message.jid,'🤖 ¡Que imagenes quieres buscar!', MessageType.text);
 
-else if (Config.WORKTYPE == 'public') {
+    var opts = {
+      searchTerm: `${match[1]}`,
+      queryStringAddition: '&tbs=ic:trans',
+      filterOutDomains: [
+        'pinterest.com'
+      ]
+    };
+    var split = '5'
+    await gis(opts).then(async(error, result) => {
+         for (var i = 0; i < (results.length < `${split}` ? results.length : `${split}`); i++) {
 
-DrkBot.addCommand({pattern: 'search ?(.*)', fromMe: false, desc: Sr}, (async (message, match) => {
+            var get = got(result[i].url, {https: {rejectUnauthorized: false}});
+            var stream = get.buffer();
 
-    if (match[1] === '') return await message.client.sendMessage(message.jid,'```¡Debes ingresar lo que quieres buscar!```', MessageType.text);
- 
-    Sea.google(`${match[1]}`).then(async(result) => {
-        
-        await message.client.sendMessage(message.jid,result[0], MessageType.text);
-      });
-  }));
-}
+            stream.then(async (image) => {
+                await message.client.sendMessage(message.jid,image, MessageType.image);
+            })
+         }
+    })
+});
