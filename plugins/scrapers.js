@@ -830,27 +830,29 @@ else if (config.WORKTYPE == 'public') {
     DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_TEXT_SONG))
         await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
-
+    if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp3?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { url_audio } = response.data.ian.result
         const ytaudio = await axios.get(url_audio, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(ytaudio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
-      }).catch(async (err) => {
-        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
       })
+    } else {
+        await message.sendMessage(errorMessage("⚠️ El comando cambio.\nPara descargar necestas la url de la cancion."))
+      }
     }));
 
     DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
         await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-
+    if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp4?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { url_video } = response.data.ian.result
+        const { title, url_video } = response.data.ian.result
         const ytvideo = await axios.get(url_video, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `${MLang.by}`})
-      }).catch(async (err) => {
-        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
+        await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
       })
+    } else {
+        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
+      }
     }));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
