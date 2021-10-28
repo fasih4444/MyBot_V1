@@ -6,6 +6,7 @@ DrkBot - Ian VanH
 
 const DrkBot = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
+const { errorMessage, infoMessage } = require('../helpers');
 const HeartBot = require('drkbot-npm')
 const dbot = require('dbot-api')
 const translatte = require('translatte');
@@ -17,8 +18,6 @@ const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
 let baseURI = '/apps/' + config.HEROKU.APP_NAME;
-const exec = require('child_process').exec;
-const os = require("os");
 
 //============================== LYRICS =============================================
 const axios = require('axios');
@@ -48,6 +47,8 @@ const Language = require('../language');
 const Lang = Language.getString('scrapers');
 const Glang = Language.getString('github');
 const Slang = Language.getString('lyrics');
+const KLang = Language.getString('keys');
+const MLang = Language.getString('messages');
 
 const wiki = require('wikijs').default;
 var gis = require('g-i-s');
@@ -826,35 +827,30 @@ else if (config.WORKTYPE == 'public') {
         await message.client.sendMessage(message.jid,buffer, MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: true});
     }));
 
-    DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => { 
-      await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
-      }));
+    DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => {
+        if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_TEXT_SONG))
+        await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
 
-    DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => { 
-        await message.sendMessage("🤖 Hola, esté es uno de los comandos mas usados pero está presentando problemas y lo hemos deshabilitado temporalmente.\nLo resolveremos lo mas rapido posible.\n*Saludos* Ian 😎")
-        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
-    
-        var VID = '';
-        try {
-            if (match[1].includes('watch')) {
-                var tsts = match[1].replace('watch?v=', '')
-                var alal = tsts.split('/')[3]
-                VID = alal
-            } else {     
-                VID = match[1].split('/')[3]
-            }
-        } catch {
-            return await message.client.sendMessage(message.jid,Lang.NO_RESULT,MessageType.text);
-        }
-        var reply = await message.client.sendMessage(message.jid,Lang.DOWNLOADING_VIDEO,MessageType.text);
+      await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp3?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { url_audio } = response.data.ian.result
+        const ytaudio = await axios.get(url_audio, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(ytaudio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
+      }).catch(async (err) => {
+        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
+      })
+    }));
 
-        var yt = ytdl(VID, {filter: format => format.container === 'mp4' && ['720p', '480p', '360p', '240p', '144p'].map(() => true)});
-        yt.pipe(fs.createWriteStream('./' + VID + '.mp4'));
+    DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => {
+        if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
+        await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
 
-        yt.on('end', async () => {
-            reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-            await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
-        });*/
+      await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp4?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { url_video } = response.data.ian.result
+        const ytvideo = await axios.get(url_video, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `${MLang.by}`})
+      }).catch(async (err) => {
+        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
+      })
     }));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
@@ -992,22 +988,5 @@ else if (config.WORKTYPE == 'public') {
 
         await message.client.sendMessage(message.jid, Buffer.from(buffer.data),  MessageType.image, {caption: `*${Slang.ARAT}* ` + '```' + `${match[1]}` + '```' + `\n*${Slang.BUL}* ` + '```' + tit + '```' + `\n*${Slang.AUT}* ` + '```' + son + '```' + `\n*${Slang.SLY}*\n\n` + aut });
 
-    }));
-
-    DrkBot.addCommand({pattern: 'aimg ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
-        dbot.wallpaper(match[1], async (result) => {
-            for (var i = 0; i < (result.length < 5 ? result.length : 5); i++) {
-                var get = got(result[i], {https: {rejectUnauthorized: false}});
-                var stream = get.buffer();
-                
-                stream.then(async (image) => {
-                    await message.client.sendMessage(message.jid,image, MessageType.image);
-                });
-            }
-
-            message.reply(Lang.IMG.format((result.length < 5 ? result.length : 5), match[1]));
-        });
     }));
 }
