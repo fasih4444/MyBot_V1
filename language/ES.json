@@ -194,7 +194,7 @@
             "VIDEO_DESC": "Descarga video de YouTube.",
             "NEED_VIDEO": "*Necesito la url del video a descargar.*\n*Ejemplo:* /video https://youtu.be/KRaWnd3LJfs",
             "DOWNLOADING_VIDEO": "```Tu video se está descargando...```",
-            "UPLOADING_VIDEO": "*🤖 Buscando tu video.",
+            "UPLOADING_VIDEO": "🤖 Buscando tu video.",
             "YT_DESC": "Búsquedas en YouTube.",
             "NEED_WORDS": "```¡Por favor escriba algunas palabras!```",
             "GETTING_VIDEOS": "*Buscando enlaces...*",
