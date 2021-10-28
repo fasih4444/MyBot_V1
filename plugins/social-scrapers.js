@@ -71,9 +71,9 @@ DrkBox.addCommand({pattern: 'tiktok ?(.*)', fromMe: wk}, async (message, match) 
      if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
 
      await axios.get(`https://drkbot-rest.herokuapp.com/api/tiktok?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { message, nowm } = response.data.result
+        const { nowm } = response.data.result
     	const profileBuffer = await axios.get(nowm, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { caption: `*Api: ${message}\n${MLang.by}`, quoted: message.data })
+        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}`, quoted: message.data })
   }).catch (async (err) => {
     await message.sendMessage(errorMessage(Lang.iErr))
     });
@@ -83,12 +83,10 @@ DrkBox.addCommand({pattern: 'ymp4 ?(.*)', fromMe: wk}, async (message, match) =>
      if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
 
      await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/youtube?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, link, mp3 } = response.data.result
+        const { title, link } = response.data.result
     	const profileV = await axios.get(link, { responseType: 'arraybuffer' })
-        const profileA = await axios.get(mp3, { responseType: 'arraybuffer' })
 
         await message.sendMessage(`*Titulo:* ${title}`, messageType.text)
-        await message.sendMessage(Buffer.from(profileA.data), MessageType.audio, { quoted: message.data })
         await message.sendMessage(Buffer.from(profileV.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
   }).catch (async (err) => {
     await message.sendMessage(errorMessage(Lang.iErr))
