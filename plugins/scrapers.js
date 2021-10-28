@@ -829,8 +829,8 @@ else if (config.WORKTYPE == 'public') {
 
     DrkBot.addCommand({pattern: 'song ?(.*)', fromMe: false, desc: Lang.SONG_DESC}, (async (message, match) => {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_TEXT_SONG))
-        await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
+      await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
       await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp3?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { url_audio } = response.data.ian.result
         const ytaudio = await axios.get(url_audio, { responseType: 'arraybuffer' })
@@ -843,8 +843,8 @@ else if (config.WORKTYPE == 'public') {
 
     DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
-        await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
+      await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
       await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp4?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { title, url_video } = response.data.ian.result
         const ytvideo = await axios.get(url_video, { responseType: 'arraybuffer' })
