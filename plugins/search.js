@@ -24,7 +24,7 @@ DrkBot.addCommand({pattern: 'search ?(.*)', fromMe: wk}, async (message, match) 
       ]
     };
     var split = '5'
-    await gis(opts).then(async(error, result) => {
+    await gis(opts), async(error, result) => {
          for (var i = 0; i < (results.length < `${split}` ? results.length : `${split}`); i++) {
 
             var get = got(result[i].url, {https: {rejectUnauthorized: false}});
@@ -34,5 +34,5 @@ DrkBot.addCommand({pattern: 'search ?(.*)', fromMe: wk}, async (message, match) 
                 await message.client.sendMessage(message.jid,image, MessageType.image);
             })
          }
-    })
+    }
 });
