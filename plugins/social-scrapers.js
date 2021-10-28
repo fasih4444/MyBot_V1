@@ -56,7 +56,7 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
 
-    await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+    await axios.get(`https://ianvanh.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { downloadUrl, type } = response.data.result
         const profileBuffer = await axios.get(downloadUrl, {responseType: 'arraybuffer'})
         const msg = `${type}`
@@ -70,24 +70,10 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
 DrkBox.addCommand({pattern: 'tiktok ?(.*)', fromMe: wk}, async (message, match) => {
      if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
 
-     await axios.get(`https://drkbot-rest.herokuapp.com/api/tiktok?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+     await axios.get(`https://ianvanh.herokuapp.com/api/tiktok?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { nowm } = response.data.result
     	const profileBuffer = await axios.get(nowm, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}`, quoted: message.data })
-  }).catch (async (err) => {
-    await message.sendMessage(errorMessage(Lang.iErr))
-    });
-});
-
-DrkBox.addCommand({pattern: 'ymp4 ?(.*)', fromMe: wk}, async (message, match) => {
-     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-
-     await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/youtube?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, link } = response.data.result
-    	const profileV = await axios.get(link, { responseType: 'arraybuffer' })
-
-        await message.sendMessage(`*Titulo:* ${title}`, messageType.text)
-        await message.sendMessage(Buffer.from(profileV.data), MessageType.video, { caption: `${MLang.by}`, quoted: message.data })
   }).catch (async (err) => {
     await message.sendMessage(errorMessage(Lang.iErr))
     });
