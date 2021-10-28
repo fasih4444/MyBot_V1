@@ -17,6 +17,8 @@ const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
 let baseURI = '/apps/' + config.HEROKU.APP_NAME;
+const exec = require('child_process').exec;
+const os = require("os");
 
 //============================== LYRICS =============================================
 const axios = require('axios');
