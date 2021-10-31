@@ -30,7 +30,7 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	if (message.message.includes('dbot1')) {
 		let buttons = [
 		  {buttonId: 'Owner', buttonText: {displayText: "OWNER"}, type: 1},
-		  {buttonId: '/upgrade', buttonText: {displayText: "UPDATES"}, type: 1}
+		  {buttonId: '/ping', buttonText: {displayText: "PING"}, type: 1}
 		]
 		let buttonMessage = {
 		  contentText: comands,
