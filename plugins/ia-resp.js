@@ -21,7 +21,7 @@ DrkBox.addCommand({pattern: 'simi ?(.*)', fromMe: wk, desc: Lang.DESC}, async (m
 	try {
 		const response = await got(url);
 		const json = JSON.parse(response.body);
-  	if (json.methods === "GET") return await message.client.sendMessage(message.jid, '🤖' + ' ```' + json.messages[0].response + '```' , MessageType.text,{quoted: message.data});
+  	        await message.client.sendMessage(message.jid, '🤖' + ' ```' + json.messages[0].response + '```' , MessageType.text,{quoted: message.data});
   } catch {
   		return await message.client.sendMessage(message.jid, Lang.iErr, MessageType.text);
   	}
