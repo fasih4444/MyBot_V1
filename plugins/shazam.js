@@ -12,7 +12,8 @@ const Ierr = "*Necesitas contestar el archivo de audio!*"
 //============================== audd ==============================
 var request = require("request");
 var axios = require("axios");
-var fs = require('fs');
+const got = require('got');
+const fs = require('fs');
 
 
 if (Config.WORKTYPE == 'private') {
@@ -61,11 +62,39 @@ DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => 
         .format('mp3')
         .save('lyr.mp3')
         .on('end', async () => {
-            var zdata = {'file': fs.createReadStream('lyr.mp3'), 'return': 'title,artist'};
-            request ({ url: `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${zdata}`}, async (err, res, body) => {
+            var zdata = {'file': fs.createReadStream('lyr.mp3'), 'return': 'data'};
+            request ({ uri: `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${zdata}`}, async (err, res, body) => {
                 return await message.client.sendMessage(message.jid, body, MessageType.text);
             })
         });
 
     }));
+
+DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (async (message, match) => {    
+        if (message.reply_message === false) return await message.sendMessage('*Need Audio!*');
+
+        var location = await message.client.downloadAndSaveMediaMessage({
+            key: {
+                remoteJid: message.reply_message.jid,
+                id: message.reply_message.id
+            },
+            message: message.reply_message.data.quotedMessage
+        });
+
+        ffmpeg(location)
+            .save('output.mp3')
+            .on('end', async () => {
+                var audd = {'file': fs.createReadStream('output.mp3')}
+          const url = `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${audd}`;
+	  try {
+		  const response = await got(url);
+		  const json = JSON.parse(response.body);
+		  if (response.statusCode === 200) return await message.client.sendMessage(message.jid,
+                      json.data.title + '\n' +
+                      json.data.artists, MessageType.text);
+	  } catch {
+		  return await message.client.sendMessage(message.jid, Ierr, MessageType.text);
+	  }
+            });
+    })); 
 }
