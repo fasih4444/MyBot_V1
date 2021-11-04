@@ -84,7 +84,7 @@ DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (
         ffmpeg(location)
             .save('output.mp3')
             .on('end', async () => {
-                var audd = {'file': fs.createReadStream('output.mp3')}
+                var audd = (fs.readFileSync('output.mp3'));
           const url = `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${audd}`;
 	  try {
 		  const response = await got(url);
