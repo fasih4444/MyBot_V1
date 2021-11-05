@@ -48,3 +48,18 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 	}
 }));
 /*################# FIN #################*/
+
+DrkBox.addCommand({pattern: "anime ?(.*)", fromMe: wk}, (async (message, match) => {
+
+dbutton = [
+    {buttonId: '/sfwwaifu', buttonText: {displayText: "WAIFU"}, type: 1},
+    {buttonId: '/sfwneko', buttonText: {displayText: "NEKO"}, type: 1}
+	  ]
+const buttonMessage = {
+     contentText: 'Waifu o Neko,
+     footerText: 'DrkBot',
+     buttons: dbuttons,
+     headerType: 4
+     }
+await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage, {quoted: message.data});
+}));
