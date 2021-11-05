@@ -51,7 +51,7 @@ DrkBox.addCommand({on: 'text', fromMe: wk}, (async (message, match) => {
 
 DrkBox.addCommand({pattern: "anime ?(.*)", fromMe: wk}, (async (message, match) => {
 
-dbutton = [
+dbuttons = [
     {buttonId: '/sfwwaifu', buttonText: {displayText: "WAIFU"}, type: 1},
     {buttonId: '/sfwneko', buttonText: {displayText: "NEKO"}, type: 1}
 	  ]
