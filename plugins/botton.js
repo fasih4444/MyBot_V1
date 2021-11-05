@@ -59,7 +59,7 @@ const buttonMessage = {
      contentText: 'Waifu o Neko',
      footerText: 'DrkBot',
      buttons: dbuttons,
-     headerType: 4
+     headerType: 1
      }
 await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage, {quoted: message.data});
 }));
