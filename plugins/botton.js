@@ -56,7 +56,7 @@ dbuttons = [
     {buttonId: '/sfwneko', buttonText: {displayText: "NEKO"}, type: 1}
 	  ]
 const buttonMessage = {
-     contentText: 'Waifu o Neko,
+     contentText: 'Waifu o Neko',
      footerText: 'DrkBot',
      buttons: dbuttons,
      headerType: 4
