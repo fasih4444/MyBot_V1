@@ -1,18 +1,18 @@
 const DrkBox = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
+const { errorMessage } = require('../helpers')
 const Config = require('../config');
 const ffmpeg = require('fluent-ffmpeg');
 
 const Language = require('../language');
 const bix = Language.getString('unvoice')
 
-const iErr = "*Necesitas contestar el archivo de audio!*"
+const iErr = '🤖 Parece que hay un error'
 
 
 //============================== audd ==============================
 var request = require("request");
 var axios = require("axios");
-const got = require('got');
 const fs = require('fs');
 
 
@@ -82,6 +82,7 @@ DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (
         });
 
         ffmpeg(location)
+            .format('mp3')
             .save('output.mp3')
             .on('end', async () => {
                const audd = (fs.readFileSync('output.mp3'));
