@@ -6,7 +6,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const Language = require('../language');
 const bix = Language.getString('unvoice')
 
-const Ierr = "*Necesitas contestar el archivo de audio!*"
+const iErr = "*Necesitas contestar el archivo de audio!*"
 
 
 //============================== audd ==============================
@@ -84,17 +84,14 @@ DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (
         ffmpeg(location)
             .save('output.mp3')
             .on('end', async () => {
-                var audd = (fs.readFileSync('output.mp3'));
-          const url = `https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${audd}`;
-	  try {
-		  const response = await got(url);
-		  const json = JSON.parse(response.body);
-		  if (response.statusCode === 200) return await message.client.sendMessage(message.jid,
-                      json.data.title + '\n' +
-                      json.data.artists, MessageType.text);
-	  } catch {
-		  return await message.client.sendMessage(message.jid, Ierr, MessageType.text);
-	  }
+               const audd = (fs.readFileSync('output.mp3'));
+	       await axios.get(`https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${audd}`).then(async (response) => {
+                 const { title, artists } = response.data.data
+    	         const msg = `*Artista:* ${artists}\n*Nombre Pista:* ${title}`
+                 await message.sendMessage(msg, MessageType.text)
+               }).catch (async (err) => {
+                 await message.sendMessage(errorMessage(iErr))
+               });
             });
     })); 
 }
