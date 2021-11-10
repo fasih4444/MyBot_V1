@@ -15,8 +15,9 @@ const MLang = Language.getString('messages');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
-DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: wk, desc: Lang.desc_ss}, (async (message, match) => {
-  if (match[1] === '') return await message.sendMessage(Lang.need_ss);
+DrkBox.addCommand({pattern: 'ss', fromMe: wk, desc: Lang.desc_ss}, (async (message, match) => {
+  await message.sendMessage('🤖 *Comando en mantenimiento, disculpa las molestias.*');
+/*if (match[1] === '') return await message.sendMessage(Lang.need_ss);
   var bufferdata = ''
   try {
     var enc = await HeartBot.shot(match[1])
@@ -25,4 +26,5 @@ DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: wk, desc: Lang.desc_ss}, (async 
     return await message.client.sendMessage(message.jid,'🤖 Parece que hay un Error!', MessageType.text);
   }
   await message.sendMessage(Buffer.from(bufferdata), MessageType.image, {mimetype: Mimetype.png, caption: `${MLang.by}`})
+*/
 }));
