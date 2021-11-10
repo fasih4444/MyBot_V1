@@ -886,9 +886,9 @@ else if (config.WORKTYPE == 'public') {
         await message.client.sendMessage(message.jid, info, MessageType.text);
     }));
 
-    DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
+    DrkBot.addCommand({pattern: 'img', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
+        await message.sendMessage('🤖 *Comando en mantenimiento, disculpa las molestias.*');
+        /*if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
         
         var img_list = await HeartBot.search_image(match[1])
         await message.client.sendMessage(message.jid, Lang.IMG.format(5, match[1]), MessageType.text);
@@ -925,7 +925,7 @@ else if (config.WORKTYPE == 'public') {
           await message.sendMessage(Buffer.from(img5.data), MessageType.image, { mimetype: Mimetype.png })
         } catch {
           return;
-        }
+        }*/
     }));
     
     DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
