@@ -12,7 +12,7 @@ const Config = require('../config');
 const Language = require('../language');
 const Lang = Language.getString('webss');
 const MLang = Language.getString('messages');
-const Klang = Language.getstring('keys');
+const Klang = Language.getString('keys');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
