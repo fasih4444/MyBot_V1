@@ -202,6 +202,7 @@
             "SEARCHING": "*🔎 Investigando...*",
             "WIKI_DESC": "Busca en Wikipedia.",
             "IMG_DESC": "Ninguna traducción coincide con su búsqueda\nGoogle Pictures toma fotografías.",
+            "NEW_IMG": "Subiendo 5 fotos de: ",
             "IMG": "Subiendo ```{}``` fotos de ```{}```..."
         },
         "sticker": {
