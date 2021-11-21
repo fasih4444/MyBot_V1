@@ -885,23 +885,6 @@ else if (config.WORKTYPE == 'public') {
         var info = await arama.rawContent();
         await message.client.sendMessage(message.jid, info, MessageType.text);
     }));
-
-    DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-
-        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
-        dbot.pinterest(match[1]).then(async (result) => {
-            for (var i = 0; i < (result.length < 5 ? result.length : 5); i++) {
-                var get = got(result[i], {https: {rejectUnauthorized: false}});
-                var stream = get.buffer();
-                
-                stream.then(async (image) => {
-                    await message.client.sendMessage(message.jid,image, MessageType.image);
-                });
-            }
-
-            message.reply(Lang.IMG.format((result.length < 5 ? result.length : 5), match[1]));
-        });
-    }));
     
     DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
       if (match[1].includes('/')) {
