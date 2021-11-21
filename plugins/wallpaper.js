@@ -1,13 +1,11 @@
-/* Codded by @phaticusthiccy
-Telegram: t.me/phaticusthiccy
-Instagram: www.instagram.com/kyrie.baran
-
-Special Thanks:
-@Unique_hunter for Helps
+/* Copyright (C) 2021
+Licensed under the  GPL-3.0 License;
+you may not use this file except in compliance with the License.
+DrkBot - Ian VanH
 */
 
 const DrkBox = require('../events');
-const {MessageType, MessageOptions, Mimetype} = require('@adiwajshing/baileys');
+const {MessageType, Mimetype} = require('@adiwajshing/baileys');
 const axios = require('axios');
 const Config = require('../config');
 
@@ -15,7 +13,7 @@ const Language = require('../language');
 const Lang = Language.getString('wallpaper');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-
+/*
 DrkBox.addCommand({pattern: 'wallpaper', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
         var r_text = new Array ();
         r_text[0] = "";
@@ -23,7 +21,7 @@ DrkBox.addCommand({pattern: 'wallpaper', fromMe: wk, desc: Lang.WP}, (async (mes
         var respoimage = await axios.get(`${r_text[i]}`, { responseType: 'arraybuffer' })
         await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image, {mimetype: Mimetype.png, caption: 'Hecho por *DrkBot*'})
 }));
-
+*/
 DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_WORDS));
         dbot.pinterest(match[1]).then(async (result) => {
@@ -35,17 +33,17 @@ DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (a
     	    var d = Math.floor(result.length*Math.random());
     	    var e = Math.floor(result.length*Math.random());
 
-            var respoimage = await axios.get(`${a}`, { responseType: 'arraybuffer' })
-            var respoimage = await axios.get(`${b}`, { responseType: 'arraybuffer' })
-            var respoimage = await axios.get(`${c}`, { responseType: 'arraybuffer' })
-            var respoimage = await axios.get(`${d}`, { responseType: 'arraybuffer' })
-            var respoimage = await axios.get(`${e}`, { responseType: 'arraybuffer' })
+            var image_a = await axios.get(`${a}`, { responseType: 'arraybuffer' })
+            var image_b = await axios.get(`${b}`, { responseType: 'arraybuffer' })
+            var image_c = await axios.get(`${c}`, { responseType: 'arraybuffer' })
+            var image_d = await axios.get(`${d}`, { responseType: 'arraybuffer' })
+            var image_e = await axios.get(`${e}`, { responseType: 'arraybuffer' })
 
-await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image)
-await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image)
-await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image)
-await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image)
-await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image)
+            await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image)
+            await message.client.sendMessage(message.jid, Buffer.from(image_b.data), MessageType.image)
+            await message.client.sendMessage(message.jid, Buffer.from(image_c.data), MessageType.image)
+            await message.client.sendMessage(message.jid, Buffer.from(image_d.data), MessageType.image)
+            await message.client.sendMessage(message.jid, Buffer.from(image_e.data), MessageType.image)
             
         });
-    }));
+}));
