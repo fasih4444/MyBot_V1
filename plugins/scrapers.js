@@ -889,7 +889,7 @@ else if (config.WORKTYPE == 'public') {
     DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
 
         if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_WORDS,MessageType.text);
-        dbot.pinterest(match[1], async (result) => {
+        dbot.pinterest(match[1]).then(async (result) => {
             for (var i = 0; i < (result.length < 5 ? result.length : 5); i++) {
                 var get = got(result[i], {https: {rejectUnauthorized: false}});
                 var stream = get.buffer();
