@@ -25,7 +25,7 @@ DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: Lang.WP}, (asyn
         });
 }));
 
-DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
+DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
         dbot.pinterest(match[1]).then(async (result) => {
             await message.client.sendMessage(message.jid,Lang.NEW_IMG,match[1],MessageType.text);
