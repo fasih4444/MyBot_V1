@@ -20,7 +20,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
-        dbot.pinterest(match[1]).then(async (result) => {
+        dbot.wallpaper(match[1]).then(async (result) => {
             var wall = Math.floor(result.length*Math.random());
             var respoimage = await axios.get(`${result[wall]}`, { responseType: 'arraybuffer' })
             await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image, {mimetype: Mimetype.png, caption: `${MLang.by}`})
