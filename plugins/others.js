@@ -94,3 +94,12 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
      await message.sendMessage(iErr, `o el tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\nLink:* ${link}`, MessageType.text)
     });
 });
+
+DrkBox.addCommand({pattern: 'ayt ?(.*)', fromMe: wk}, (async (message, match) => {
+        if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"));
+        dbot.youtube(match[1]).then(async (result) => {
+            var audio = result.mp3
+            var respoaudio = await axios.get(`${audio}`, { responseType: 'arraybuffer' })
+            await message.client.sendMessage(message.jid, Buffer.from(respoaudio.data), MessageType.audio, {mimetype: Mimetype.mp3})
+        });
+}));
