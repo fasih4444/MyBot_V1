@@ -8,7 +8,6 @@ const DrkBot = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
 const HeartBot = require('drkbot-npm')
-const dbot = require('dbot-api')
 const translatte = require('translatte');
 const config = require('../config');
 const LanguageDetect = require('languagedetect');
