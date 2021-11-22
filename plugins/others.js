@@ -95,11 +95,8 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
     });
 });
 
-DrkBox.addCommand({pattern: 'ayt ?(.*)', fromMe: wk}, (async (message, match) => {
-        if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"));
-        dbot.youtube(match[1]).then(async (result) => {
-            var { mp3 } = result
-            var respoaudio = await axios.get(mp3, { responseType: 'arraybuffer' })
-            await message.client.sendMessage(message.jid, Buffer.from(respoaudio.data), MessageType.audio, {mimetype: Mimetype.mp3})
-        });
+DrkBox.addCommand({pattern: 'vyt?(.*)', fromMe: wk}, (async (message, match) => {
+    var vid = await dbot.youtube(match[1])
+    var buffer_data = await axios.get(vid.link, { responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video)
 }));
