@@ -19,6 +19,7 @@ const MLang = Language.getString('messages');
 let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
+        if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
         dbot.pinterest(match[1]).then(async (result) => {
             var wall = Math.floor(result.length*Math.random());
             var respoimage = await axios.get(`${result[wall]}`, { responseType: 'arraybuffer' })
@@ -37,17 +38,16 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
     	    var d = Math.floor(result.length*Math.random());
     	    var e = Math.floor(result.length*Math.random());
 
-            var image_a = await axios.get(`${a}`, { responseType: 'arraybuffer' })
-            var image_b = await axios.get(`${b}`, { responseType: 'arraybuffer' })
-            var image_c = await axios.get(`${c}`, { responseType: 'arraybuffer' })
-            var image_d = await axios.get(`${d}`, { responseType: 'arraybuffer' })
-            var image_e = await axios.get(`${e}`, { responseType: 'arraybuffer' })
+            var image_a = await axios.get(`${result[a]}`, { responseType: 'arraybuffer' })
+            var image_b = await axios.get(`${result[b]}`, { responseType: 'arraybuffer' })
+            var image_c = await axios.get(`${result[c]}`, { responseType: 'arraybuffer' })
+            var image_d = await axios.get(`${result[d]}`, { responseType: 'arraybuffer' })
+            var image_e = await axios.get(`${result[e]}`, { responseType: 'arraybuffer' })
 
             await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image)
             await message.client.sendMessage(message.jid, Buffer.from(image_b.data), MessageType.image)
             await message.client.sendMessage(message.jid, Buffer.from(image_c.data), MessageType.image)
             await message.client.sendMessage(message.jid, Buffer.from(image_d.data), MessageType.image)
             await message.client.sendMessage(message.jid, Buffer.from(image_e.data), MessageType.image)
-            
         });
 }));
