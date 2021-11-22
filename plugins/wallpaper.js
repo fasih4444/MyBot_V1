@@ -8,22 +8,25 @@ const DrkBox = require('../events');
 const {MessageType, Mimetype} = require('@adiwajshing/baileys');
 const axios = require('axios');
 const Config = require('../config');
+const dbot = require('dbot-api');
 
 const Language = require('../language');
 const Lang = Language.getString('wallpaper');
+const iLang = Language.getString('scrapers');
+const MLang = Language.getString('messages');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-/*
-DrkBox.addCommand({pattern: 'wallpaper', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
-        var r_text = new Array ();
-        r_text[0] = "";
-        var i = Math.floor(1*Math.random())
-        var respoimage = await axios.get(`${r_text[i]}`, { responseType: 'arraybuffer' })
-        await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image, {mimetype: Mimetype.png, caption: 'Hecho por *DrkBot*'})
+
+DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
+        dbot.wallpaper(match[1]).then(async (result) => {
+            var wall = Math.floor(result.length*Math.random());
+            var respoimage = await axios.get(`${wall}`, { responseType: 'arraybuffer' })
+            await message.client.sendMessage(message.jid, Buffer.from(respoimage.data), MessageType.image, {mimetype: Mimetype.png, caption: `${MLang.by}`})
+        });
 }));
-*/
-DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: false, desc: Lang.IMG_DESC}, (async (message, match) => { 
-        if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_WORDS));
+
+DrkBot.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
+        if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
         dbot.pinterest(match[1]).then(async (result) => {
             await message.client.sendMessage(message.jid,Lang.NEW_IMG,match[1],MessageType.text);
 
