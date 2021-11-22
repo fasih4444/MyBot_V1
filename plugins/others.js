@@ -95,7 +95,7 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
     });
 });
 
-DrkBox.addCommand({pattern: 'vyt?(.*)', fromMe: wk}, (async (message, match) => {
+DrkBox.addCommand({pattern: 'vyt ?(.*)', fromMe: wk}, (async (message, match) => {
     var vid = await dbot.youtube(match[1])
     var buffer_data = await axios.get(vid.link, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.video)
