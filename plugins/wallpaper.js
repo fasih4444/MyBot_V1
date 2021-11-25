@@ -21,7 +21,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
-        gis(match[1]).then(async (error, result) => {
+        gis(match[1], async (error, result) => {
       //    await message.client.sendMessage(message.jid,Lang.NEW_IMG,match[1],MessageType.text);
 
             var wall_a = Math.floor(result.url.length*Math.random());
