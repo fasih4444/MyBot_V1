@@ -10,6 +10,7 @@ const { errorMessage, infoMessage } = require('../helpers');
 const axios = require('axios');
 const Config = require('../config');
 const dbot = require('dbot-api');
+const gis = require('g-i-s');
 
 const Language = require('../language');
 const Lang = Language.getString('wallpaper');
