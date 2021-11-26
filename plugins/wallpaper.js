@@ -24,7 +24,7 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
         await message.sendMessage(Lang.NEW_IMG,match[1],MessageType.text);
         gis(match[1], async (error, result) => {
-            for (var i = Math.floor(result.length*Math.random()); i++) {
+            for (var i = Math.floor(result.length*Math.random())) {
                 var get = got(result[i].url, {https: {rejectUnauthorized: false}});
                 var stream = get.buffer();
 
