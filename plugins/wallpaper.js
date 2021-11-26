@@ -30,11 +30,11 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
     	    var wall_d = Math.floor(result.url.length*Math.random());
     	    var wall_e = Math.floor(result.url.length*Math.random());
 
-            var image_a = await axios.get(`${result[wall_a]}`, { responseType: 'arraybuffer' })
-            var image_b = await axios.get(`${result[wall_b]}`, { responseType: 'arraybuffer' })
-            var image_c = await axios.get(`${result[wall_c]}`, { responseType: 'arraybuffer' })
-            var image_d = await axios.get(`${result[wall_d]}`, { responseType: 'arraybuffer' })
-            var image_e = await axios.get(`${result[wall_e]}`, { responseType: 'arraybuffer' })
+            var image_a = await axios.get(`${result[wall_a].url}`, { responseType: 'arraybuffer' })
+            var image_b = await axios.get(`${result[wall_b].url}`, { responseType: 'arraybuffer' })
+            var image_c = await axios.get(`${result[wall_c].url}`, { responseType: 'arraybuffer' })
+            var image_d = await axios.get(`${result[wall_d].url}`, { responseType: 'arraybuffer' })
+            var image_e = await axios.get(`${result[wall_e].url}`, { responseType: 'arraybuffer' })
 
             await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image, {mimetype: Mimetype.png})
             await message.client.sendMessage(message.jid, Buffer.from(image_b.data), MessageType.image, {mimetype: Mimetype.png})
