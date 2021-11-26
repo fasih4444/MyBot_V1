@@ -99,7 +99,7 @@ DrkBox.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) 
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
     dbot.youtube(match[1]).then(async (result) => {
       var { mp3 } = result
-      var d_audio = await axios.get(`${mp3}`, { responseType: 'arraybuffer' })
+      var d_audio = await axios.get(mp3, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_audio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
     });
 }));
@@ -109,7 +109,7 @@ DrkBox.addCommand({pattern: 'dvideo ?(.*)', fromMe: wk}, (async (message, match)
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
     dbot.youtube(match[1]).then(async (result) => {
       var { title, link } = result
-      var d_video = await axios.get(`${link}`, { responseType: 'arraybuffer' })
+      var d_video = await axios.get(link, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_video.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
     });
 }));
