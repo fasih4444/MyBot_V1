@@ -19,22 +19,21 @@ const iLang = Language.getString('scrapers');
 const MLang = Language.getString('messages');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-
+/*
 DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
      // await message.sendMessage(Lang.NEW_IMG,match[1],MessageType.text);
 
         gis(match[1], async (error, result) => {
-            for (var i = Math.floor(result.length*Math.random());) {
-                var get = got(result[i].url, {https: {rejectUnauthorized: false}});
+                var img = Math.floor(result.length*Math.random())
+                var get = got(result[img].url, {https: {rejectUnauthorized: false}});
                 var stream = get.buffer();
 
                 stream.then(async (image) => {
                     await message.client.sendMessage(message.jid,image, MessageType.image);
                 });
-            }
         });
-}));
+}));*/
 
 DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
