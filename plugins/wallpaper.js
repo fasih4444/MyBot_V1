@@ -24,11 +24,11 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
         gis(match[1], async (error, result) => {
       //    await message.client.sendMessage(message.jid,Lang.NEW_IMG,match[1],MessageType.text);
 
-            var wall_a = Math.floor(result.url.length*Math.random());
-    	    var wall_b = Math.floor(result.url.length*Math.random());
-    	    var wall_c = Math.floor(result.url.length*Math.random());
-    	    var wall_d = Math.floor(result.url.length*Math.random());
-    	    var wall_e = Math.floor(result.url.length*Math.random());
+            var wall_a = Math.floor(result.length*Math.random());
+    	    var wall_b = Math.floor(result.length*Math.random());
+    	    var wall_c = Math.floor(result.length*Math.random());
+    	    var wall_d = Math.floor(result.length*Math.random());
+    	    var wall_e = Math.floor(result.length*Math.random());
 
             var image_a = await axios.get(`${result[wall_a].url}`, { responseType: 'arraybuffer' })
             var image_b = await axios.get(`${result[wall_b].url}`, { responseType: 'arraybuffer' })
