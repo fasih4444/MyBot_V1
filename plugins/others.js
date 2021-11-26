@@ -97,27 +97,19 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
 
 DrkBox.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-  try {
     dbot.youtube(match[1]).then(async (result) => {
       var { mp3 } = result
       var d_audio = await axios.get(`${mp3}`, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_audio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
     });
-  } catch {
-    return await message.client.sendMessage(message.jid, '⚠️ El comando cambio.\nPara descargar necestas la url de la cancion.', MessageType.text)
-  }
 }));
 
 
 DrkBox.addCommand({pattern: 'dvideo ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-  try {
     dbot.youtube(match[1]).then(async (result) => {
       var { title, link } = result
       var d_video = await axios.get(`${link}`, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_video.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
     });
-  } catch {
-    return await message.client.sendMessage(message.jid, '⚠️ *Parece que tenemos un error*', MessageType.text)
-  }
 }));
