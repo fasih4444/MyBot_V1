@@ -95,7 +95,7 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
     });
 });
 
-DrkBot.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) => {
+DrkBox.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
   try {
     dbot.youtube(match[1]).then(async (result) => {
@@ -109,7 +109,7 @@ DrkBot.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) 
 }));
 
 
-DrkBot.addCommand({pattern: 'dvideo ?(.*)', fromMe: wk}, (async (message, match) => {
+DrkBox.addCommand({pattern: 'dvideo ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
   try {
     dbot.youtube(match[1]).then(async (result) => {
