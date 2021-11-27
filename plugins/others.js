@@ -97,7 +97,7 @@ DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, matc
 
 DrkBox.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-    dbot.youtube(match[1]).then(async (result) => {
+    await dbot.youtube(match[1]).then(async (result) => {
       var { mp3 } = result
       var d_audio = await axios.get(mp3, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_audio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
@@ -107,9 +107,29 @@ DrkBox.addCommand({pattern: 'dsong ?(.*)', fromMe: wk}, (async (message, match) 
 
 DrkBox.addCommand({pattern: 'dvideo ?(.*)', fromMe: wk}, (async (message, match) => {
   if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-    dbot.youtube(match[1]).then(async (result) => {
+    await dbot.youtube(match[1]).then(async (result) => {
       var { title, link } = result
       var d_video = await axios.get(link, { responseType: 'arraybuffer' })
       await message.sendMessage(Buffer.from(d_video.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
     });
 }));
+
+DrkBox.addCommand({pattern: 'github ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
+  await axios.get(`https://api-alphabot.herokuapp.com/api/stalking/github?username=${match[1]}&apikey=Alphabot`).then(async (result) => {
+    const { login, avatar_url } = result.data.result
+    const profileBuffer = await axios.get(avatar_url, {responseType: 'arraybuffer'})
+    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `*Nombre: ${login}`, quoted: message.data })
+
+   const url = `https://api.github.com/users/${match[1]}/repos`
+   try {
+    const response = await got(url);
+    const json = JSON.parse(response.body);
+
+    for (var i = 0; i < (json.length); i++) {
+      await message.client.sendMessage(message.jid, json[i].html_url, MessageType.text)
+    }
+   } catch {
+    return await message.client.sendMessage(message.jid, "Error", MessageType.text)
+   }
+  })
+});
