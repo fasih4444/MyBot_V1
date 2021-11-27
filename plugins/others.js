@@ -129,7 +129,7 @@ DrkBox.addCommand({pattern: 'github ?(.*)', fromMe: wk, desc: "Descarga de Insta
       await message.sendMessage(json[i].html_url, MessageType.text)
     }
    } catch {
-    return await message.client.sendMessage(message.jid, "Error", MessageType.text)
+    return await message.client.sendMessage(message.jid, "*Hay algun error o no hay repositorios.*", MessageType.text)
    }
   })
 });
