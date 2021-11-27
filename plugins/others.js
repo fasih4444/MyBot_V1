@@ -86,10 +86,10 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
   if (!match[1]) return await message.sendMessage(errorMessage("🤖 Necesito un link!"))
 
-  await axios.get(`https://drkbot-rest.herokuapp.com/api/dbot/down/mediafire?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, link } = response.data.result
+  await dbot.youtube(match[1]).then(async (result) => {
+        const { title, link } = result
     	const profileBuffer = await axios.get(link, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document, { filename: `${title}` })
+        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.document, { filename: `${title}.apk` })
   }).catch (async (err) => {
      await message.sendMessage(iErr, `o el tamaño de descarga supera los limites de WhatsApp, descargalo de forma externa.\n\n*Nombre:* ${title}\nLink:* ${link}`, MessageType.text)
     });
@@ -118,7 +118,7 @@ DrkBox.addCommand({pattern: 'github ?(.*)', fromMe: wk, desc: "Descarga de Insta
   await axios.get(`https://api-alphabot.herokuapp.com/api/stalking/github?username=${match[1]}&apikey=Alphabot`).then(async (result) => {
     const { login, avatar_url } = result.data.result
     const profileBuffer = await axios.get(avatar_url, {responseType: 'arraybuffer'})
-    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `*Nombre: ${login}`, quoted: message.data })
+    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { quoted: message.data })
 
    const url = `https://api.github.com/users/${match[1]}/repos`
    try {
@@ -126,7 +126,7 @@ DrkBox.addCommand({pattern: 'github ?(.*)', fromMe: wk, desc: "Descarga de Insta
     const json = JSON.parse(response.body);
 
     for (var i = 0; i < (json.length); i++) {
-      await message.client.sendMessage(message.jid, json[i].html_url, MessageType.text)
+      await message.sendMessage(json[i].html_url, MessageType.text)
     }
    } catch {
     return await message.client.sendMessage(message.jid, "Error", MessageType.text)
