@@ -56,7 +56,7 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"));
     await message.sendMessage(infoMessage(iLoad))
 
-    await axios.get(`https://ianvanh.herokuapp.com/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+    await axios.get(`https://drkbot.vercel.app/api/dbot/down/igdl?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
         const { downloadUrl, type } = response.data.result
         const profileBuffer = await axios.get(downloadUrl, {responseType: 'arraybuffer'})
         const msg = `${type}`
@@ -64,17 +64,5 @@ DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagr
         if (msg === 'image') { await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: `${MLang.by}`, quoted: message.data })}
     }).catch (async (err) => {
      await message.sendMessage(errorMessage(Lang.iErr))
-    });
-});
-
-DrkBox.addCommand({pattern: 'tiktok ?(.*)', fromMe: wk}, async (message, match) => {
-     if (!match[1]) return await message.sendMessage(infoMessage("🤖 Necesito un link!"))
-
-     await axios.get(`https://ianvanh.herokuapp.com/api/tiktok?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { nowm } = response.data.result
-    	const profileBuffer = await axios.get(nowm, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.video, { mimetype: Mimetype.mp4, caption: `${MLang.by}`, quoted: message.data })
-  }).catch (async (err) => {
-    await message.sendMessage(errorMessage(Lang.iErr))
     });
 });
