@@ -82,3 +82,15 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 		    return await message.client.sendMessage(message.jid, iErr, MessageType.text);
 	    }
     });
+
+DrkBox.addCommand({pattern: 'mediafire ?(.*)', fromMe: wk}, async (message, match) => {
+     if (!match[1]) return await message.sendMessage("⚠️: 🤖 *Necesito un link!*")
+
+     await axios.get(`https://drkbot.vercel.app/api/new/mediafire?&url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { link } = response.data.result
+    	const rest_mf = await axios.get(link, { responseType: 'arraybuffer' })
+        await message.sendMessage(Buffer.from(rest_mf.data), MessageType.document)
+  }).catch (async (err) => {
+    await message.sendMessage('🛑: 🤖 *Parece que tenemos un error!*')
+    });
+});
