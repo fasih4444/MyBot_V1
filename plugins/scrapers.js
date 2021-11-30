@@ -559,9 +559,9 @@ else if (config.WORKTYPE == 'public') {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_TEXT_SONG))
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
-      await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp3?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { url_audio } = response.data.ian.result
-        const ytaudio = await axios.get(url_audio, { responseType: 'arraybuffer' })
+      await axios.get(`https://drkbot.vercel.app/api/new/yta?&url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { result } = response.data.result
+        const ytaudio = await axios.get(result, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(ytaudio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
       })
     } else {
@@ -573,9 +573,9 @@ else if (config.WORKTYPE == 'public') {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-      await axios.get(`https://ianvanh.herokuapp.com/api/youtube/mp4?url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, url_video } = response.data.ian.result
-        const ytvideo = await axios.get(url_video, { responseType: 'arraybuffer' })
+      await axios.get(`https://drkbot.vercel.app/api/new/ytv?&url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
+        const { title, result } = response.data.ian.result
+        const ytvideo = await axios.get(result, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
       })
     } else {
