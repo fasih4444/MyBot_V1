@@ -90,7 +90,7 @@ axios(`https://api.zeks.me/api/searchmusic?apikey=apivinz`, {
     ...bodyForm.getHeaders()
   },
   data: bodyForm.getBuffer()
-}).then(({response}) => {
+}).then(async ({response}) => {
 	 if(response.status) {
 	 	  await message.client.sendMessage(messaje.jid,
 	 	    `✪〘 *DATOS ENCONTRADOS* 〙✪\n\n➡️ *Titulo:* ${response.data.title}\n➡️ *Artista:* ${response.data.artists}\n➡️ *Genero:* ${response.data.genre}\n➡️ *Album:* ${response.data.album}\n➡️ *Lanzamiento:* ${response.data.release_date}`, MessageType.text)
