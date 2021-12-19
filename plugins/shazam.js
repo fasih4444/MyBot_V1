@@ -3,6 +3,7 @@ const {MessageType,Mimetype} = require('@adiwajshing/baileys');
 const { errorMessage } = require('../helpers')
 const Config = require('../config');
 const ffmpeg = require('fluent-ffmpeg');
+const FormData = require('form-data');
 
 const Language = require('../language');
 const bix = Language.getString('unvoice')
@@ -70,7 +71,7 @@ DrkBox.addCommand({pattern: 'reconb', fromMe: true}, (async (message, match) => 
 
     }));
 
-DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (async (message, match) => {    
+DrkBox.addCommand({pattern: 'shazam', fromMe: true, dontAddCommandList: true}, (async (message, match) => {    
         if (message.reply_message === false) return await message.sendMessage('*Need Audio!*');
 
         var location = await message.client.downloadAndSaveMediaMessage({
@@ -81,18 +82,22 @@ DrkBox.addCommand({pattern: 'reconc', fromMe: true, dontAddCommandList: true}, (
             message: message.reply_message.data.quotedMessage
         });
 
-        ffmpeg(location)
-            .format('mp3')
-            .save('output.mp3')
-            .on('end', async () => {
-               const audd = (fs.readFileSync('output.mp3'));
-	       await axios.get(`https://api.zeks.me/api/searchmusic?apikey=apivinz&audio=${audd}`).then(async (response) => {
-                 const { title, artists } = response.data.data
-    	         const msg = `*Artista:* ${artists}\n*Nombre Pista:* ${title}`
-                 await message.sendMessage(msg, MessageType.text)
-               }).catch (async (err) => {
-                 await message.sendMessage(errorMessage(iErr))
-               });
-            });
-    })); 
+bodyForm = new FormData()
+bodyForm.append('audio', location, 'music.mp3')
+axios(`https://api.zeks.me/api/searchmusic?apikey=apivinz`, {
+  method: 'POST',
+  headers: {
+    ...bodyForm.getHeaders()
+  },
+  data: bodyForm.getBuffer()
+}).then(({response}) => {
+	 if(response.status) {
+	 	  await message.client.sendMessage(messaje.jid,
+	 	    `✪〘 *DATOS ENCONTRADOS* 〙✪\n\n➡️ *Titulo:* ${response.data.title}\n➡️ *Artista:* ${response.data.artists}\n➡️ *Genero:* ${response.data.genre}\n➡️ *Album:* ${response.data.album}\n➡️ *Lanzamiento:* ${response.data.release_date}`, MessageType.text)
+	 	}	 else {
+	 		 await messaje.sendMessage(`${response.message}`, MessageType.text)
+	 	}
+}).catch (async (err) => {
+     await message.sendMessage('🤖 Parece que tenemos un error!', MessageType.text)
+});
 }
