@@ -27,7 +27,7 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
       res = gis(`fondos de pantalla 4k ${match[1]}`, google)
      async function google(error, result){
         if (error){
-	   console.log('[ ! ] Intentalo de nuevo')
+	   await message.sendMessage('🤖 Parece que tenemos un error.', MessageType.text);
         } else {
            var gugWp = result
            var randomWp =  gugWp[Math.floor(Math.random() * gugWp.length)].url
