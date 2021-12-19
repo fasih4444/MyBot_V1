@@ -59,7 +59,7 @@ else if (Config.WORKTYPE == 'public') {
             message.jid, 
             fs.readFileSync("media/gif/drklogo.mp4"), 
             MessageType.video, 
-            { mimetype: Mimetype.mp4, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/cambios* Mustra actualizaciones'}
+            { mimetype: Mimetype.mp4, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/nuevo* Mustra actualizaciones'}
         )
     }));
     
@@ -68,7 +68,7 @@ else if (Config.WORKTYPE == 'public') {
     }));
     
     
-    DrkBox.addCommand({pattern: 'cambios', fromMe: false}, (async (message, match) => {
+    DrkBox.addCommand({pattern: 'nuevo', fromMe: false}, (async (message, match) => {
         await message.sendMessage('┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */img*\nComando actualizado.\n\n  */wallpaper*\nComando actualizado.\n┗━━━━━━━━━━━━');
     }));
 
