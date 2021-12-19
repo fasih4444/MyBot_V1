@@ -24,7 +24,7 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
      // await message.sendMessage(Lang.NEW_IMG,match[1],MessageType.text);
 
-      res = gis(`fondos de pantalla 4k ${match[1]}`, google)
+     res = gis(`${match[1]}`, google)
      async function google(error, result){
         if (error){
 	   await message.sendMessage('🤖 Parece que tenemos un error.', MessageType.text);
@@ -39,9 +39,16 @@ DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (asy
 
 DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
-        dbot.pinterest(match[1]).then(async (result) => {
-            var wall_a = Math.floor(result.length*Math.random());
-            var image_a = await axios.get(`${result[wall_a]}`, { responseType: 'arraybuffer' })
-            await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image, {mimetype: Mimetype.png})
-        });
+
+     res = gis(`fondos de pantalla 4k ${match[1]}`, google)
+     async function google(error, result){
+        if (error){
+	   await message.sendMessage('🤖 Parece que tenemos un error.', MessageType.text);
+        } else {
+           var gugWp = result
+           var randomWp =  gugWp[Math.floor(Math.random() * gugWp.length)].url
+           var image_a = await axios.get(`${randomWp}`, { responseType: 'arraybuffer' })
+           await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+       }
+     }
 }));
