@@ -84,16 +84,16 @@ DrkBox.addCommand({pattern: 'shazam', fromMe: true, dontAddCommandList: true}, (
 
 bodyForm = new FormData()
 bodyForm.append('audio', location, 'music.mp3')
-axios(`https://api.zeks.me/api/searchmusic?apikey=apivinz`, {
+await axios(`https://api.zeks.me/api/searchmusic?apikey=apivinz`, {
   method: 'POST',
   headers: {
     ...bodyForm.getHeaders()
   },
   data: bodyForm.getBuffer()
-}).then(async ({response}) => {
+}).then(async ({data}) => {
 	 if(response.status) {
 	 	  await message.client.sendMessage(messaje.jid,
-	 	    `✪〘 *DATOS ENCONTRADOS* 〙✪\n\n➡️ *Titulo:* ${response.data.title}\n➡️ *Artista:* ${response.data.artists}\n➡️ *Genero:* ${response.data.genre}\n➡️ *Album:* ${response.data.album}\n➡️ *Lanzamiento:* ${response.data.release_date}`, MessageType.text)
+	 	    `✪〘 *DATOS ENCONTRADOS* 〙✪\n\n➡️ *Titulo:* ${data.data.title}\n➡️ *Artista:* ${data.data.artists}\n➡️ *Genero:* ${data.data.genre}\n➡️ *Album:* ${data.data.album}\n➡️ *Lanzamiento:* ${data.data.release_date}`, MessageType.text)
 	 	}	 else {
 	 		 await messaje.sendMessage(`${response.message}`, MessageType.text)
 	 	}
