@@ -7,7 +7,7 @@ DrkBot - Ian VanH
 const DrkBot = require('../events');
 const {MessageType,Mimetype} = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
-const HeartBot = require('drkbot-npm')
+const { yta, ytv } = require('./datos.js');
 const translatte = require('translatte');
 const config = require('../config');
 const LanguageDetect = require('languagedetect');
@@ -559,11 +559,10 @@ else if (config.WORKTYPE == 'public') {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_TEXT_SONG))
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await message.client.sendMessage(message.jid,Lang.UPLOADING_SONG,MessageType.text);
-      await axios.get(`https://drkbot.vercel.app/api/new/yta?&url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { result } = response.data.result
-        const ytaudio = await axios.get(result, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(ytaudio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
-      })
+      res = await yta(match[1])
+      ytm = res
+      const ytaudio = await axios.get(`${ytm.link}`, { responseType: 'arraybuffer' })
+      await message.sendMessage(Buffer.from(ytaudio.data), MessageType.audio, {mimetype: Mimetype.mp4Audio, ptt: false})
     } else {
         await message.sendMessage(errorMessage("⚠️ El comando cambio.\nPara descargar necestas la url de la cancion."))
       }
@@ -573,11 +572,10 @@ else if (config.WORKTYPE == 'public') {
         if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-      await axios.get(`https://drkbot.vercel.app/api/new/ytv?&url=${match[1]}&apikey=${KLang.rest}`).then(async (response) => {
-        const { title, result } = response.data.result
-        const ytvideo = await axios.get(result, { responseType: 'arraybuffer' })
-        await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `*${title}*\n${MLang.by}`})
-      })
+      res = await ytv(match[1])
+      ytm = res
+      const ytvideo = await axios.get(`${ytm.link}`, { responseType: 'arraybuffer' })
+      await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `${MLang.by}`})
     } else {
         await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
       }
@@ -612,55 +610,6 @@ else if (config.WORKTYPE == 'public') {
 
         var info = await arama.rawContent();
         await message.client.sendMessage(message.jid, info, MessageType.text);
-    }));
-    
-    DrkBot.addCommand({ pattern: 'github ?(.*)', fromMe: false, desc: Glang.GİTHUB_DESC, usage: 'github ianvanh // github ianvanh/drkbot-download' }, (async (message, match) => {
-      if (match[1].includes('/')) {
-        var data = await HeartBot.github_repos(match[1])
-        var Msg = await HeartBot.github_message(config.LANG)
-        if (data.username == undefined) return await message.client.sendMessage(message.jid, Msg.not_found_repo, MessageType.text)
-        var payload = Msg.repo.username + data.username + '\n' +
-          Msg.repo.repo_name + data.repo_name + '\n' +
-          Msg.repo.repo_id + data.repo_id + '\n' +
-          Msg.repo.repo_desc + data.repo_desc + '\n' +
-          Msg.repo.created_at + data.created_at + '\n' +
-          Msg.repo.updated_at + data.updated_at + '\n' +
-          Msg.repo.fork + data.fork == true ? '✅\n' : '❌\n' +
-          Msg.repo.size + data.size + 'KB' + '\n' +
-          Msg.repo.star + data.star + '\n' +
-          Msg.repo.forks + data.forks + '\n' +
-          Msg.repo.watcher + data.watcher + '\n' +
-          Msg.repo.subscribers + data.subscribers + '\n' +
-          Msg.repo.language + data.language + '\n' +
-          Msg.repo.issues + data.issues + '\n' +
-          Msg.repo.has_lisance + data.has_lisance == false ? '❌\n' : '✅\n' +
-          Msg.repo.lisance_key + data.lisance_key + '\n' +
-          Msg.repo.lisance_name + data.lisance_name + '\n' +
-          Msg.repo.branch + data.branch
-        await message.client.sendMessage(massage.jid, payload, MessageType.text)
-      } else {
-        var data = await HeartBot.github_user(match[1])
-        var Msg = await HeartBot.github_message(config.LANG)
-        if (data.status == false) return await message.client.sendMessage(message.jid, Msg.not_found_user, MassageType.text)
-        var payload = Msg.user.username + data.username + '\n' +
-          Msg.user.name + data.name == 'null' ? '' + '\n' : data.name + '\n' + 
-          Msg.user.biography + data.biography == 'null' ? '' + '\n' : data.biography + '\n' +
-          Msg.user.created_at + data.created_at + '\n' +
-          Msg.user.last_update + data.last_update + '\n' +
-          Msg.user.id + data.id + '\n' +
-          Msg.user.repos + data.repos + '\n' +
-          Msg.user.gists + data.gists + '\n' +
-          Msg.user.location + data.location == 'null' ? '' + '\n' : data.location + '\n' +
-          Msg.user.following + data.following + '\n' +
-          Msg.user.follower + data.follower + '\n' +
-          Msg.user.hireable + data.hireable == 'null' ? Msg.cant_rent + '\n' : Msg.can_rent + '\n'
-          Msg.user.blog + data.blog == false ? '' + '\n' : data.blog + '\n' +
-          Msg.user.twitter + data.twitter == 'null' ? '' + '\n' : data.twitter + '\n' +
-          Msg.user.company + data.company == 'null' ? '' + '\n' : data.company + '\n' +
-          Msg.user.mail + data.mail == 'null' ? '' + '\n' : data.mail
-        var bf = await axios.get(data.image, {responseType:'arraybuffer'})
-        await message.sendMessage(Buffer.from(bf.data), MessageType.image, { caption: payload })
-      }
     }));
     
     DrkBot.addCommand({pattern: 'lyric ?(.*)', fromMe: false, desc: Slang.LY_DESC }, (async (message, match) => { 
