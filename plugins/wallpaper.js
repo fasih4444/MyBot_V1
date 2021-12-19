@@ -19,21 +19,23 @@ const iLang = Language.getString('scrapers');
 const MLang = Language.getString('messages');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
-/*
+
 DrkBox.addCommand({pattern: 'img ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
      // await message.sendMessage(Lang.NEW_IMG,match[1],MessageType.text);
 
-        gis(match[1], async (error, result) => {
-                var img = Math.floor(result.length*Math.random())
-                var get = got(result[img].url, {https: {rejectUnauthorized: false}});
-                var stream = get.buffer();
-
-                stream.then(async (image) => {
-                    await message.client.sendMessage(message.jid,image, MessageType.image);
-                });
-        });
-}));*/
+      res = gis(`fondos de pantalla 4k ${match[1]}`, google)
+     async function google(error, result){
+        if (error){
+	   console.log('[ ! ] Intentalo de nuevo')
+        } else {
+           var gugWp = result
+           var randomWp =  gugWp[Math.floor(Math.random() * gugWp.length)].url
+           var image_a = await axios.get(`${randomWp}`, { responseType: 'arraybuffer' })
+           await message.client.sendMessage(message.jid, Buffer.from(image_a.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
+       }
+     }
+}));
 
 DrkBox.addCommand({pattern: 'wallpaper ?(.*)', fromMe: wk, desc: iLang.IMG_DESC}, (async (message, match) => { 
         if (!match[1]) return await message.sendMessage(infoMessage(iLang.NEED_WORDS));
