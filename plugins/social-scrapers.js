@@ -31,7 +31,7 @@ DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async 
     res = await dbot.igstalk(userName)
     ytm = res
     const profileBuffer = await axios.get(`${ytm.profilePicHD}`, {responseType: 'arraybuffer'})
-    msg = `*Nombre:* ${ytm.fullName}\n*Usuario:* ${ytm.username}\n*Seguidores:* ${ytm.followers}\n*Siguiendo:* ${ytm.following}`
+    const msg = `*Nombre:* ${ytm.fullName}\n*Usuario:* ${ytm.username}\n*Seguidores:* ${ytm.followers}\n*Siguiendo:* ${ytm.following}`
     await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: msg, quoted: message.data })
                 
 });
