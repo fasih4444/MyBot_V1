@@ -3,18 +3,14 @@ const {MessageType,Mimetype} = require('@adiwajshing/baileys');
 const { errorMessage } = require('../helpers')
 const Config = require('../config');
 const fs = require('fs');
-const axios = requiere ('axios');
+const axios = require('axios');
 const FormData = require('form-data');
 
 const iErr = '🤖 Parece que hay un error'
 
+let wk = Config.WORKTYPE == 'public' ? false : true
 
-
-if (Config.WORKTYPE == 'private') {}
-
-else if (Config.WORKTYPE == 'public') {
-
-DrkBox.addCommand({pattern: 'shazam', fromMe: true, dontAddCommandList: true}, (async (message, match) => {    
+DrkBox.addCommand({pattern: 'shazam', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {    
         if (message.reply_message === false) return await message.sendMessage('*Need Audio!*');
 
         var location = await message.client.downloadAndSaveMediaMessage({
@@ -45,5 +41,3 @@ await axios(`https://api.zeks.me/api/searchmusic?apikey=apivinz`, {
      await message.sendMessage('🤖 Parece que tenemos un error!', MessageType.text)
 });
 }));
-
-}
