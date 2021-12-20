@@ -25,15 +25,13 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
     if (!match[1]) return await message.sendMessage(errorMessage(Lang.need))
-    await message.sendMessage(infoMessage(Lang.load))
+    await message.sendMessage(infoMessage(Lang.loading))
 
     res = await igstalk(match[1])
     ytm = res
-    //const profileBuffer = await axios.get(`${ytm.profilePicHD}`, {responseType: 'arraybuffer'})
+    const profileBuffer = await axios.get(`${ytm.profilePicHD}`, {responseType: 'arraybuffer'})
     const msg = `*Nombre:* ${ytm.fullName}\n*Usuario:* ${ytm.username}\n*Seguidores:* ${ytm.followers}\n*Siguiendo:* ${ytm.following}`
-    //await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: msg, quoted: message.data })
-    await message.sendMessage(msg, MessageType.text)
-                
+    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: msg, quoted: message.data })
 });
 
 DrkBox.addCommand({pattern: 'igdl ?(.*)', fromMe: wk, desc: "Descarga de Instagram"}, async (message, match) => {
