@@ -8,7 +8,7 @@ const DrkBox = require('../events');
 const { MessageType } = require('@adiwajshing/baileys');
 const { errorMessage, infoMessage } = require('../helpers');
 const Config = require('../config');
-const { igDownloader } = require('./datos.js')
+const { igDownloader, igstalk } = require('./datos.js')
 const dbot = require('dbot-api');
 const axios = require('axios');
 const fs = require('fs');
@@ -24,15 +24,15 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 
 DrkBox.addCommand({ pattern: 'insta ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
-    const userName = match[1]
-    if (!userName) return await message.sendMessage(errorMessage(Lang.need))
+    if (!match[1]) return await message.sendMessage(errorMessage(Lang.need))
     await message.sendMessage(infoMessage(Lang.load))
 
-    res = await dbot.igstalk(userName)
+    res = await igstalk(match[1])
     ytm = res
-    const profileBuffer = await axios.get(`${ytm.profilePicHD}`, {responseType: 'arraybuffer'})
+    //const profileBuffer = await axios.get(`${ytm.profilePicHD}`, {responseType: 'arraybuffer'})
     const msg = `*Nombre:* ${ytm.fullName}\n*Usuario:* ${ytm.username}\n*Seguidores:* ${ytm.followers}\n*Siguiendo:* ${ytm.following}`
-    await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: msg, quoted: message.data })
+    //await message.sendMessage(Buffer.from(profileBuffer.data), MessageType.image, { caption: msg, quoted: message.data })
+    await message.sendMessage(msg, MessageType.text)
                 
 });
 
