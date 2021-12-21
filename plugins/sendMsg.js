@@ -12,7 +12,7 @@ const base64 = require('base-64');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
-DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) => {
+DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk, onlyGroup: false}, async (message, match) => {
    if (!match[1]) return await message.sendMessage(infoMessage('🤖 *Envíale un mensaje a alguien de forma anonima por medio del BOT*\nForma de usar el comando.\n\n/send número al que le vas a enviar el msj, signo de + , mensaje a enviar\n\n/send 57xxxxxxx+Hola como estas.'))
 
     const num = match[1]
