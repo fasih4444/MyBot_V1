@@ -87,6 +87,6 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
     const num = match[1]
           text = num.split(',')
     const id = `${text[0]}@s.whatsapp.net`
-    const msj = `${text[1]}`
+    const msg = `${text[1]}`
   await message.client.sendMessage(id, msg, MessageType.text)
 })
