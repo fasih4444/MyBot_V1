@@ -20,7 +20,7 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
     const id = `${text[0]}@s.whatsapp.net`
     const msg = `${text[1]}`
 
-    const idCod = base64.encode(`${message.id}@s.whatsapp.net`)
+    const idCod = base64.encode(`${message.id}`)
 
     var exists = await message.client.isOnWhatsApp(`${text[0]}`)
     if (exists) {
@@ -43,7 +43,7 @@ DrkBox.addCommand({pattern: 'rsend ?(.*)', fromMe: wk}, async (message, match) =
     const codNum = match[1]
           text = codNum.split('+')
     const idDecod = base64.decode(`${text[0]}`)
-    const id = idDecod
+    const id = `${idDecod}@s.whatsapp.net`
     const msg = `${text[1]}`
 
     await message.client.sendMessage(id,
