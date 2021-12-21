@@ -89,6 +89,7 @@ async function whatsAsena () {
     const Session = new StringSession();
     DrkBotCN.version = [3, 3234, 9]
     DrkBotCN.setMaxListeners(0);
+    DrkBotCN.browserDescription = ["DrkBot", "Chrome", "3.0.0"];
     setInterval(async () => { 
         var getGMTh = new Date().getHours()
         var getGMTm = new Date().getMinutes()
