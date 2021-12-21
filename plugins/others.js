@@ -84,7 +84,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
     });
 
 DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) => {
-   if (!match[1]) return await message.sendMessage(infoMessage('🤖 Forma de usar el comando.\nSeparar el número del mensaje con el signo de +\n\n/send 57xxxxxxx+Hola como estas.'))
+   if (!match[1]) return await message.sendMessage(infoMessage('🤖 *Envíale un mensaje a alguien de forma anonima por medio del BOT*\nForma de usar el comando.\n\n/send número al que le vas a enviar el msj, signo de + , mensaje a enviar\n\n/send 57xxxxxxx+Hola como estas.'))
 
     const num = match[1]
           text = num.split('+')
