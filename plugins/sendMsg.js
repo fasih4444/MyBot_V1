@@ -43,7 +43,7 @@ DrkBox.addCommand({pattern: 'rsend ?(.*)', fromMe: wk}, async (message, match) =
     const codNum = match[1]
           text = codNum.split('+')
     const idDecod = base64.decode(`${text[0]}`)
-    const id = `${idDecod}@s.whatsapp.net`
+    const id = idDecod
     const msg = `${text[1]}`
 
     await message.client.sendMessage(id,
