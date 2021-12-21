@@ -55,12 +55,8 @@ if (Config.WORKTYPE == 'private') {
 }
 else if (Config.WORKTYPE == 'public') {
     DrkBox.addCommand({pattern: 'alive', fromMe: false, desc: Lang.ALIVE_DESC}, (async (message, match) => {
-        await message.client.sendMessage(
-            message.jid, 
-            fs.readFileSync("https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg"), 
-            MessageType.image, 
-            { mimetype: Mimetype.jpg, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/nuevo* Mustra actualizaciones'}
-        )
+       var image = await axios.get('https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg', {responseType: 'arraybuffer'})
+       await message.client.sendMessage (message.jid, Buffer.from(image.data), MessageType.image, {mimetype: Mimetype.jpg, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/nuevo* Mustra actualizaciones'})
     }));
     
     DrkBox.addCommand({pattern: 'menu', fromMe: false}, (async (message, match) => {
