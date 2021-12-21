@@ -66,7 +66,7 @@ else if (Config.WORKTYPE == 'public') {
     
     
     DrkBox.addCommand({pattern: 'nuevo', fromMe: false}, (async (message, match) => {
-        await message.sendMessage('┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */send*\nComando de mensaje anonimo.\n\n  */img*\nComando actualizado.\n\n  */wallpaper*\nComando actualizado.\n┗━━━━━━━━━━━━');
+        await message.sendMessage('┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『/』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */send*\nComando de mensaje anonimo.\n⚠️ Usar solo en chat privado.\n\n  */img*\nComando actualizado.\n\n  */wallpaper*\nComando actualizado.\n┗━━━━━━━━━━━━');
     }));
 
     DrkBox.addCommand({pattern: 'owner', fromMe: false}, (async (message, match) => {
