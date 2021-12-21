@@ -84,9 +84,22 @@ let wk = Config.WORKTYPE == 'public' ? false : true
     });
 
 DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) => {
+   if (!match[1]) return await message.sendMessage(infoMessage('🤖 Forma de usar el comando.\nSeparar el número del mensaje con el signo de *+*\n\n/send 57xxxxxxx+Hola como estas.'))
+
     const num = match[1]
-          text = num.split(',')
+          text = num.split('+')
     const id = `${text[0]}@s.whatsapp.net`
     const msg = `${text[1]}`
-  await message.client.sendMessage(id, msg, MessageType.text)
+
+    var exists = await message.client.isOnWhatsApp(`${text[0]}`)
+    if (exists) {
+       await message.client.sendMessage(message.jid, '🤖 El número ingresado está registrado en whatsapp, su mensaje será enviado.', MessageType.text)
+       await message.client.sendMessage(id,
+         'Hola soy 🤖 *DrkBot*\n' +
+         'Te han enviado esté mensaje por medio de chat anonimo.\n\n' +
+         `*Mensaje:* ${msg}`, MessageType.text)
+       await message.client.sendMessage(message.jid, '🤖 Su mensaje fue enviado con éxito.', MessageType.text)
+    } else {
+       await message.client.sendMessage(message.jid, '🤖 Su mensaje no pudo ser enviado.\nEl número ingresado no está registrado en whatsapp o está mal escrito.\n\nRecuerda que el número debe ser escrito en formato internacional, codigo del pais más número telefonico.', MessageType.text)
+    }
 })
