@@ -44,7 +44,10 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
 
     var exists = await message.client.isOnWhatsApp(`${text[0]}`)
     if (exists) {
-       await message.client.sendMessage(id, msg, MessageType.text)
+       await message.client.sendMessage(id,
+        '🤖 Hola\n' +
+        'Te han enviado este mensaje.\n\n' +
+        `*Mensaje:* ${msg}` , MessageType.text)
     } else {
        await message.client.sendMessage(message.jid, '🤖 Su mensaje no pudo ser enviado.\nEl número ingresado no está registrado en whatsapp o está mal escrito.\n\nRecuerda que el número debe ser escrito en formato internacional, codigo del pais más número telefonico.', MessageType.text)
     }
@@ -63,7 +66,7 @@ DrkBox.addCommand({pattern: 'resp ?(.*)', fromMe: wk}, async (message, match) =>
     if (exists) {
         await message.client.sendMessage(id,
          '🤖 Hola\n' +
-         `Tu mensaje de respuesta de ${message.jid} es:\n\n` +
+         `Tu mensaje de respuesta de ${message.jid} es.\n\n` +
          `*Mensaje:* ${msg}`, MessageType.text)
     } else {
         await message.client.sendMessage(message.jid, '🤖 Su respuesta no pudo ser enviada.\nEl formato de respuesta no es correcto.', MessageType.text)
