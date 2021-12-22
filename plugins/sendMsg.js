@@ -28,7 +28,7 @@ DrkBox.addCommand({pattern: 'reglas ?(.*)', fromMe: wk}, async (message, match) 
         '2. Para responder es de la siguiente forma.\n' +
         '*/send codigo respuesta + mensaje a responder*\n' +
         '⚠️ El signo de mas(+) es el que separa el codigo del mensaje a responder, que no se te olvide colocarlo.', MessageType.text)
-      await message.client.sendMessage(id, idcod, MessageType.text)
+      await message.client.sendMessage(id, idCod, MessageType.text)
     } else {
       await message.client.sendMessage(message.jid, '🤖 Su mensaje no pudo ser enviado.\nEl número ingresado no está registrado en whatsapp o está mal escrito.\n\nRecuerda que el número debe ser escrito en formato internacional, codigo del pais más número telefonico.', MessageType.text)
     }
