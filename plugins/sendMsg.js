@@ -25,8 +25,8 @@ DrkBox.addCommand({pattern: 'reglas ?(.*)', fromMe: wk}, async (message, match) 
         'Te están invitando a un chat anonimo, para poder responderle a esa persona vas a necesitar el codigo de respuesta de ese chat.\n' +
         '*Las reglas de este chat son las siguientes:*\n' +
         '1. Al final de este chat te va a llegar un mensaje con un codigo el cual podras usar para responder.\n' +
-        '2. Para responder es de la siguiente forma.\n' +
-        '*/send codigo respuesta + mensaje a responder*\n' +
+        '2. Para responder es de la siguiente forma.\n\n' +
+        '*/resp codigo respuesta + mensaje a responder*\n' +
         '⚠️ El signo de mas(+) es el que separa el codigo del mensaje a responder, que no se te olvide colocarlo.', MessageType.text)
       await message.client.sendMessage(id, idCod, MessageType.text)
     } else {
