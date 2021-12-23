@@ -31,7 +31,7 @@ DrkBox.addCommand({pattern: 'reglas ?(.*)', fromMe: wk}, async (message, match) 
 })
 
 DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) => {
-   if (!match[1]) return await message.sendMessage('🤖 *Envíale un mensaje a alguien de forma anonima por medio del BOT*\nForma de usar el comando.\n\n/send número al que le vas a enviar el msj, signo de + , mensaje a enviar\n\n/send 57xxxxxxx+Hola como estas.')
+   if (!match[1]) return await message.sendMessage('🤖 *Envíale un mensaje a alguien de forma anonima por medio del BOT*\n\nPara empezar a chatear de forma anonima enviale las reglas a quien le vas a escribir para que sepa como responderte.\nEscribe:\n*/reglas y el número a quien le vas a escribir*\n❌ */Reglas 3xxxxxxxxx*\n✅ */reglas 573xxxxxxxxx*\n\nAhora forma de empezar a escribir.\nEscribe:\n/send número al que le vas a enviar el msj, signo de + , mensaje a enviar\n\n⚠️ El comando al inicio no lleva mayúsculas y el resto del mensaje no lleva espacios entre el número y el signo de +\n❌ */Send 573xxxxxxxxx + Hola*\n✅ */send 573xxxxxxxxx+Hola*')
 
     const num = match[1]
           text = num.split('+')
