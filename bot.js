@@ -316,6 +316,8 @@ async function whatsAsena () {
         if (config.NO_ONLINE) {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
+ 
+        selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
 
