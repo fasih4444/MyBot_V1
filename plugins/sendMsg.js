@@ -16,19 +16,15 @@ DrkBox.addCommand({pattern: 'reglas ?(.*)', fromMe: wk}, async (message, match) 
 
     const num = match[1]
     const id = `${num}@s.whatsapp.net`
-    const idCod = base64.encode(`${message.jid}+`)
 
     var exists = await message.client.isOnWhatsApp(id)
     if (exists) {
       await message.client.sendMessage(id,
         'Hola soy 🤖 *DrkBot*\n' +
-        'Te están invitando a un chat anonimo, para poder responderle a esa persona vas a necesitar el codigo de respuesta de ese chat.\n' +
-        '*Las reglas de este chat son las siguientes:*\n' +
-        '1. Al final de este chat te va a llegar un mensaje con un codigo el cual podras usar para responder.\n' +
-        '2. Para responder es de la siguiente forma.\n\n' +
-        '*/resp codigo respuesta + mensaje a responder*\n' +
-        '⚠️ El signo de mas(+) es el que separa el codigo del mensaje a responder, que no se te olvide colocarlo.', MessageType.text)
-      await message.client.sendMessage(id, idCod, MessageType.text)
+        'Te están invitando a un chat anonimo.\n\n' +
+        '*Para responder es de la siguiente forma.*\n' +
+        'Solo desliza hacia la derecha el msj que vas a responder y escribe\n' +
+        '/resp y lo que vallas a decir', MessageType.text)
     } else {
       await message.client.sendMessage(message.jid, '🤖 Su mensaje no pudo ser enviado.\nEl número ingresado no está registrado en whatsapp o está mal escrito.\n\nRecuerda que el número debe ser escrito en formato internacional, codigo del pais más número telefonico.', MessageType.text)
     }
