@@ -41,12 +41,12 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
           text = num.split('+')
     const id = `${text[0]}@s.whatsapp.net`
     const msg = `${text[1]}`
-    const idCod = base64.encode(`${message.jid}+`)
+    const idCod = base64.encode(`${message.jid}`)
 
     var exists = await message.client.isOnWhatsApp(`${text[0]}`)
     if (exists) {
        await message.client.sendMessage(id,
-        `${idCod}\n` +
+        `${idCod}+\n` +
         '🤖 Hola\n' +
         'Te han enviado este mensaje.\n\n' +
         `*Mensaje:* ${msg}` , MessageType.text)
