@@ -16,7 +16,7 @@ DrkBox.addCommand({pattern: 'reglas ?(.*)', fromMe: wk}, async (message, match) 
 
     const num = match[1]
     const id = `${num}@s.whatsapp.net`
-    const idCod = base64.encode(`${message.jid}`)
+    const idCod = base64.encode(`${message.jid}+`)
 
     var exists = await message.client.isOnWhatsApp(id)
     if (exists) {
@@ -41,10 +41,12 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
           text = num.split('+')
     const id = `${text[0]}@s.whatsapp.net`
     const msg = `${text[1]}`
+    const idCod = base64.encode(`${message.jid}+`)
 
     var exists = await message.client.isOnWhatsApp(`${text[0]}`)
     if (exists) {
        await message.client.sendMessage(id,
+        `${idCod}\n` +
         '🤖 Hola\n' +
         'Te han enviado este mensaje.\n\n' +
         `*Mensaje:* ${msg}` , MessageType.text)
@@ -54,13 +56,13 @@ DrkBox.addCommand({pattern: 'send ?(.*)', fromMe: wk}, async (message, match) =>
 })
 
 DrkBox.addCommand({pattern: 'resp ?(.*)', fromMe: wk}, async (message, match) => {
-   if (!match[1]) return await message.sendMessage('🤖 Forma de responder.\n\n/rsend codigo de respuesta, signo de + , mensaje de respuesta\n\n/rsend xxxxxxxx+mensaje a responder')
+   if (!message.reply_message) return await message.client.sendMessage(message.jid,'🤖 Responde el msj que vas a responder.', MessageType.text)
 
-    const codNum = match[1]
+    const codNum = message.reply_message.text
           text = codNum.split('+')
     const idDecod = base64.decode(`${text[0]}`)
     const id = idDecod
-    const msg = `${text[1]}`
+    const msg = match[1]
 
     var exists = await message.client.isOnWhatsApp(id)
     if (exists) {
