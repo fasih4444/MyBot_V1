@@ -24,10 +24,12 @@ let wk = Config.WORKTYPE == 'public' ? false : true
     DrkBox.addCommand({ pattern: 'ip ?(.*)', fromMe: wk, desc: Lang.descIp}, async (message, match) => {
         if (!match[1]) return await message.sendMessage(errorMessage(Lang.needIp))
         await message.sendMessage(infoMessage(Lang.search))
-        await axios.get(`http://ip-api.com/json/${match[1]}?fields=status,message,country,regionName,city,zip,timezone,currency,org,mobile,query`).then(async (response) => {
-            const {query, country, regionName, city, zip, timezone, currency, org, mobile} = response.data
+        await axios.get(`http://ip-api.com/json/${match[1]}?fields=status,message,country,regionName,city,zip,timezone,currency,org,mobile,query,lon,lat`).then(async (response) => {
+            const {query, country, regionName, city, zip, timezone, currency, org, mobile, lon, lat} = response.data
             const msg = `*Ip:* ${query} \n\n*Pais:* ${country}\n*Region:* ${regionName}\n*Ciudad:* ${city}\n*Zip Code:* ${zip}\n*Timezone:* ${timezone}\n*Moneda:* ${currency}\n*Servicio:* ${org}\n*Mobile:* ${mobile}`
+            const ubication = `degreesLatitude: ${lat}, degreesLongitude: ${lon}`
             await message.sendMessage(msg, MessageType.text)
+            await message.sendMessage(ubication, MessageType.location)
         }).catch(async (err) => {
             await message.sendMessage(errorMessage(iErr))
           })
