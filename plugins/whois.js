@@ -133,6 +133,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                 await message.client.sendMessage(message.jid, WAME.format(user.split('@')[0], user.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                     contextInfo: {mentionedJid: [user.replace('c.us', 's.whatsapp.net')]}
                 });
+           });
         } else if (check) {
            stst = await message.client.getStatus(id)
            sstst = stst.status == 401 ? '' : stst.status
