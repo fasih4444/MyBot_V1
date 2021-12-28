@@ -128,8 +128,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             message.mention.map(async user => {
                 await message.client.sendMessage(message.jid, WAME.format(user.split('@')[0], user.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                     contextInfo: {mentionedJid: [user.replace('c.us', 's.whatsapp.net')]}
-                }); 
-            });
+                });
         } else if {
            num = match[1]
            id = `${num}@s.whatsapp.net`
