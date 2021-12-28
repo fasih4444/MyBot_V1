@@ -138,7 +138,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
            stst = await message.client.getStatus(id)
            sstst = stst.status == 401 ? '' : stst.status
 
-           picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg'
+           picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
 
            msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${match[1]}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
 
@@ -148,7 +148,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
            var exists = await message.client.isOnWhatsApp(message.jid)
            var stst = await message.client.getStatus(message.jid)
            var sstst = stst.status == 401 ? '🤖 😎 🤖' : stst.status
-           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg'
+           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
            var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID:*${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
 
            photo = await axios.get(picture, {responseType: 'arraybuffer'})
