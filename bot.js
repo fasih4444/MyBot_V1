@@ -307,20 +307,20 @@ async function whatsAsena () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, up_ch, MessageType.text)
         }
     })
-    DrkBotCN.on('chat-update', async msg => {
-        if (!msg.hasNewMessage) return;
-        if (!msg.messages && !msg.count) return;
-        let msg = msg.messages.all()[0];
+    DrkBotCN.on('chat-update', async m => {
+        if (!m.hasNewMessage) return;
+        if (!m.messages && !m.count) return;
+        let msg = m.messages.all()[0];
 
-        sam.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
-       
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
+
+        msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
         const type = Object.keys(msg.message)[0]
- 
         selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
+
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
 
