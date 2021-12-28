@@ -45,7 +45,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
             var dtsjson = await message.client.groupMetadata(message.jid)
-            var sdesc = dtsjson.desc == 401 ? '🤖 😎 🤖' : dtsjson.desc
+            var sdesc = dtsjson.desc == 'undefined' ? '🤖 😎 🤖' : dtsjson.desc
             var jids = [];
             mesaj = '';
             var users1 = [];
@@ -106,24 +106,18 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             );
         }
         else {
-            var status = await message.client.getStatus(message.jid) 
-            var usppUrl = await message.client.getProfilePicture(message.jid) 
-            var usexists = await message.client.isOnWhatsApp(message.jid)
-            const nwmsg = Lang.JİD + `${usexists.jid} \n` + Lang.ST + `${status.status}`
-            const resimnw = await axios.get(usppUrl, {responseType: 'arraybuffer'})
-            await message.sendMessage(
-                Buffer.from(resimnw.data), 
-                MessageType.image, 
-                { caption: nwmsg }
-            );
+           var exists = await message.client.isOnWhatsApp(message.jid)
+           var stst = await message.client.getStatus(message.jid)
+           var sstst = stst.status == 'undefined' ? '🤖 😎 🤖' : stst.status
+           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
+           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID:*${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+
+           var photo = await axios.get(picture, {responseType: 'arraybuffer'})
+           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
         }
     });
 
     DrkBox.addCommand({pattern: 'wame ?(.*)', fromMe: wk, onlyGroup: true}, (async (message, match) => {
-     num = match[1]
-      id = `${num}@s.whatsapp.net`
-     chek = await message.client.isOnWhatsApp(id)
-
         if (message.reply_message !== false) {
             await message.client.sendMessage(message.jid, WAME.format(message.reply_message.jid.split('@')[0], message.reply_message.jid.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                 quotedMessage: message.reply_message.data, contextInfo: {mentionedJid: [message.reply_message.jid.replace('c.us', 's.whatsapp.net')]}
@@ -134,24 +128,19 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                     contextInfo: {mentionedJid: [user.replace('c.us', 's.whatsapp.net')]}
                 });
            });
-        } else if (check) {
-           stst = await message.client.getStatus(id)
-           sstst = stst.status == 401 ? '' : stst.status
-
-           picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-
-           msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${match[1]}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
-
-           photo = await axios.get(picture, {responseType: 'arraybuffer'})
-           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
         } else {
-           var exists = await message.client.isOnWhatsApp(message.jid)
-           var stst = await message.client.getStatus(message.jid)
-           var sstst = stst.status == 401 ? '🤖 😎 🤖' : stst.status
-           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID:*${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+           var num  = match[1]
+           var   id = `${num}@s.whatsapp.net`
+           var chek = await message.client.isOnWhatsApp(id)
 
-           photo = await axios.get(picture, {responseType: 'arraybuffer'})
+           var stst = await message.client.getStatus(id)
+           var sstst = stst.status == 'undefined' ? '🤖 😎 🤖' : stst.status
+
+           var picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
+
+           var msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${match[1]}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+
+           var photo = await axios.get(picture, {responseType: 'arraybuffer'})
            await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
         }
     }));
