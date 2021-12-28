@@ -110,7 +110,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
            var stst = await message.client.getStatus(message.jid)
            var sstst = stst.status == 'undefined' ? '🤖 😎 🤖' : stst.status
            var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID:*${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID: *${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
 
            var photo = await axios.get(picture, {responseType: 'arraybuffer'})
            await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
