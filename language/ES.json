@@ -235,8 +235,8 @@
             "DES": "*Descripción del Grupo:* ",
             "OWN": "*Fundador:* ",
             "COD": "*Código de grupo único:* ",
-            "JİD": "*Persona JID:* ",
-            "ST": "*Estado de la persona:* "
+            "JİD": "*ID:* ",
+            "ST": "*Estado:* "
         },
         "log": {
             "LOG": "Guarda el mensaje que responde a su número privado.",
