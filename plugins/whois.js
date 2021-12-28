@@ -119,7 +119,11 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
         }
     });
 
-    DrkBox.addCommand({pattern: 'wame ?(.*)', fromMe: wk, onlyGroup: true}, (async (message, match) => {    
+    DrkBox.addCommand({pattern: 'wame ?(.*)', fromMe: wk, onlyGroup: true}, (async (message, match) => {
+     num = match[1]
+      id = `${num}@s.whatsapp.net`
+     chek = await message.client.isOnWhatsApp(id)
+
         if (message.reply_message !== false) {
             await message.client.sendMessage(message.jid, WAME.format(message.reply_message.jid.split('@')[0], message.reply_message.jid.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                 quotedMessage: message.reply_message.data, contextInfo: {mentionedJid: [message.reply_message.jid.replace('c.us', 's.whatsapp.net')]}
@@ -129,11 +133,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                 await message.client.sendMessage(message.jid, WAME.format(user.split('@')[0], user.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                     contextInfo: {mentionedJid: [user.replace('c.us', 's.whatsapp.net')]}
                 });
-        } else if {
-           num = match[1]
-           id = `${num}@s.whatsapp.net`
-           chek = await message.client.isOnWhatsApp(id)
-
+        } else if (check) {
            stst = await message.client.getStatus(id)
            sstst = stst.status == 401 ? '' : stst.status
 
