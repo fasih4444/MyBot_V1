@@ -317,9 +317,19 @@ async function whatsAsena () {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
 
-        msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
-        const type = Object.keys(msg.message)[0]
-        selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
+// ######## PRUEBA ########
+const from = msg.key.remoteJid
+msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
+const type = Object.keys(msg.message)[0]
+const isGroup = from.endsWith('@g.us')
+const sender = msg.key.fromMe ? DrkBotCN.user.jid : isGroup ? msg.participant : msg.key.remoteJid
+conts = msg.key.fromMe ? DrkBotCN.user.jid : DrkBotCN.contacts[sender] || {
+   notify: jid.replace(/@.+/, '')
+}
+let pushname = msg.key.fromMe ? DrkBotCN.user.name : conts.notify || conts.vname || conts.name || '*Amigo*'
+
+
+selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
 
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
