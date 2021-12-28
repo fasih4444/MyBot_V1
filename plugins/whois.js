@@ -11,8 +11,9 @@ const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
 const {execFile} = require('child_process');
 const Config = require('../config');
+
 const Language = require('../language'); 
-const Lang = Language.getString('whois'); // Language Support
+const Lang = Language.getString('whois');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
@@ -43,7 +44,8 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
         if (message.jid.includes('-')) {
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
-            var dtsjson = await message.client.groupMetadata(message.jid) 
+            var dtsjson = await message.client.groupMetadata(message.jid)
+            var sdesc = dtsjson.desc == 401 ? '🤖 😎 🤖' : dtsjson.desc
             var jids = [];
             mesaj = '';
             var users1 = [];
@@ -94,7 +96,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             var usaus = ' ' + usa_user.length + '\n'
             var oth = ' ' + user_count - cous - arus - bous - clus - ecus - mxus - peus - pyus - uyus - esus - usaus
             const user_count_msg = ADMİN_USER + admin_count + USER_USER + user_count + CO_USER + cous + AR_USER + arus + BO_USER + bous + CL_USER + clus + EC_USER + ecus + MX_USER + mxus + PE_USER + peus + PY_USER + pyus + UY_USER + uyus + ES_USER + esus + USA_USER + usaus + OTHER + oth + '\n'
-            const msg = `*ID del grupo:* ${json.id}\n` + Lang.SUB + `${dtsjson.subject}\n` + Lang.OWN + `${json.owner}\n` + Lang.COD + `${code}\n\n` + user_count_msg + `\n\n` + Lang.DES + `\n${dtsjson.desc}`
+            const msg = `*ID del grupo:* ${json.id}\n` + Lang.SUB + `${dtsjson.subject}\n` + Lang.OWN + `${json.owner}\n` + Lang.COD + `https://chat.whatsapp.com/${code}\n\n` + user_count_msg + `\n\n` + Lang.DES + `\n${sdesc}`
             var ppUrl = await message.client.getProfilePicture(message.jid) 
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
             await message.sendMessage(
@@ -128,7 +130,28 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                     contextInfo: {mentionedJid: [user.replace('c.us', 's.whatsapp.net')]}
                 }); 
             });
+        } else if {
+           num = match[1]
+           id = `${num}@s.whatsapp.net`
+           chek = await message.client.isOnWhatsApp(id)
+
+           stst = await message.client.getStatus(id)
+           sstst = stst.status == 401 ? '' : stst.status
+
+           picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg'
+
+           msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${match[1]}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+
+           photo = await axios.get(picture, {responseType: 'arraybuffer'})
+           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
         } else {
-            await message.client.sendMessage(message.jid, NEED_UWONG, MessageType.text);
+           var exists = await message.client.isOnWhatsApp(message.jid)
+           var stst = await message.client.getStatus(message.jid)
+           var sstst = stst.status == 401 ? '🤖 😎 🤖' : stst.status
+           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg'
+           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID:*${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
+
+           photo = await axios.get(picture, {responseType: 'arraybuffer'})
+           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
         }
     }));
