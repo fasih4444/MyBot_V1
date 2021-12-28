@@ -45,7 +45,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
             var dtsjson = await message.client.groupMetadata(message.jid)
-            var sdesc = dtsjson.desc == 'undefined' ? '🤖 😎 🤖' : dtsjson.desc
+            var sdesc = dtsjson.desc == '' ? '🤖 😎 🤖' : dtsjson.desc
             var jids = [];
             mesaj = '';
             var users1 = [];
@@ -108,7 +108,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
         else {
            var exists = await message.client.isOnWhatsApp(message.jid)
            var stst = await message.client.getStatus(message.jid)
-           var sstst = stst.status == 'undefined' ? '🤖 😎 🤖' : stst.status
+           var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
            var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
            var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID: *${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
 
@@ -129,12 +129,18 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                 });
            });
         } else {
-           var num  = match[1]
+           await message.client.sendMessage(message.jid, NEED_UWONG, MessageType.text);
+        }
+    }));
+
+
+/*
+var num  = match[1]
            var   id = `${num}@s.whatsapp.net`
            var chek = await message.client.isOnWhatsApp(id)
 
            var stst = await message.client.getStatus(id)
-           var sstst = stst.status == 'undefined' ? '🤖 😎 🤖' : stst.status
+           var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
 
            var picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
 
@@ -142,5 +148,4 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
 
            var photo = await axios.get(picture, {responseType: 'arraybuffer'})
            await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
-        }
-    }));
+*/
