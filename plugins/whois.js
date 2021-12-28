@@ -43,13 +43,11 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
         if (message.jid.includes('-')) {
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
-            var nwjson = await message.client.groupMetadata(message.jid) 
-            let region = await message.client.groupMetadata(message.jid);
-            let grup = await message.client.groupMetadata(message.jid);
+            var dtsjson = await message.client.groupMetadata(message.jid) 
             var jids = [];
             mesaj = '';
             var users1 = [];
-            grup['participants'].map(async (uye) => {
+            dtsjson['participants'].map(async (uye) => {
                 if (uye.isAdmin) {
                     mesaj += '@' + uye.id.split('@')[0] + ' ';
                     jids.push(uye.id.replace('c.us', 's.whatsapp.net'));
@@ -70,7 +68,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             var es_user = [];
             var usa_user = [];
             var other_user = [];
-            region['participants'].map(async (reg) => {
+            dtsjson['participants'].map(async (reg) => {
                 if (reg.jid.startsWith('57')) { co_user.push(reg.id.replace('c.us', 's.whatsapp.net')); } 
                 if (reg.jid.startsWith('54')) { ar_user.push(reg.id.replace('c.us', 's.whatsapp.net')); } 
                 if (reg.jid.startsWith('591')) { bo_user.push(reg.id.replace('c.us', 's.whatsapp.net')); } 
@@ -96,7 +94,7 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
             var usaus = ' ' + usa_user.length + '\n'
             var oth = ' ' + user_count - cous - arus - bous - clus - ecus - mxus - peus - pyus - uyus - esus - usaus
             const user_count_msg = ADMİN_USER + admin_count + USER_USER + user_count + CO_USER + cous + AR_USER + arus + BO_USER + bous + CL_USER + clus + EC_USER + ecus + MX_USER + mxus + PE_USER + peus + PY_USER + pyus + UY_USER + uyus + ES_USER + esus + USA_USER + usaus + OTHER + oth + '\n'
-            const msg = `*ID del grupo:* ${json.id}\n` + Lang.SUB + `${nwjson.subject}\n` + Lang.OWN + `${json.owner}\n` + Lang.COD + `${code}\n\n` + user_count_msg + `\n\n` + Lang.DES + `\n${nwjson.desc}`
+            const msg = `*ID del grupo:* ${json.id}\n` + Lang.SUB + `${dtsjson.subject}\n` + Lang.OWN + `${json.owner}\n` + Lang.COD + `${code}\n\n` + user_count_msg + `\n\n` + Lang.DES + `\n${dtsjson.desc}`
             var ppUrl = await message.client.getProfilePicture(message.jid) 
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
             await message.sendMessage(
