@@ -5,7 +5,7 @@ DrkBot - Ian VanH
 */
 
 const DrkBot = require('../events');
-const {MessageType} = require('@adiwajshing/baileys');
+const {MessageType, MimeType} = require('@adiwajshing/baileys');
 const Config = require('../config');
 const axios = require('axios');
 
@@ -27,7 +27,7 @@ DrkBot.addCommand({ pattern: 'scan ?(.*)', fromMe: wk, desc: Lang.SCAN}, (async 
       var msg = `═══✪〘 *USUARIO* 〙✪═══\n❖ *ID:* ${id.split('@')[0]}\n❖ *Bio:* ${sstst}\n═══✪〘 *DrkBot* 〙✪═══\n\n*Escribele:*\nhttps://wa.me/${num}`
            
       var photo = await axios.get(picture, {responseType: 'arraybuffer'})
-      await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg })
+      await message.sendMessage(Buffer.from(photo.data), MessageType.image, {mimetype: Mimetype.jpg, caption: msg })
     } else {
        await message.client.sendMessage(message.jid,'```' + match[1] + '``` \n' + Lang.UNSUC, MessageType.text);
     }
