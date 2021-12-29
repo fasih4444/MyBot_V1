@@ -40,8 +40,7 @@ var OTHER = ''
 if (Config.LANG == 'ES') ADMİN_USER = '*Recuento de administradores:* ', USER_USER = '*Recuento de miembros:* ', CO_USER = '*Recuento de miembros de Colombia:*', AR_USER = '*Recuento de miembros de Argentina:*', BO_USER = '*Recuento de miembros de Bolivia:*', CL_USER = '*Recuento de miembros de Chile:*', EC_USER = '*Recuento de miembros de Ecuador:*', MX_USER = '*Recuento de miembros de México:*', PE_USER = '*Recuento de miembros de Perú:*', PY_USER = '*Recuento de miembros de Paraguay:*', UY_USER = '*Recuento de miembros de Uruguay:*', ES_USER = '*Recuento de miembros de España:*', USA_USER = '*Recuento de miembros de USA:*', OTHER = '*Recuento de miembros de otros paises:* '
 if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Count:*', TR_USER = '*Turkish Member Count:*', Hİ_USER = '*Indian Member Count:*', AZ_USER = '*Azerbayjan Member Count:*', SRİ_USER = '*Sri Lanka Member Count:*', RU_USER = '*Russian Member Count:*', USA_USER = '*USA Member Count:*', OTHER = '*Other Member Count:*'
 
-    DrkBox.addCommand({ pattern: 'infogroup$', fromMe: wk, desc: Lang.PL_DESC }, async (message, match) => {
-        if (message.jid.includes('-')) {
+    DrkBox.addCommand({ pattern: 'infogroup', fromMe: wk, desc: Lang.PL_DESC, onlyGroup: true}, async (message, match) => {
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
             var dtsjson = await message.client.groupMetadata(message.jid)
@@ -104,20 +103,9 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
                 MessageType.image, 
                 {caption: msg }
             );
-        }
-        else {
-           var exists = await message.client.isOnWhatsApp(message.jid)
-           var stst = await message.client.getStatus(message.jid)
-           var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
-           var picture = await message.client.getProfilePicture(message.jid).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-           var msg = `╔══✪〘 *YO* 〙✪══\n╠❖ *ID: *${exists.jid}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
-
-           var photo = await axios.get(picture, {responseType: 'arraybuffer'})
-           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
-        }
     });
 
-    DrkBox.addCommand({pattern: 'wame ?(.*)', fromMe: wk, onlyGroup: true}, (async (message, match) => {
+    DrkBox.addCommand({pattern: 'wame ?(.*)', fromMe: wk, onlyGroup: true}, async (message, match) => {
         if (message.reply_message !== false) {
             await message.client.sendMessage(message.jid, WAME.format(message.reply_message.jid.split('@')[0], message.reply_message.jid.replace('@s.whatsapp.net', ' ')), MessageType.text, {
                 quotedMessage: message.reply_message.data, contextInfo: {mentionedJid: [message.reply_message.jid.replace('c.us', 's.whatsapp.net')]}
@@ -131,21 +119,4 @@ if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Co
         } else {
            await message.client.sendMessage(message.jid, NEED_UWONG, MessageType.text);
         }
-    }));
-
-
-/*
-var num  = match[1]
-           var   id = `${num}@s.whatsapp.net`
-           var chek = await message.client.isOnWhatsApp(id)
-
-           var stst = await message.client.getStatus(id)
-           var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
-
-           var picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-
-           var msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${match[1]}\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══`
-
-           var photo = await axios.get(picture, {responseType: 'arraybuffer'})
-           await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg });
-*/
+    });
