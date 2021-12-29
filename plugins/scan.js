@@ -7,6 +7,7 @@ DrkBot - Ian VanH
 const DrkBot = require('../events');
 const {MessageType} = require('@adiwajshing/baileys');
 const Config = require('../config');
+const axios = require('axios');
 
 const Language = require('../language');
 const Lang = Language.getString('tagall');
