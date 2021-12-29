@@ -18,7 +18,7 @@ const Lang = Language.getString('whois');
 let wk = Config.WORKTYPE == 'public' ? false : true
 
 // wa.me
-const WAME = "```Escribele:\n``` @{}:\nhttps://wa.me/{}"
+const WAME = "```Escribele a:``` @{}\nhttps://wa.me/{}"
 const NEED_UWONG = "*¡Menciona a un usuario!*"
 // end wa.me
 
