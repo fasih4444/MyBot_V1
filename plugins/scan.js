@@ -24,7 +24,7 @@ DrkBot.addCommand({ pattern: 'scan ?(.*)', fromMe: wk, desc: Lang.SCAN}, (async 
       var stst = await message.client.getStatus(id)
       var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
       var picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-      var msg = `╔══✪〘 *USUARIO* 〙✪══\n╠❖ *ID:* ${id}.split('@')[0]\n╠❖ *Bio:* ${sstst}\n╚══✪〘 *DrkBot* 〙✪══\n\n*Escribele:*\nhttps://wa.me/${num}`
+      var msg = `═══✪〘 *USUARIO* 〙✪═══\n❖ *ID:* ${exists.split('@')[0]}\n❖ *Bio:* ${sstst}\n═══✪〘 *DrkBot* 〙✪═══\n\n*Escribele:*\nhttps://wa.me/${num}`
            
       var photo = await axios.get(picture, {responseType: 'arraybuffer'})
       await message.sendMessage(Buffer.from(photo.data), MessageType.image, { caption: msg })
