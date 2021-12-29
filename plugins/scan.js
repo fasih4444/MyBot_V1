@@ -5,7 +5,7 @@ DrkBot - Ian VanH
 */
 
 const DrkBot = require('../events');
-const {MessageType, MimeType} = require('@adiwajshing/baileys');
+const {MessageType, Mimetype} = require('@adiwajshing/baileys');
 const Config = require('../config');
 const axios = require('axios');
 
