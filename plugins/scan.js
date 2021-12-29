@@ -21,14 +21,8 @@ DrkBot.addCommand({ pattern: 'scan ?(.*)', fromMe: wk, desc: Lang.SCAN}, (async 
 
     var exists = await message.client.isOnWhatsApp(id)
     if (exists) {
-      var stst = await message.client.getStatus(id)
-      var sstst = stst.status == '' ? '🤖 😎 🤖' : stst.status
-      var picture = await message.client.getProfilePicture(id).catch(() => picture = 'https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg')
-      var msg = `═══✪〘 *USUARIO* 〙✪═══\n❖ *ID:* ${id.split('@')[0]}\n❖ *Bio:* ${sstst}\n═══✪〘 *DrkBot* 〙✪═══\n\n*Escribele:*\nhttps://wa.me/${num}`
-           
-      var photo = await axios.get(picture, {responseType: 'arraybuffer'})
-      await message.sendMessage(Buffer.from(photo.data), MessageType.image, {mimetype: Mimetype.jpg, caption: msg })
+      await message.client.sendMessage(message.jid, Lang.SUC.format(num, num), MessageType.text)
     } else {
-       await message.client.sendMessage(message.jid,'```' + match[1] + '``` \n' + Lang.UNSUC, MessageType.text);
+      await message.client.sendMessage(message.jid, Lang.UNSUC.format(num), MessageType.text)
     }
 }));
