@@ -40,7 +40,7 @@ var OTHER = ''
 if (Config.LANG == 'ES') ADMİN_USER = '*Recuento de administradores:* ', USER_USER = '*Recuento de miembros:* ', CO_USER = '*Recuento de miembros de Colombia:*', AR_USER = '*Recuento de miembros de Argentina:*', BO_USER = '*Recuento de miembros de Bolivia:*', CL_USER = '*Recuento de miembros de Chile:*', EC_USER = '*Recuento de miembros de Ecuador:*', MX_USER = '*Recuento de miembros de México:*', PE_USER = '*Recuento de miembros de Perú:*', PY_USER = '*Recuento de miembros de Paraguay:*', UY_USER = '*Recuento de miembros de Uruguay:*', ES_USER = '*Recuento de miembros de España:*', USA_USER = '*Recuento de miembros de USA:*', OTHER = '*Recuento de miembros de otros paises:* '
 if (Config.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Count:*', TR_USER = '*Turkish Member Count:*', Hİ_USER = '*Indian Member Count:*', AZ_USER = '*Azerbayjan Member Count:*', SRİ_USER = '*Sri Lanka Member Count:*', RU_USER = '*Russian Member Count:*', USA_USER = '*USA Member Count:*', OTHER = '*Other Member Count:*'
 
-    DrkBox.addCommand({ pattern: 'infogroup', fromMe: wk, desc: Lang.PL_DESC, onlyGroup: true}, async (message, match) => {
+    DrkBox.addCommand({ pattern: 'groupinfo', fromMe: wk, desc: Lang.PL_DESC, onlyGroup: true}, async (message, match) => {
             var json = await message.client.groupMetadataMinimal(message.jid) 
             var code = await message.client.groupInviteCode(message.jid)
             var dtsjson = await message.client.groupMetadata(message.jid)
