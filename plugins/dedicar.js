@@ -49,10 +49,8 @@ DrkBox.addCommand({pattern: 'dedicarv ?(.*)', fromMe: wk}, async (message, match
         res = await ytv(link)
         ytm = res
         const ytvideo = await axios.get(`${ytm.link}`, { responseType: 'arraybuffer' })
-        await message.client.sendMessage(id,
-          '🤖 Hola\n' +
-          `El usuario ${message.jid} te dedica esté video.`, MessageType.text)
-        await message.client.sendMessage(id, Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4})
+        const msg = `🤖 Hola\nEl usuario ${message.jid} te dedica esté video.`
+        await message.client.sendMessage(id, Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: msg})
     } else {
         await message.client.sendMessage(message.jid, '🤖 Su dedicatoria no pudo ser enviada.\n\n❖ El link tiene que ser de YouTube\n❖ El número ingresado no está registrado en whatsapp o está mal escrito.\n\n⚠️ Recuerda que el número debe ser escrito en formato internacional, codigo del pais más número telefonico.', MessageType.text)
     }
