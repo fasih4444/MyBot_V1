@@ -95,7 +95,7 @@ async function whatsAsena () {
         var getGMTm = new Date().getMinutes()
         var ann_msg = await HeartBot.daily_announcement(config.LANG)
         var ann = await HeartBot.ann()
-        while (getGMTh == 15 && getGMTm == 35) {
+        while (getGMTh == 10 && getGMTm == 00) {
             var ilan = ''
             if (config.LANG == 'ES') ilan = '[ ```Anuncios Diarios``` ]\n\n'
             if (config.LANG == 'EN') ilan = '[ ```Daily Announcements``` ]\n\n'
