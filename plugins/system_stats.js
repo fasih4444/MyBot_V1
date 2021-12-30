@@ -5,18 +5,15 @@ DrkBot - Ian VanH
 */
 
 const DrkBox = require('../events');
-const {MessageType, Mimetype, MessageOptions} = require('@adiwajshing/baileys');
-const {spawnSync} = require('child_process');
+const {MessageType, Mimetype} = require('@adiwajshing/baileys');
 const Config = require('../config');
-const chalk = require('chalk');
+const prefix = Config.HANDLERS
+const wk = Config.WORKTYPE == 'public' ? false : true
+
 const axios = require('axios');
-const fs = require('fs');
+const moment = require('moment-timezone')
+const time = moment()tz.('America/Bogota').format('HH:mm:ss')
 
-const Language = require('../language');
-const Lang = Language.getString('system_stats');
-
-let wk = Config.WORKTYPE == 'public' ? false : true
-let prfx = Config.HANDLERS
 
 /*Tarjeta Owner*/
 const vCard = 'BEGIN:VCARD\n'
@@ -27,20 +24,116 @@ const vCard = 'BEGIN:VCARD\n'
             + 'END:VCARD'
 
 
-    DrkBox.addCommand({pattern: 'alive', fromMe: wk, desc: Lang.ALIVE_DESC}, (async (message, match) => {
-       var image = await axios.get('https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg', {responseType: 'arraybuffer'})
-       await message.client.sendMessage (message.jid, Buffer.from(image.data), MessageType.image, {mimetype: Mimetype.jpg, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/nuevo* Mustra actualizaciones'})
-    }));
-    
-    DrkBox.addCommand({pattern: 'menu', fromMe: wk}, (async (message, match) => {
-        await message.sendMessage('┏━━━━━━━━━━━━━━━━━━━\n┃〘 *COMANDOS* 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ 🛑 /alive\n  Verifica si funciona el bot.\n\n┠⊷️ ☎️ /owner\n Número del creador del *BOT*\n\n┠⊷️ 🔁 /apkmod\n  Menú de aplicaciones premium.\n\n┠⊷️ ➡️ /deepai\n  Una potente Inteligencia Artificial con varias funciones.\n\n┠⊷️ ➡️ /infoanime\n  Menú para descargar imagenes anime y H.\n\n┠⊷️ ➡️ /infocovid\n  Obtén información acerca de la situación del Covid19 de varios países.\n\n┠⊷️ ➡️ /infotblend\n  Herramienta de mezcla para edición de videos.\n\n┠⊷️ ➡️ /removebg\n  Elimina el fondo de una fotografía que envíes.\n\n┠⊷️ ➡️ /qr\n  Obten un codigo QR de algún texto o enlace enviado.\n\n┠⊷️ ➡️ /price (token)\n  Obten precio de cualquier cryptomoneda.\n  🗒️ Ejemplo: /price btc\n\n┠⊷️ ➡️ /cambio\n  Intercambia cualquier divisa.\n  🗒️ Ejemplo: /cambio usd,cop,10\n\n┠⊷️ ➡️ /song (nombre de la canción)\n  Descarga cualquier canción, si el resultado no es el que estás buscando, intenta escribiendo el nombre del autor de la canción.\n\n┠⊷️ ➡️ /mp4audio\n  Convierte un video en un audio.\n\n┠⊷️ ➡️ /imagesticker\n  Convierte un sticker en una foto.\n\n┠⊷️ ➡️ /ocr\n  Analiza una imagen si tiene texto y lo escribe. (beta)\n\n┠⊷️ ➡️ /trt (Responde a un texto)\n  Traduce el texto del mensaje al idioma que quieras (Ej.: /trt es en).\n\n┠⊷️ ➡️ /tts\n  Convierte el texto en un audio con la voz del Traductor de Google (Ej.: /tts hola).\n\n┠⊷️ ➡️ /yt (enlace)\n  Busca videos en YouTube.\n\n┠⊷️ ➡️ /video\n  Descarga videos de YouTube debes colocar el enlace obtenido con el comando de arriba.\n\n┠⊷️ ➡️ /insta (Usuario)\n  Busca perfiles de Instagram.\n\n┠⊷️ ➡️ /gay\n  Muestra cantidad de gay de la persona etiquetada o mensaje que respondas.\n\n┠⊷️ ➡️ /less\n  Muestra cantidad de leabiana de la persona etiquetada o mensaje que respondas.\n\n┠⊷️ ➡️ /wiki\n  Realiza busquedas en Wikipedia.\n\n┠⊷️ ➡️ /img\n  Busca alguna imagen desde Google Pictures (Ej.: /img Bugatti).\n\n┠⊷️ ➡️ /ss\n  Toma captura de pantalla de el enlace que envíes (esto evitará que tengas que entrar a la página para ver su contenido).\n\n┠⊷️ ➡️ /animesay (Texto)\n  Escribe el texto dentro de la pancarta sostenida por una chica anime.\n\n┠⊷️ ➡️ /changesay (Texto)\n  Escribe el texto en un póster de Change My Mind.\n\n┠⊷️ ➡️ /trumpsay (Texto)\n  Escribe el texto en un Tweet de Donald Trump.\n\n┠⊷️ ➡️ /sticker (Responde una foto)\n  Crea un sticker de la foto dada, preferiblemente de una foto cuadrada.\n\n┠⊷️ ➡️ /unvoice\n  Convierte un audio en una nota de voz.\n\n┠⊷️ ➡️ /wallpaper\n  Envía fondos de pantalla de alta resolución, hay muchos.\n\n┠⊷️ ➡️ /weather (Ciudad)\n  Envía el clima de la ciudad dada.\n\n┠⊷️ ➡️ /gif (Respondiendo a un video)\n  Convierte un video en gif, tiene que ser un video corto.\n\n┠⊷️ ➡️ /short (enlace)\n  Acorta cualquier enlace.\n\n┠⊷️ ➡️ /lyric (nombre de la canción)\n  Obtén la letra y los datos de la canción solicitada.\n\n┠⊷️ ➡️ /scan (número telefonico)\n  Busca si el número ingresado está registrado en WhatsApp.\n  🗒️ Ejemplo: /scan 57301xxxxxxx\n  ⚠️ El número debe ser ingresado con codigo de pais.\n\n┠⊷️ ➡️ /calc\n  Resuelve problemas de matematica basica.\n  🗒️ Ejemplo: /calc 9 x 7\n\n┠⊷️ ➡️ /simi\n  *IA* con la cual podras hablar y contarle de tus problemas 🙂\n  🗒️ Ejemplo: /simi hola, como estas?\n\n┠⊷️ ➡️ /meme (responde una foto)\n  Obten un meme para la foto que respondas.\n  🗒️ Ejemplo: /meme Hola,a todos\n  ⚠️ La , separa texto arriba del texto abajo.\n\n┠⊷️ ➡️ /logo\n  Escribe el texto en un *Logo Gamer*.\n\n┠⊷️ ➡️ /ip\n  Busca información sobre cualquier dirección *IP*.\n\n┠⊷️ ➡️ /wame (responde o etiqueta)\n  Obten enlace del número ingresado o mensaje respondido.\n\n┠⊷️ ➡️ /donation\n  Puedes ayudarme de una forma totalmente gratis si eres de Colombia.\n\n┠⊷️ ➡️ /share\n  Compartir enlace del *BOT*.\n┗━━━━━━━━━━━━━━━━━━━\n\n┏━━━━━━━━━━━━━━━━━━━\n *𝐃𝐫𝐤𝐁𝐨𝐭* tu BOT amigo 😉\n┗━━━━━━━━━━━━━━━━━━━\n');
-    }));
-    
-    
-    DrkBox.addCommand({pattern: 'nuevo', fromMe: wk}, (async (message, match) => {
-        await message.sendMessage('┏━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┣━━━━━━━━━━\n┠ NUEVA ACTUALIZACIÓN\n┠⊷️ *Version:*  ```'+Config.VERSION+'```\n┠⊷️ *Prefix:*  『'+prfx+'』\n┗━━━━━━━━━━\n┃\n┠⊷️ *CAMBIOS*\n┏━━━━━━━━━━━━\n  */send*\nComando de mensaje anonimo.\n⚠️ Usar solo en chat privado.\n\n  */img*\nComando actualizado.\n\n  */wallpaper*\nComando actualizado.\n┗━━━━━━━━━━━━');
-    }));
+DrkBox.addCommand({pattern: 'alive', fromMe: wk, desc: Lang.ALIVE_DESC}, async (message, match) => {
+	var image = await axios.get('https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg', {responseType: 'arraybuffer'})
+	await message.client.sendMessage (message.jid, Buffer.from(image.data), MessageType.image, {mimetype: Mimetype.jpg, caption: '┏━━━━━━━━━━━━━━━━━━━\n┃〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙\n┗━━━━━━━━━━━━━━━━━━━\n┠⊷️ *Version:*\n┃ ```'+Config.VERSION+'```\n┠⊷️ *Canal de Telegram:*\n┃ http://bit.ly/TLgramDrkBot\n┠⊷️ *Grupo de Soporte:*\n┃ http://bit.ly/SupportDrkBot\n┠⊷️ *Creador:*\n┃ http://bit.ly/OwnerDrkBot\n┗━━━━━━━━━━━━━━━━━━━\n*/menu* Muestra comandos del BOT\n⚠️\n*/nuevo* Mustra actualizaciones'})
+});
 
-    DrkBox.addCommand({pattern: 'owner', fromMe: wk}, (async (message, match) => {
-        await message.sendMessage({displayname: "Ian", vcard: vCard}, MessageType.contact);
-    }));
+DrkBox.addCommand({pattern: 'owner', fromMe: wk}, async (message, match) => {
+	await message.client.sendMessage(messaje.jid, {displayname: "Ian", vcard: vCard}, MessageType.contact);
+});
+
+DrkBox.addCommand({pattern: 'nuevo', fromMe: wk}, async (message, match) => {
+	await message.client.sendMessage(message.jid,
+`╔══════════
+║〘 ☢️ *𝐃𝐫𝐤𝐁𝐨𝐭* ☢️ 〙
+╠══════════
+║ NUEVA ACTUALIZACIÓN
+║⊷️ *Version:*  ${Config.VERSION}
+║⊷️ *Prefix:*  『${prefix}』
+╠══════════
+║
+║⊷️ *CAMBIOS*
+╠══════════
+  */send*
+Comando de mensaje anonimo.
+⚠️ Usar solo en chat privado.
+
+  */img*
+Comando actualizado.
+
+  */wallpaper*
+Comando actualizado.
+╚══════════`);
+});
+
+DrkBox.addCommand({pattern: 'menu', fromMe: wk}, async (message, match) => {
+
+if(time <= "05:00:00"){var saludo = 'Es muy temprano, duerme un poco mas'}
+else if(time <= "12:00:00"){var saludo = 'Buenos Dias'}
+else if(time <= "19:00:00"){var saludo = 'Buenos Tardes'}
+else if(time <= "23:59:59"){var saludo = 'Buenos Noches'}
+
+const p = '╠❖'
+
+await message.client.sendMessage(message.jid,
+`Hola ${saludo}
+
+╔══✪〘 *MENU* 〙✪══
+${p} ${prefix}alive
+${p} ${prefix}menu
+${p} ${prefix}owner
+${p} ${prefix}donar
+${p} ${prefix}info
+${p} ${prefix}nuevo
+╠══✪〘 *GRUPOS* 〙✪══
+${p} ${prefix}promote
+${p} ${prefix}demote
+${p} ${prefix}add
+${p} ${prefix}ban
+${p} ${prefix}welcome
+${p} ${prefix}goodbye
+${p} ${prefix}groupinfo
+${p} ${prefix}mute
+${p} ${prefix}unmute
+${p} ${prefix}invite
+${p} ${prefix}block
+${p} ${prefix}unblock
+${p} ${prefix}rename
+${p} ${prefix}revoke
+${p} ${prefix}tagall
+${p} ${prefix}tagadmin
+${p} ${prefix}wame
+╠══✪〘 *UTILIDADES* 〙✪══
+${p} ${prefix}yt
+${p} ${prefix}song
+${p} ${prefix}video
+${p} ${prefix}igdl
+${p} ${prefix}covid
+${p} ${prefix}price
+${p} ${prefix}cambio
+${p} ${prefix}qr
+${p} ${prefix}calc
+${p} ${prefix}sfw
+${p} ${prefix}nsfw
+${p} ${prefix}ocr
+${p} ${prefix}ip
+${p} ${prefix}logo
+${p} ${prefix}insult
+${p} ${prefix}bin
+${p} ${prefix}removebg
+${p} ${prefix}scan
+${p} ${prefix}trt
+${p} ${prefix}detectlang
+${p} ${prefix}tts
+${p} ${prefix}wiki
+${p} ${prefix}lyric
+${p} ${prefix}ss
+${p} ${prefix}spdf
+${p} ${prefix}insta
+${p} ${prefix}sticker
+${p} ${prefix}voicy
+${p} ${prefix}unvoice
+${p} ${prefix}wallpaper
+${p} ${prefix}weather
+${p} ${prefix}short
+╠══✪〘 *JUEGOS* 〙✪══
+${p} ${prefix}slot
+╠══✪〘 *IMAGEMAKER* 〙✪══
+${p} ${prefix}attp
+${p} ${prefix}ttp
+${p} ${prefix}animesay
+${p} ${prefix}changesay
+${p} ${prefix}trumpsay
+╚══✪〘 *DrkBot* 〙✪══`)
+});
