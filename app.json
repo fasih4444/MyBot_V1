@@ -34,7 +34,7 @@
         "HANDLERS": {
             "description": "Indicativo para activar los comandos. Prefix to activate the commands.",
             "required": true,
-            "value": "^[.!;]"
+            "value": "^[/]"
         },
         "FULL_EVA": {
             "description": "¡Convierta su cuenta en un chatbot! Turn your account into a chatbot!",
