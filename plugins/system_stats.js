@@ -12,7 +12,7 @@ const wk = Config.WORKTYPE == 'public' ? false : true
 
 const axios = require('axios');
 const moment = require('moment-timezone')
-const time = moment()tz.('America/Bogota').format('HH:mm:ss')
+const time = moment().tz('America/Bogota').format('HH:mm:ss')
 
 
 /*Tarjeta Owner*/
