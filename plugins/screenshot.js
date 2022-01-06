@@ -6,7 +6,6 @@ DrkBot - Ian VanH
 
 const DrkBox = require('../events');
 const { MessageType, Mimetype } = require('@adiwajshing/baileys');
-const HeartBot = require('drkbot-npm');
 const axios = require('axios');
 const Config = require('../config');
 
