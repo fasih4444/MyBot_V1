@@ -315,10 +315,8 @@ async function myBot () {
     })
     DrkBotCN.on('chat-update', async m => {
         if (!m.hasNewMessage) return;
-        if (!m.messages && !m.count) return;
+        if (!m.message) return;
         
-        if (!m.message) return // selectedButtonId
-        if (m.isBaileys) return
         if (m.mtype !== 'buttonsResponseMessage' && m.type !== 1) return
         let id = m.msg.selectedButtonId
         let isIdMessage = false, prefix
