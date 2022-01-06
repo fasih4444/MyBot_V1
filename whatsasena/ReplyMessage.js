@@ -60,10 +60,6 @@ class ReplyMessage extends Base {
     async sendMessage(content, type, options) {
         return await this.client.sendMessage(this.jid, content, type, options);
     }
-    
-    async prepareMessage(content, type, options) {
-        return await this.client.sendMessage(this.jid, content, type, options);
-    }
 
     async sendTyping() {
         return await this.client.updatePresence(this.jid, Presence.composing);
