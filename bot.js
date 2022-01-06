@@ -316,8 +316,14 @@ async function myBot () {
     DrkBotCN.on('chat-update', async m => {
         if (!m.hasNewMessage) return;
         if (!m.messages && !m.count) return;
-        let msg = m.messages.all()[0];
+        
+        if (!m.message) return // selectedButtonId
+        if (m.isBaileys) return
+        if (m.mtype !== 'buttonsResponseMessage' && m.type !== 1) return
+        let id = m.msg.selectedButtonId
+        let isIdMessage = false, prefix
 
+        let msg = m.messages.all()[0];
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
