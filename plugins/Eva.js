@@ -3,7 +3,7 @@ Licensed under the  GPL-3.0 License;
 you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
-
+/*
 const DrkBox = require('../events');
 const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
@@ -17,7 +17,7 @@ const axios = require('axios')
 const axiosdef = require("axios").default;
 const os = require('os')
 const translatte = require('translatte');
-const HeartBot = require('drkbot-npm');
+const HeartBot = require('mybot-npm');
 const LanguageDetect = require('languagedetect');
 const lngDetector = new LanguageDetect();
 const Heroku = require('heroku-client');
@@ -349,3 +349,4 @@ DrkBox.addCommand({ pattern: 'fulleva ?(.*)', desc: fulleva_dsc, fromMe: true, u
         return await message.client.sendMessage(message.jid, wr_cmd, MessageType.text)
     }
 }));
+*/
