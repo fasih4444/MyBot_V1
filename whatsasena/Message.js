@@ -24,16 +24,17 @@ class Message extends Base {
         this.data = data;
         
         if (data.message.hasOwnProperty('extendedTextMessage') &&
-                data.message.extendedTextMessage.hasOwnProperty('contextInfo') === true && 
-                data.message.extendedTextMessage.contextInfo.hasOwnProperty('quotedMessage')) { 
-            this.reply_message = new ReplyMessage(this.client, data.message.extendedTextMessage.contextInfo); } else {
-                this.reply_message = false;
-            }
+            data.message.extendedTextMessage.hasOwnProperty('contextInfo') === true && 
+            data.message.extendedTextMessage.contextInfo.hasOwnProperty('quotedMessage')) {
+              this.reply_message = new ReplyMessage(this.client, data.message.extendedTextMessage.contextInfo)
+        } else {
+          this.reply_message = false;
+        }
         
         if (data.message.hasOwnProperty('extendedTextMessage') &&
-        data.message.extendedTextMessage.hasOwnProperty('contextInfo') === true && 
-        data.message.extendedTextMessage.contextInfo.hasOwnProperty('mentionedJid')) {
-            this.mention = data.message.extendedTextMessage.contextInfo.mentionedJid;
+            data.message.extendedTextMessage.hasOwnProperty('contextInfo') === true && 
+            data.message.extendedTextMessage.contextInfo.hasOwnProperty('mentionedJid')) {
+              this.mention = data.message.extendedTextMessage.contextInfo.mentionedJid;
         } else {
             this.mention = false;
         }
@@ -53,6 +54,14 @@ class Message extends Base {
     async sendMessage(content, type = MessageType.text, options) {
         return await this.client.sendMessage(this.jid, content, type, options)
     }
+    
+    async prepareMessage(content, type = MessageType.buttonsMessage, options) {
+      return await this.client.sendMessage(this.jid, isIdMessage ? data.message.selectedButtonId : data.message.selectedDisplayText, MessageType.extendedText, {
+            contextInfo: {
+              mentionedJid: data.message.extendedTextMessage.contextInfo && data.message.extendedTextMessage.contextInfo.mentionedJid ? data.message.extendedTextMessage.contextInfo.mentionedJid : []
+            }
+      })
+    }
 
     async sendTyping() {
         return await this.client.updatePresence(this.jid, Presence.composing) ;
@@ -61,6 +70,6 @@ class Message extends Base {
     async sendRead() {
         return await this.client.chatRead(this.jid);
     }
-};
+}
 
 module.exports = Message;
