@@ -27,7 +27,7 @@
     "@adiwajshing/baileys": "^3.5.2",
     "base-64": "^1.0.0",
     "dbot-api": "^1.2.1",
-    "mybot-npm": "^1.2.9",
+    "mybot-npm": "^2.0.2",
     "@lh2020/speedtest-net": "^2.1.1",
     "browser-id3-writer": "^4.4.0",
     "playstore-scraper": "^1.0.0",
