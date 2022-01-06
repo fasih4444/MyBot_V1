@@ -1,9 +1,9 @@
 {
-    "name": "WhatsAsenaDuplicated",
+    "name": "MyBot_V1",
     "description": "DarkBot project - Makes it easy and fun to use Whatsapp..",
-    "logo": "https://raw.githubusercontent.com/DrkBotBase/WhatsAsenaDuplicated/master/media/gif/PicsArt_07-18-06.46.26.jpg",
-    "keywords": ["whatsapp", "userbot", "DrkBox", "Asena", "WhatsAsena", "bot", "api", "ai"],
-    "repository": "https://github.com/BotPrivateDrk/WhatsAsenaDuplicated",
+    "logo": "https://raw.githubusercontent.com/DrkBotBase/MyBot_V1/master/media/gif/PicsArt_07-18-06.46.26.jpg",
+    "keywords": ["whatsapp", "userbot", "DrkBox", "bot", "api", "ai"],
+    "repository": "https://github.com/DrkBotBase",
     "website":   "https://t.me/Dark1522",
     "success_url": "https://t.me/Dark1522",
     "stack": "container",
