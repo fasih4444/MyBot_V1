@@ -7,7 +7,7 @@ DrkBot - Ian VanH
 const DrkBox = require('../events');
 const {MessageType, GroupSettingChange, ChatModification, WAConnectionTest} = require('@adiwajshing/baileys');
 const Config = require('../config');
-const HeartBot = require('drkbot-npm')
+const HeartBot = require('mybot-npm')
 
 var clear_desc = ''
 if (Config.LANG == 'ES') clear_desc = 'Borra todos los mensajes del chat.'
