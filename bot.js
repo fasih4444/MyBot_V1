@@ -17,7 +17,7 @@ const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require(
 const {Message, StringSession, Image, Video} = require('./whatsasena/');
 const { DataTypes } = require('sequelize');
 const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
-const HeartBot = require('drkbot-npm');
+const HeartBot = require('mybot-npm');
 const got = require('got');
 const simpleGit = require('simple-git');
 const git = simpleGit();
@@ -26,7 +26,6 @@ const nw = '```Blacklist Defected!```'
 const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
-const ytdl = require('ytdl-core');
 let baseURI = '/apps/' + config.HEROKU.APP_NAME;
 const Language = require('./language');
 const Lang = Language.getString('updater');
@@ -74,8 +73,8 @@ Array.prototype.remove = function() {
     return this;
 };
 
-async function whatsAsena () {
-    var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vRHJrQm90QmFzZS9XaGF0c0FzZW5hRHVwbGljYXRlZCAvcm9vdC9XaGF0c0FzZW5hRHVwbGljYXRlZA==', exc_pl: '', pth_w: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQvRG9ja2VyZmlsZQ==', pth_v: '' }
+async function myBot () {
+    var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vRHJrQm90QmFzZS9NeUJvdF9WMSAvcm9vdC9XaGF0c0FzZW5hRHVwbGljYXRlZA==', exc_pl: '', pth_w: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQvRG9ja2VyZmlsZQ==', pth_v: '' }
     var ggg = Buffer.from(clh.cd, 'base64')
     var exc_sl = Buffer.from(clh.exc, 'base64')
     var ddd = ggg.toString('utf-8')
@@ -90,6 +89,7 @@ async function whatsAsena () {
     DrkBotCN.version = [3, 3234, 9]
     DrkBotCN.setMaxListeners(0);
     DrkBotCN.browserDescription = ["DrkBot", "Chrome", "3.0.0"];
+/*
     setInterval(async () => { 
         var getGMTh = new Date().getHours()
         var getGMTm = new Date().getMinutes()
@@ -116,6 +116,7 @@ async function whatsAsena () {
             }
         }
     }, 50000);
+*/
     async function asynchronous_ch() {
         execx('sed -n 3p ' + clh.pth_v, async (err, stdout, stderr) => {
             if (clh.exc_pl + '\n' !== stdout) {
@@ -131,6 +132,7 @@ async function whatsAsena () {
         })
     }
     asynchronous_ch()
+/*
     setInterval(async () => { 
         if (config.AUTOBIO == 'true') {
             var timezone_bio = await HeartBot.timezone(DrkBotCN.user.jid)
@@ -139,6 +141,7 @@ async function whatsAsena () {
             await DrkBotCN.setStatus(biography)
         }
     }, 7890);
+*/
     var shs1 = ''
     var shl2 = ''
     var lss3 = ''
@@ -282,8 +285,9 @@ async function whatsAsena () {
             })
         }
         if (config.FULLEVA == 'true') {
-            var eva_msg = await HeartBot.eva_if(config.LANG)
-            await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)
+            console.log('eva no está')
+            /*var eva_msg = await HeartBot.eva_if(config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)*/
         }
         else {
             var af_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
@@ -316,20 +320,6 @@ async function whatsAsena () {
         if (config.NO_ONLINE) {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
-
-// ######## PRUEBA ########
-const from = msg.key.remoteJid
-msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
-const type = Object.keys(msg.message)[0]
-const isGroup = from.endsWith('@g.us')
-const sender = msg.key.fromMe ? DrkBotCN.user.jid : isGroup ? msg.participant : msg.key.remoteJid
-conts = msg.key.fromMe ? DrkBotCN.user.jid : DrkBotCN.contacts[sender] || {
-   notify: jid.replace(/@.+/, '')
-}
-let pushname = msg.key.fromMe ? DrkBotCN.user.name : conts.notify || conts.vname || conts.name || '*Amigo*'
-
-
-selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
 
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
@@ -761,4 +751,4 @@ selectedButton = (type == 'buttonsResponseMessage') ? msg.message.buttonsRespons
     }
 }
 
-whatsAsena();
+myBot();
