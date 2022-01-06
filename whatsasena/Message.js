@@ -55,8 +55,8 @@ class Message extends Base {
         return await this.client.sendMessage(this.jid, content, type, options)
     }
     
-    async prepareMessage(content, type = MessageType.buttonsMessage, options) {
-      return await this.client.sendMessage(this.jid, isIdMessage ? data.message.selectedButtonId : data.message.selectedDisplayText, MessageType.extendedText, {
+    async prepareMessage(content, type, options) {
+      return await this.client.prepareMessage(this.jid, isIdMessage ? data.message.selectedButtonId : data.message.selectedDisplayText, MessageType.extendedText, {
             contextInfo: {
               mentionedJid: data.message.extendedTextMessage.contextInfo && data.message.extendedTextMessage.contextInfo.mentionedJid ? data.message.extendedTextMessage.contextInfo.mentionedJid : []
             }
