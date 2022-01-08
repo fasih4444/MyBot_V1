@@ -325,8 +325,8 @@ async function myBot () {
 
 // ######## PRUEBA ########
 const from = msg.key.remoteJid
-msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
-const type = Object.keys(msg.message)[0]
+//msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
+//const type = Object.keys(msg.message)[0]
 const isGroup = from.endsWith('@g.us')
 const sender = msg.key.fromMe ? DrkBotCN.user.jid : isGroup ? msg.participant : msg.key.remoteJid
 const conts = msg.key.fromMe ? DrkBotCN.user.jid : DrkBotCN.contacts[sender] || {
