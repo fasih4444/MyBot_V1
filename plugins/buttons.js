@@ -7,7 +7,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({ pattern: 'test', fromMe: wk}, (async (message, match) => {
 
-   const buttonsMessage = {
+   const buttonMessage = {
             contentText: '✪〘 *FUNCIONANDO* 〙✪',
             footerText: 'Prueba',
             buttons: [
@@ -28,8 +28,7 @@ DrkBox.addCommand({ pattern: 'test', fromMe: wk}, (async (message, match) => {
             ],
             headerType: 1
         }
-    prep = await message.client.prepareMessageFromContent(message.jid, buttonsMessage, MessageType.buttonsMessage)
-    message.relayWamessage(prep)
+    await message.client.sendMessage(message.jid, buttonMessage, MessageType.buttonsMessage)
 }));
 
 DrkBox.addCommand({ pattern: 'atest', fromMe: wk}, (async (message, match) => {
@@ -46,6 +45,5 @@ DrkBox.addCommand({ pattern: 'atest', fromMe: wk}, (async (message, match) => {
             headerType: 1
         }
 
-        prep = await message.client.prepareMessageFromContent(message.jid, {buttonsMessage}, {})
-        message.relayWAMessage(prep)
+        await message.client.prepareMessageFromContent(message.jid, {buttonsMessage}, {})
 }));
