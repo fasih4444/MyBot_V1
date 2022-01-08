@@ -324,20 +324,9 @@ async function myBot () {
         }
 
 // ######## PRUEBA ########
-const from = msg.key.remoteJid
-//msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
-//const type = Object.keys(msg.message)[0]
-const isGroup = from.endsWith('@g.us')
-const sender = msg.key.fromMe ? DrkBotCN.user.jid : isGroup ? msg.participant : msg.key.remoteJid
-const conts = msg.key.fromMe ? DrkBotCN.user.jid : DrkBotCN.contacts[sender] || {
-   notify: jid.replace(/@.+/, '')
-}
-let pushname = msg.key.fromMe ? DrkBotCN.user.name : conts.notify || conts.vname || conts.name || '*Amigo*'
-
-        
-        if (msg.MessageType !== 'buttonsResponseMessage' && msg.type !== 1) return
-        let idMessage = msg.message.selectedButtonId
-        let isIdMessage = false, prefix
+    if (msg.MessageType !== 'buttonsResponseMessage' && msg.type !== 1) return
+    let idMessage = msg.message.selectedButtonId
+    let isIdMessage = false, prefix
 
     selectedButton = (msg.MessageType == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
     responseButton = (msg.MessageType == 'listResponseMessage') ? msg.message.listResponseMessage.title : ''
