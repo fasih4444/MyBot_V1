@@ -324,7 +324,6 @@ async function myBot () {
         }
 
 // ######## PRUEBA ########
-    if (msg.MessageType !== 'buttonsResponseMessage' && msg.type !== 1) return
     let idMessage = msg.message.selectedButtonId
     let isIdMessage = false, prefix
 
