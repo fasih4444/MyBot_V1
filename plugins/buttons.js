@@ -28,7 +28,8 @@ DrkBox.addCommand({ pattern: 'test', fromMe: wk}, (async (message, match) => {
             ],
             headerType: 1
         }
-    await message.client.prepareMessageFromContent(message.jid, buttonsMessage, MessageType.buttonsMessage)
+    prep = await message.client.prepareMessageFromContent(message.jid, buttonsMessage, MessageType.buttonsMessage)
+    message.relayWamessage(prep)
 }));
 
 DrkBox.addCommand({ pattern: 'atest', fromMe: wk}, (async (message, match) => {
