@@ -7,7 +7,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 DrkBox.addCommand({ pattern: 'test', fromMe: wk}, (async (message, match) => {
 
-   const buttonMessage = {
+   const buttonsMessage = {
             contentText: '✪〘 *FUNCIONANDO* 〙✪',
             footerText: 'Prueba',
             buttons: [
@@ -28,23 +28,23 @@ DrkBox.addCommand({ pattern: 'test', fromMe: wk}, (async (message, match) => {
             ],
             headerType: 1
         }
-    await message.client.prepareMessage(message.jid, buttonMessage, MessageType.buttonsMessage)
+    await message.client.prepareMessageFromContent(message.jid, buttonsMessage, MessageType.buttonsMessage)
 }));
 
 DrkBox.addCommand({ pattern: 'atest', fromMe: wk}, (async (message, match) => {
+        txtt = 'Hola'
+        buttons = [
+            { buttonId: `/menu`, buttonText:{displayText:'Menu'}, type:1 },
+            { buttonId: `/ping`, buttonText:{displayText:'Ping'}, type:1 }
+        ]
 
-   const buttonMessage = {
-            contentText: '✪〘 *FUNCIONANDO* 〙✪',
-            footerText: 'Prueba',
-            buttons: [
-                { buttonId: `/menu`, buttonText: { displayText: "📒 MENU" },
-                    type: 1
-                },
-                { buttonId: `/ping`, buttonText: { displayText: "🪀 PING" },
-                    type: 1
-                },
-            ],
+        buttonsMessage = {
+            contentText: `${txtt}`,
+            footerText: 'Prueba Botones',
+            buttons: buttons,
             headerType: 1
         }
-    await message.client.prepareMessage(message.jid, buttonMessage, MessageType.buttonsMessage)
+
+        prep = await message.client.prepareMessageFromContent(message.jid, {buttonsMessage}, {})
+        message.relayWAMessage(prep)
 }));
