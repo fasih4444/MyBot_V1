@@ -45,5 +45,5 @@ DrkBox.addCommand({ pattern: 'atest', fromMe: wk}, (async (message, match) => {
             headerType: 1
         }
 
-        await message.client.prepareMessageFromContent(message.jid, {buttonsMessage}, {})
+        await message.client.prepareMessage(message.jid, {buttonsMessage}, MessageType.buttonsMessage, {})
 }));
