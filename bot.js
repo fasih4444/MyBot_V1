@@ -271,8 +271,8 @@ async function myBot () {
         if (os.userInfo().homedir !== clh.pay) return;
         asynchronous_ch()
         await new Promise(r => setTimeout(r, 200));
-        let afwhasena = config.WORKTYPE == 'public' ? ' Public' : ' Private'
-        console.log(chalk.bgGreen('🤖 DrkBot-Nice' + afwhasena));
+        let wtMyBot = config.WORKTYPE == 'public' ? ' Public' : ' Private'
+        console.log(chalk.bgGreen('🤖 DrkBot-Nice' + wtMyBot));
         await new Promise(r => setTimeout(r, 500));
         let EVA_ACTİON = config.LANG == 'ES' ? '🤖 *DrkBot funciona como Chatbot!*\n\n_El propósito de este mod es convertir el bot en una herramienta de chat de IA completamente funcional._\n_Para volver al modo normal, puede utilizar el comando._ *.fulleva off*_\n\n*Gracias por usar DrkBot 💌*\n    *- Eva*' : '🤖 *DrkBot works like Chatbot!*\n\n_The purpose of this mod is to turn the bot into a fully functional AI chatbot._\n_You can use the_ *.fulleva off* _command to return to normal mode._\n\n*Thanks For Using DrkBot 💌*\n    *- Eva*'
         if (DrkBotCN.user.jid == one || DrkBotCN.user.jid == two || DrkBotCN.user.jid == three || DrkBotCN.user.jid == four || DrkBotCN.user.jid == five || DrkBotCN.user.jid == six || DrkBotCN.user.jid == seven || DrkBotCN.user.jid == eight) {
@@ -292,8 +292,8 @@ async function myBot () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)*/
         }
         else {
-            var af_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
-            await DrkBotCN.sendMessage(DrkBotCN.user.jid, af_start, MessageType.text)
+            var wt_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, wt_start, MessageType.text)
         }
         await git.fetch();
         var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
@@ -315,13 +315,18 @@ async function myBot () {
     })
     DrkBotCN.on('chat-update', async m => {
         if (!m.hasNewMessage) return;
-        if (!m.message) return;
+        if (!m.messages) return;
+        let msg = m.messages.all()[0];
         
-        if (m.mtype !== 'buttonsResponseMessage' && m.type !== 1) return
-        let id = m.msg.selectedButtonId
+        if (msg.MessageType !== 'buttonsResponseMessage' && msg.type !== 1) return
+        let idMessage = msg.message.selectedButtonId
         let isIdMessage = false, prefix
 
-        let msg = m.messages.all()[0];
+        const type = Object.keys(msg.message)[0]
+    selectedButton = (msg.MessageType == 'buttonsResponseMessage') ? msg.message.buttonsResponseMessage.selectedButtonId : ''
+    responseButton = (msg.MessageType == 'listResponseMessage') ? msg.message.listResponseMessage.title : ''
+
+
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
@@ -332,7 +337,7 @@ async function myBot () {
 
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
             if (gb !== false) {
-                if (gb.message.includes('{pp}')) {
+            if (gb.message.includes('{pp}')) {
                 let pp 
                 try { pp = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await DrkBotCN.getProfilePicture(); }
                  var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
@@ -347,9 +352,9 @@ async function myBot () {
                 var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                    await DrkBotCN.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name), MessageType.text);
             }
-          }   
+          }
             return;
-          } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
+        } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
              var gb = await getMessage(msg.key.remoteJid);
             if (gb !== false) {
@@ -373,21 +378,13 @@ async function myBot () {
         // ==================== End Greetings ====================
 
         // ==================== Blocked Chats ====================
-        if (config.BLOCKCHAT !== false) {     
+        if (config.BLOCKCHAT !== false) {
             var abc = config.BLOCKCHAT.split(',');                            
             if(msg.key.remoteJid.includes('-') ? abc.includes(msg.key.remoteJid.split('@')[0]) : abc.includes(msg.participant ? msg.participant.split('@')[0] : msg.key.remoteJid.split('@')[0])) return ;
         }
-        if (config.SUPPORT == '905524317852-1612300121') {     
+        if (config.SUPPORT == '0') {
             var sup = config.SUPPORT.split(',');                            
             if(msg.key.remoteJid.includes('-') ? sup.includes(msg.key.remoteJid.split('@')[0]) : sup.includes(msg.participant ? msg.participant.split('@')[0] : msg.key.remoteJid.split('@')[0])) return ;
-        }
-        if (config.SUPPORT2 == '905511384572-1617736751') {     
-            var tsup = config.SUPPORT2.split(',');                            
-            if(msg.key.remoteJid.includes('-') ? tsup.includes(msg.key.remoteJid.split('@')[0]) : tsup.includes(msg.participant ? msg.participant.split('@')[0] : msg.key.remoteJid.split('@')[0])) return ;
-        }
-        if (config.SUPPORT3 == '905511384572-1621015274') {     
-            var nsup = config.SUPPORT3.split(',');                            
-            if(msg.key.remoteJid.includes('-') ? nsup.includes(msg.key.remoteJid.split('@')[0]) : nsup.includes(msg.participant ? msg.participant.split('@')[0] : msg.key.remoteJid.split('@')[0])) return ;
         }
         // ==================== End Blocked Chats ====================
 
@@ -398,6 +395,8 @@ async function myBot () {
                     var text_msg = msg.message.imageMessage.caption;
                 } else if (msg.message && msg.message.videoMessage && msg.message.videoMessage.caption) {
                     var text_msg = msg.message.videoMessage.caption;
+                } else if (msg.message && msg.message.buttonsMessage) {
+                    var text_msg = msg.message.buttonsMessage;
                 } else if (msg.message) {
                     var text_msg = msg.message.extendedTextMessage === null ? msg.message.conversation : msg.message.extendedTextMessage.text;
                 } else {
