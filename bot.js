@@ -323,11 +323,6 @@ async function myBot () {
             await DrkBotCN.updatePresence(msg.key.remoteJid, Presence.unavailable);
         }
 
-// ######## PRUEBA ########
-    let idMessage = msg.message.selectedButtonId
-    let idMessage = false, prefix
-// ######## END PRUEBA ########
-
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
 
