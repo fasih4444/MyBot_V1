@@ -11,5 +11,5 @@ module.exports = {
     ReplyMessage: require('./ReplyMessage'),
     Image: require('./Image'),
     Video: require('./Video'),
-    meBuffer: require('./funciones')
+    getBuffer: require('./funciones')
 };
