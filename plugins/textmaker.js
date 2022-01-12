@@ -18,13 +18,13 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 
 
 DrkBox.addCommand({pattern: 'greenhorror ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    var img = await HeartBot.textpro("https://textpro.me/create-green-horror-style-text-effect-online-1036.html", march[1])
+    var img = await HeartBot.textpro("https://textpro.me/create-green-horror-style-text-effect-online-1036.html", match[1])
     var buffer_data = await axios.get(img, { responseType: 'arraybuffer'})
     await message.sendMessage(Buffer.from(buffer_data.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
 
 DrkBox.addCommand({pattern: 'thunder ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    var img = await HeartBot.textpro("https://textpro.me/thunder-text-effect-online-881.html", march[1])
+    var img = await HeartBot.textpro("https://textpro.me/thunder-text-effect-online-881.html", match[1])
     var buffer_data = await getBuffer(img)
     await message.sendMessage(buffer_data, MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
