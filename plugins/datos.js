@@ -255,7 +255,7 @@ async function post(url, formdata = {}, cookies) {
 /**
  * TextPro Scraper
  * @function
- * @param {String} url - Your phootoxy url, example https://photooxy.com/logo-and-text-effects/make-tik-tok-text-effect-375.html.
+ * @param {String} url - Your textpro url, example "https://textpro.me/create-realistic-vintage-style-light-bulb-1000.html",
  * @param {String[]} text - Text (required). example ["text", "text 2 if any"]
  */
 
