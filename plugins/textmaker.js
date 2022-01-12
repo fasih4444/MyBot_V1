@@ -300,7 +300,7 @@ DrkBox.addCommand({pattern: 'steel3d ?(.*)', fromMe: wk, dontAddCommandList: tru
     await message.sendMessage(buffer_data, MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
 
-DrkBox.addCommand({pattern: 'glitch' ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
+DrkBox.addCommand({pattern: 'glitch ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
     var topText, bottomText; 
     if (match[1].includes(',')) {
         var split = match[1].split(',');
