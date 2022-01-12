@@ -23,8 +23,8 @@ const simpleGit = require('simple-git');
 const git = simpleGit();
 const crypto = require('crypto');
 const nw = '```Blacklist Defected!```'
-const prefix = config.HANDLERS
-//const prefix = handler[2]
+const handler = config.HANDLERS
+const prefix = handler[2]
 const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
