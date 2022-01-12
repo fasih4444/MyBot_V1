@@ -27,7 +27,7 @@ DrkBox.addCommand({pattern: 'greenhorror ?(.*)', fromMe: wk, dontAddCommandList:
 }));
 
 DrkBox.addCommand({pattern: 'thunder ?(.*)', fromMe: wk, dontAddCommandList: true}, (async (message, match) => {
-    var img = await HeartBot.textpro("https://textpro.me/thunder-text-effect-online-881.html", match[1])
+    var img = await HeartBot.textpro("https://textpro.me/create-thunder-text-effect-online-881.html", match[1])
     var buffer_data = await getBuffer(img)
     await message.sendMessage(buffer_data, MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}` })
 }));
