@@ -14,6 +14,9 @@ const request = require('request')
 const fs = require('fs')
 const axios = require('axios')
 
+const Language = require('../language');
+const MLang = Language.getString('messages');
+
 let wk = Config.WORKTYPE == 'public' ? false : true
 
 
