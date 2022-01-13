@@ -23,8 +23,7 @@ const simpleGit = require('simple-git');
 const git = simpleGit();
 const crypto = require('crypto');
 const nw = '```Blacklist Defected!```'
-const handler = config.HANDLERS
-const prefix = handler[2]
+const prefix = config.HANDLERS[2]
 const heroku = new Heroku({
     token: config.HEROKU.API_KEY
 });
@@ -292,7 +291,7 @@ async function myBot () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)*/
         }
         else {
-            var wt_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
+            var wt_start = await HeartBot.work_type(config.WORKTYPE, config.LANG, config.HANDLERS)
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, wt_start, MessageType.text)
         }
         await git.fetch();
