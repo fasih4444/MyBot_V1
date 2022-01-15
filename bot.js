@@ -291,7 +291,7 @@ async function myBot () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, eva_msg, MessageType.text)*/
         }
         else {
-            var wt_start = await HeartBot.work_type(config.WORKTYPE, config.LANG, config)
+            var wt_start = await HeartBot.work_type(config.WORKTYPE, config.LANG)
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, wt_start, MessageType.text)
         }
         await git.fetch();
