@@ -568,18 +568,28 @@ else if (config.WORKTYPE == 'public') {
       }
     }));
 
-    DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false, desc: Lang.VIDEO_DESC}, (async (message, match) => {
-        if (!match[1]) return await message.sendMessage(infoMessage(Lang.NEED_VIDEO))
+DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false}, (async (message, match) => { 
+  const VID = match[1]
+  if (!VID) return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
+
+  try{
     if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
       await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-      res = await ytv(match[1])
-      ytm = res
-      const ytvideo = await axios.get(`${ytm.link}`, { responseType: 'arraybuffer' })
-      await message.sendMessage(Buffer.from(ytvideo.data), MessageType.video, {mimetype: Mimetype.mp4, caption: `${MLang.by}`})
+      
+      var yt = ytdl(VID, {filter: format => format.container === 'mp4' && ['720p', '480p', '360p', '240p', '144p'].map(() => true)});
+      yt.pipe(fs.createWriteStream('./' + VID + '.mp4'));
+
+      yt.on('end', async () => {
+        reply = await message.client.sendMessage(message.jid,Lang.DOWNLOADING_VIDEO,MessageType.text);
+        await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
+      });
     } else {
-        await message.sendMessage(errorMessage("⚠️ *Parece que tenemos un error*"))
-      }
-    }));
+      await message.sendMessage(errorMessage("⚠️ *Para descargar necesitas un video valido de YouTube*"))
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
 
