@@ -15,34 +15,10 @@ DrkBox.addCommand({pattern: 'dif ?(.*)', fromMe: wk}, (async (message, match) =>
 	const msg = match[1]
 	const allChats = await message.client.chats.all()
 	allChats.map(async uye => {
-    	if(uye.jid.endsWith('@s.whatsapp.net')) {
-    		await message.client.sendMessage(message.jid, msg, MessageType.text)
-    	} else {
-    		await message.client.sendMessage(message.jid, 'error', MessageType.text)
-    	}
-	})
-}));
-
-DrkBox.addCommand({pattern: 'adif ?(.*)', fromMe: wk}, (async (message, match) => {
-	const msg = match[1]
-	const chats = await message.client(messaje.jid)
-	chats.map(async (uye) => {
-    	if(uye.jid.endsWith('@s.whatsapp.net')) {
-    		await message.client.sendMessage(message.jid, msg, MessageType.text)
-    	} else {
-    		await message.client.sendMessage(message.jid, 'error', MessageType.text)
-    	}
-	})
-}));
-
-DrkBox.addCommand({pattern: 'bdif ?(.*)', fromMe: wk}, (async (message, match) => {
-	const msg = match[1]
-	const chats = await message.client.all(messaje.jid)
-	chats.map(async (uye) => {
-    	if(uye.jid.endsWith('@s.whatsapp.net')) {
-    		await message.client.sendMessage(message.jid, msg, MessageType.text)
-    	} else {
-    		await message.client.sendMessage(message.jid, 'error', MessageType.text)
-    	}
+    	  if(uye.jid.endsWith('@s.whatsapp.net')) {
+    		await message.client.sendMessage(uye.jid, msg, MessageType.text)
+       	  } else {
+    		await message.client.sendMessage(uye.jid, 'error', MessageType.text)
+    	  }
 	})
 }));
