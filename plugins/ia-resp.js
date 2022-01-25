@@ -14,16 +14,22 @@ const Lang = Language.getString('simi');
 
 let wk = Config.WORKTYPE == 'public' ? false : true
 
-DrkBox.addCommand({pattern: 'simi ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
-        if (match[1] === '') await message.sendMessage(Lang.what, MessageType.text, {quoted: message.data});
-	if (match[1].includes('xxx') || match[1].includes('porno')) return await message.reply(Lang.err_type, {quoted: message.data});
-	const url = `https://api.simsimi.net/v2/?text=${match[1]}&lc=es&cf=true`;
-	try {
-		const response = await got(url);
-		const json = JSON.parse(response.body);
-  	  if (json.messages[0].response.includes('maite')) return await message.client.sendMessage(message.jid, '🤖' + ' ```' + json.message[0].response.replace('maite', 'DrkBot') + '```' , MessageType.text,{quoted: message.data})
-  	  else return await message.client.sendMessage(message.jid, '🤖' + ' ```' + json.messages[0].response + '```' , MessageType.text,{quoted: message.data})
-  } catch {
-  		return await message.client.sendMessage(message.jid, Lang.iErr, MessageType.text);
+DrkBox.addCommand({pattern: 'bot ?(.*)', fromMe: wk, desc: Lang.DESC}, async (message, match) => {
+    if (match[1] === '') await message.sendMessage(Lang.what, MessageType.text, {quoted: message.data})
+    if (match[1].includes('xxx') || match[1].includes('porno')) return await message.reply(Lang.err_type, {quoted: message.data});
+	
+    axios.get(`https://api.simsimi.net/v2/?text=${match[1]}&lc=es&cf=true`).then(async (response) => {
+        try {
+            const { text } = response.data.messages[0]
+            if (text ==='Roberto' || text === 'maite' || text === 'Luis Mario.' || text === 'Ricardo milos\n') {
+                await message.client.sendMessage(message.jid, '🤖 ' + '```mi nombre es DrkBot```', MessageType.text, {quoted: message.data});
+            } else {
+                console.log('🤖 ' + text)
+                await message.client.sendMessage(message.jid, '🤖 ' + '```' + text + '```', MessageType.text, {quoted: message.data});
+            }
+        } catch {
+            await message.client.sendMessage(message.jid, Lang.iErr, MessageType.text);
   	}
-});
+    })
+        
+})
