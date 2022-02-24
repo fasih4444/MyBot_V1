@@ -568,28 +568,31 @@ else if (config.WORKTYPE == 'public') {
       }
     }));
 
-DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: false}, (async (message, match) => { 
-  const VID = match[1]
-  if (!VID) return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
+    DrkBot.addCommand({pattern: 'video ?(.*)', fromMe: true, desc: Lang.VIDEO_DESC}, (async (message, match) => { 
+        if (match[1] === '') return await message.client.sendMessage(message.jid,Lang.NEED_VIDEO,MessageType.text);    
+    
+        var VID = '';
+        try {
+            if (match[1].includes('watch')) {
+              var xa = match [1].replace('watch?v=', '')
+              var name = xa.split('/')[3]
+              VID = name
+            } else {     
+              VID = match[1].split('/')[3]
+            }
+        } catch {
+            return await message.client.sendMessage(message.jid,Lang.NO_RESULT,MessageType.text);
+        }
+        var reply = await message.client.sendMessage(message.jid,Lang.DOWNLOADING_VIDEO,MessageType.text);
 
-  try{
-    if (match[1].includes('youtube.com') || match[1].includes('youtu.be')) {
-      await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
-      
-      var yt = ytdl(VID, {filter: format => format.container === 'mp4' && ['720p', '480p', '360p', '240p', '144p'].map(() => true)});
-      yt.pipe(fs.createWriteStream('./' + VID + '.mp4'));
+        var yt = ytdl(VID, {filter: format => format.container === 'mp4' && ['720p', '480p', '360p', '240p', '144p'].map(() => true)});
+            yt.pipe(fs.createWriteStream('./' + VID + '.mp4'));
 
-      yt.on('end', async () => {
-        reply = await message.client.sendMessage(message.jid,Lang.DOWNLOADING_VIDEO,MessageType.text);
-        await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
-      });
-    } else {
-      await message.sendMessage(errorMessage("⚠️ *Para descargar necesitas un video valido de YouTube*"))
-    }
-  } catch (err) {
-    console.log(err)
-  }
-}));
+        yt.on('end', async () => {
+            reply = await message.client.sendMessage(message.jid,Lang.UPLOADING_VIDEO,MessageType.text);
+            await message.client.sendMessage(message.jid,fs.readFileSync('./' + VID + '.mp4'), MessageType.video, {mimetype: Mimetype.mp4});
+        });
+    }));
 
     DrkBot.addCommand({pattern: 'yt ?(.*)', fromMe: false, desc: Lang.YT_DESC}, (async (message, match) => { 
 
