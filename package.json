@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/DrkBotBase/MyBot_V1#readme",
   "dependencies": {
-    "@adiwajshing/baileys": "^3.5.2",
+    "@adiwajshing/baileys": "^3.5.3",
     "base-64": "^1.0.0",
     "dbot-api": "^1.2.1",
     "mybot-npm": "^2.0.8",
@@ -32,7 +32,7 @@
     "browser-id3-writer": "^4.4.0",
     "playstore-scraper": "^1.0.0",
     "cheerio": "^1.0.0-rc.10",
-    "axios": "^0.21.4",
+    "axios": "^0.26.0",
     "googlethis": "^1.0.7",
     "audiobuffer-to-wav": "1.0.0",
     "chalk": "^4.1.0",
@@ -72,6 +72,6 @@
     "translatte": "^3.0.0",
     "wikijs": "^6.0.1",
     "yt-search": "^2.10.3",
-    "ytdl-core": "^4.10.0"
+    "ytdl-core": "^4.10.1"
   }
 }
