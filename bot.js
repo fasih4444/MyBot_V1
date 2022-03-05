@@ -87,7 +87,11 @@ async function myBot () {
     clh.pay = ddd
     const DrkBotCN = new WAConnection();
     const Session = new StringSession();
-    DrkBotCN.version = [3, 3234, 9]
+    try {
+        DrkBotCN.version = [3, 3234, 9]
+    } catch {
+        console.log(`passed v${DrkBotCN.version}`)
+    }
     DrkBotCN.setMaxListeners(0);
     DrkBotCN.browserDescription = ["DrkBot", "Chrome", "3.0.0"];
 /*
@@ -324,46 +328,45 @@ async function myBot () {
 
         // ==================== Greetings ====================
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
-
+            // goodbye
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
+            const teks = '╔══✪〘 *SE FUE* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
-            if (gb.message.includes('{pp}')) {
-                let pp 
-                try { pp = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await DrkBotCN.getProfilePicture(); }
-                 var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
-                await DrkBotCN.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) }); });                           
-            } else if (gb.message.includes('{gif}')) {
-                var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                //created by afnanplk
-                    var plkpinky = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
-                await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) });
-            } else {
-                var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                   await DrkBotCN.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name), MessageType.text);
+                if (gb.message.includes('{pp}')) {
+                    let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    const resim = await axios.get(pp, {responseType: 'arraybuffer'})
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png });
+                } else if (gb.message.includes('{gif}')) {
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    var resim = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.video, {mimetype: Mimetype.gif });
+                } else {
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, teks, MessageType.text);
+                }
             }
-          }
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
-             var gb = await getMessage(msg.key.remoteJid);
+            var gb = await getMessage(msg.key.remoteJid);
+            const teks = '╔══✪〘 *NUEVO USUARIO* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
                 if (gb.message.includes('{pp}')) {
-                let pp
-                try { pp = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await DrkBotCN.getProfilePicture(); }
-                    var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
-                    //created by afnanplk
-                await DrkBotCN.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) }); });                           
-            } else if (gb.message.includes('{gif}')) {
-                var plkpinky = await axios.get(config.WEL_GIF, { responseType: 'arraybuffer' })
-                await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name) });
-            } else {
-                   var pinkjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                   await DrkBotCN.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', DrkBotCN.user.name), MessageType.text);
+                    let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    const resim = await axios.get(pp, {responseType: 'arraybuffer'})
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png });
+                } else if (gb.message.includes('{gif}')) {
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    var resim = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.video, {mimetype: Mimetype.gif });
+                } else {
+                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, teks, MessageType.text);
+                }
             }
-          }         
-            return;                               
+            return;
         }
         // ==================== End Greetings ====================
 
@@ -387,10 +390,6 @@ async function myBot () {
                   var text_msg = msg.message.videoMessage.caption;
                 } else if (msg.message) {
                   var text_msg = msg.message.extendedTextMessage === null ? msg.message.conversation : msg.message.extendedTextMessage.text;
-                } else if (msg.message && msg.message.buttonsResponseMessage.selectedButtonId) {
-                  var text_msg = msg.message.buttonsResponseMessage.selectedButtonId;
-                } else if (msg.message && msg.message.listResponseMessage.singleSelectReply.selectedRowId) {
-                  var text_msg = msg.message.listResponseMessage.singleSelectReply.selectedRowId;
                 } else {
                   var text_msg = undefined
                 }
@@ -440,11 +439,8 @@ async function myBot () {
                         } else {
                             whats = new Message(DrkBotCN, msg);
                         }
-                        if (msg.key.fromMe && command.deleteCommand) { 
-                            var wrs = DrkBotCN.user.phone.wa_version.split('.')[2]
-                            if (wrs < 11) {
-                                await whats.delete() 
-                            }
+                        if (msg.key.fromMe && command.deleteCommand && !msg.key.remoteJid.includes('-')) {
+                            await whats.delete()
                         } 
                         // ==================== End Message Catcher ====================
 
