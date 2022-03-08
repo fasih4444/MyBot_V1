@@ -439,9 +439,9 @@ async function myBot () {
                         } else {
                             whats = new Message(DrkBotCN, msg);
                         }
-                        if (msg.key.fromMe && command.deleteCommand && !msg.key.remoteJid.includes('-')) {
+                        /*if (msg.key.fromMe && command.deleteCommand && !msg.key.remoteJid.includes('-')) {
                             await whats.delete()
-                        } 
+                        }*/
                         // ==================== End Message Catcher ====================
 
                         // ==================== Error Message ====================
