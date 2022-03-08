@@ -332,18 +332,16 @@ async function myBot () {
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
             const teks = '╔══✪〘 *SE FUE* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
-                if (gb.message.includes('{pp}')) {
+                if (gb.message.includes('{off}')) {
                     let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
                     var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                     const resim = await axios.get(pp, {responseType: 'arraybuffer'})
                     await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png });
-                } else if (gb.message.includes('{gif}')) {
-                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    var resim = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
-                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.video, {mimetype: Mimetype.gif });
                 } else {
-                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    await DrkBotCN.sendMessage(msg.key.remoteJid, teks, MessageType.text);
+                    let mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                    let resim = await axios.get(pp, {responseType: 'arraybuffer'})
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png, caption: `${teks}` });
                 }
             }
             return;
@@ -352,18 +350,16 @@ async function myBot () {
             var gb = await getMessage(msg.key.remoteJid);
             const teks = '╔══✪〘 *NUEVO USUARIO* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
-                if (gb.message.includes('{pp}')) {
+                if (gb.message.includes('{on}')) {
                     let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
                     var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                     const resim = await axios.get(pp, {responseType: 'arraybuffer'})
                     await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png });
-                } else if (gb.message.includes('{gif}')) {
-                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    var resim = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
-                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.video, {mimetype: Mimetype.gif });
                 } else {
-                    var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    await DrkBotCN.sendMessage(msg.key.remoteJid, teks, MessageType.text);
+                    let mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                    let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                    let resim = await axios.get(pp, {responseType: 'arraybuffer'})
+                    await DrkBotCN.sendMessage(msg.key.remoteJid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png, caption: `${teks}` });
                 }
             }
             return;
