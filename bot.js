@@ -330,44 +330,61 @@ async function myBot () {
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
             // goodbye
             const gb = await getMessage(msg.key.remoteJid, 'goodbye');
-            const teks = '╔══✪〘 *SE FUE* 〙\n╚══✪〘 *DrkBot* 〙✪══'
+
+            const ateks = '╔══✪〘 *SE FUE* 〙\n╠❖ *No detecta mensaje*\n╚══✪〘 *DrkBot* 〙✪══'
+            const bteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *Detecta bye*\n╚══✪〘 *DrkBot* 〙✪══'
+            const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
+
             if (gb !== false) {
-                if (gb.message.includes('{bye}')) {
-                    const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
-                    const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
-                    await DrkBotCN.sendMessage(
-                        msg.key.remoteJid,
-                        Buffer.from(resim.data),
-                        MessageType.image,
-                        { caption: teks });
-                } else {
-                    const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                    const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
-                    const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
-                    await DrkBotCN.sendMessage(
-                        msg.key.remoteJid,
-                        Buffer.from(resim.data),
-                        MessageType.image,
-                        { caption: teks });
-                }
-            }
-            return;
-        } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
-            // welcome
-            const gb = await getMessage(msg.key.remoteJid);
-            const teks = '╔══✪〘 *NUEVO USUARIO* 〙\n╚══✪〘 *DrkBot* 〙✪══'
-            if (gb !== false) {
-                let mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                await DrkBotCN.sendMessage(msg.key.remoteJid, teks, MessageType.text);
-            } else {
-                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid)
+                await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+            } else if (gb.message.includes('bye')) {
+                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
                 const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
                 await DrkBotCN.sendMessage(
                     msg.key.remoteJid,
                     Buffer.from(resim.data),
                     MessageType.image,
-                    { caption: teks });
+                    { caption: bteks });
+            } else {
+                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+                await DrkBotCN.sendMessage(
+                    msg.key.remoteJid,
+                    Buffer.from(resim.data),
+                    MessageType.image,
+                    { caption: cteks });
+            }
+            return;
+        } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
+            // welcome
+            const gb = await getMessage(msg.key.remoteJid, 'welcome');
+
+            const ateks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *No detecta mensaje*\n╚══✪〘 *DrkBot* 〙✪══'
+            const bteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Detecta wel*\n╚══✪〘 *DrkBot* 〙✪══'
+            const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
+
+            if (gb !== false) {
+                await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+            } else if (gb.message.includes('wel')) {
+                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+                await DrkBotCN.sendMessage(
+                    msg.key.remoteJid,
+                    Buffer.from(resim.data),
+                    MessageType.image,
+                    { caption: bteks });
+            } else {
+                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+                await DrkBotCN.sendMessage(
+                    msg.key.remoteJid,
+                    Buffer.from(resim.data),
+                    MessageType.image,
+                    { caption: cteks });
             }
             return;
         }
