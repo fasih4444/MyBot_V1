@@ -332,7 +332,7 @@ async function myBot () {
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
             const teks = '╔══✪〘 *SE FUE* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
-                if (gb.message.includes('{off}')) {
+                if (gb.message.includes('{bye}')) {
                     let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
                     var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                     const resim = await axios.get(pp, {responseType: 'arraybuffer'})
@@ -350,7 +350,7 @@ async function myBot () {
             var gb = await getMessage(msg.key.remoteJid);
             const teks = '╔══✪〘 *NUEVO USUARIO* 〙✪══\n╚══✪〘 *DrkBot* 〙✪══'
             if (gb !== false) {
-                if (gb.message.includes('{on}')) {
+                if (gb.message.includes('{hi}')) {
                     let pp = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => pp = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
                     var mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                     const resim = await axios.get(pp, {responseType: 'arraybuffer'})
