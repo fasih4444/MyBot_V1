@@ -339,7 +339,7 @@ async function myBot () {
                 await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
                 
                 const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid)
                 const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
                 await DrkBotCN.sendMessage(
                     msg.key.remoteJid,
@@ -360,7 +360,7 @@ async function myBot () {
                 await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
 
                 const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                const ppUrl = awaiDrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid)
                 const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
                 await DrkBotCN.sendMessage(
                     msg.key.remoteJid,
