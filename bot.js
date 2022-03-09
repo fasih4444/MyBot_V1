@@ -332,7 +332,7 @@ async function myBot () {
             const gb = await getMessage(msg.key.remoteJid, 'goodbye');
             const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
               num = msg.participants[0]
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
@@ -348,7 +348,7 @@ async function myBot () {
             const gb = await getMessage(msg.key.remoteJid, 'welcome');
             const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
               num = msg.participants[0]
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
