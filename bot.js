@@ -357,7 +357,7 @@ async function myBot () {
             const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
             
-                await DrkBo.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+                await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
 
                 const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
                 const ppUrl = awaiDrkBotCN.getProfilePicture(msg.key.remoteJid).catch(() => ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
