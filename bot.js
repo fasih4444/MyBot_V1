@@ -330,44 +330,34 @@ async function myBot () {
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
             // goodbye
             const gb = await getMessage(msg.key.remoteJid, 'goodbye');
-
-            const ateks = '╔══✪〘 *SE FUE* 〙\n╠❖ *No detecta mensaje*\n╚══✪〘 *DrkBot* 〙✪══'
-
             const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            
-                await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
-                
-                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid)
-                const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
-                await DrkBotCN.sendMessage(
-                    msg.key.remoteJid,
-                    Buffer.from(resim.data),
-                    MessageType.image,
-                    { caption: cteks });
-            
+            await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+              num = msg.participants[0]
+            const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
+            const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+            await DrkBotCN.sendMessage(
+                msg.key.remoteJid,
+                Buffer.from(resim.data),
+                MessageType.image,
+                { caption: cteks });
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
             const gb = await getMessage(msg.key.remoteJid, 'welcome');
-
-            const ateks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *No detecta mensaje*\n╚══✪〘 *DrkBot* 〙✪══'
-            
             const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            
-                await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
-
-                const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-                const ppUrl = await DrkBotCN.getProfilePicture(msg.key.remoteJid)
-                const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
-                await DrkBotCN.sendMessage(
-                    msg.key.remoteJid,
-                    Buffer.from(resim.data),
-                    MessageType.image,
-                    { caption: cteks });
-            
+            await DrkBotCN.sendMessage(msg.key.remoteJid, ateks, MessageType.text);
+              num = msg.participants[0]
+            const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
+            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
+            const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+            await DrkBotCN.sendMessage(
+                msg.key.remoteJid,
+                Buffer.from(resim.data),
+                MessageType.image,
+                { caption: cteks });
             return;
         }
         // ==================== End Greetings ====================
