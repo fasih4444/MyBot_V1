@@ -74,6 +74,8 @@ Array.prototype.remove = function() {
     return this;
 };
 
+const DrkBotCN = new WAConnection();
+exports.DrkBotCN = DrkBotCN
 async function myBot () {
     var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vRHJrQm90QmFzZS9NeUJvdF9WMSAvcm9vdC9XaGF0c0FzZW5hRHVwbGljYXRlZA==', exc_pl: '', pth_w: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQvRG9ja2VyZmlsZQ==', pth_v: '' }
     var ggg = Buffer.from(clh.cd, 'base64')
@@ -85,7 +87,6 @@ async function myBot () {
     var exc_fn = exc_sl.toString('utf-8')
     clh.exc_pl = exc_fn
     clh.pay = ddd
-    const DrkBotCN = new WAConnection();
     const Session = new StringSession();
     try {
         DrkBotCN.version = [3, 3234, 9]
