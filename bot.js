@@ -14,7 +14,14 @@ const execx = require('child_process').exec;
 const axios = require('axios');
 const Heroku = require('heroku-client');
 const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
-const {Message, StringSession, Image, Video} = require('./whatsasena/');
+const {Message, StringSession, Image, Video, getBuffer} = require('./whatsasena/');
+const {
+  cekWelcome
+} = require('./functions/group');
+const {
+  getCustomWelcome,
+  getCustomBye
+} = require('./functions/welcome')
 const { DataTypes } = require('sequelize');
 const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
 const HeartBot = require('mybot-npm');
@@ -317,6 +324,16 @@ async function myBot () {
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, up_ch, MessageType.text)
         }
     })
+    // ==================== New Commands ====================
+    DrkBotCN.on("CB:Call", json => {
+        let call;
+        calling = JSON.parse(JSON.stringify(json));
+        call = calling[1].msg.key.remoteJid;
+        DrkBotCN.sendMessage(call, `*${DrkBotCN.user.name}* No debiste llamar al bot, tu número se bloqueará automáticamente`, MessageType.text).then(() => DrkBotCN.blockUser(call, "add"));
+    });
+    
+    
+    // ==================== New Commands ====================
     DrkBotCN.on('chat-update', async m => {
         if (!m.hasNewMessage) return;
         if (!m.messages && !m.count) return;
