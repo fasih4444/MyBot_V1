@@ -320,7 +320,7 @@ async function myBot () {
         }
     })
     // ==================== New Commands ====================
-    DrkBotCN.on('CB:action,,call', async json => {
+    DrkBotCN.on('CB:call', async json => {
         const callerId = json[2][0][1].from;
         console.log("Llamada recibida de "+ callerId)
        // DrkBotCN.sendMessage(from, `*${DrkBotCN.user.name}* No debiste llamar al bot, tu número se bloqueará automáticamente`, MessageType.text).then(() => DrkBotCN.blockUser(from, "add"));
