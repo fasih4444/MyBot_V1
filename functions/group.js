@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Group = JSON.parse(fs.readFileSync('../database/group.json'));
+const Group = JSON.parse(fs.readFileSync('./database/group.json'));
 
 /**
  * 
