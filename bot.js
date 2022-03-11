@@ -321,10 +321,8 @@ async function myBot () {
     })
     // ==================== New Commands ====================
     DrkBotCN.on("CB:Call", json => {
-        let call;
-        calling = JSON.parse(JSON.stringify(json));
-        call = calling[1].msg.key.remoteJid;
-        DrkBotCN.sendMessage(call, `*${DrkBotCN.user.name}* No debiste llamar al bot, tu número se bloqueará automáticamente`, MessageType.text).then(() => DrkBotCN.blockUser(call, "add"));
+        let { from } = json[2][0][1]
+        DrkBotCN.sendMessage(from, `*${DrkBotCN.user.name}* No debiste llamar al bot, tu número se bloqueará automáticamente`, MessageType.text).then(() => DrkBotCN.blockUser(call, "add"));
     });
     
     
@@ -333,6 +331,7 @@ async function myBot () {
         if (!m.hasNewMessage) return;
         if (!m.messages && !m.count) return;
         let msg = m.messages.all()[0];
+        const from = msg.key.remoteJid
 
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
