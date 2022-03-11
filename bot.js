@@ -15,13 +15,8 @@ const axios = require('axios');
 const Heroku = require('heroku-client');
 const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
 const {Message, StringSession, Image, Video, getBuffer} = require('./whatsasena/');
-const {
-  cekWelcome
-} = require('./functions/group');
-const {
-  getCustomWelcome,
-  getCustomBye
-} = require('./functions/welcome')
+const { cekWelcome } = require('./functions/group');
+const { getCustomWelcome, getCustomBye } = require('./functions/welcome')
 const { DataTypes } = require('sequelize');
 const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
 const HeartBot = require('mybot-npm');
