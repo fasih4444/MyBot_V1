@@ -278,7 +278,7 @@ async function myBot () {
         asynchronous_ch()
         // await new Promise(r => setTimeout(r, 200));
         let wtMyBot = config.WORKTYPE == 'public' ? ' Public' : ' Private'
-        console.log(chalk.bgGreen('🤖 DrkBot-Nice' + wtMyBot));
+        console.log(chalk.green.bold('🤖 DrkBot-Nice' + wtMyBot));
         // await new Promise(r => setTimeout(r, 500));
         let EVA_ACTİON = config.LANG == 'ES' ? '🤖 *DrkBot funciona como Chatbot!*\n\n_El propósito de este mod es convertir el bot en una herramienta de chat de IA completamente funcional._\n_Para volver al modo normal, puede utilizar el comando._ *.fulleva off*_\n\n*Gracias por usar DrkBot 💌*\n    *- Eva*' : '🤖 *DrkBot works like Chatbot!*\n\n_The purpose of this mod is to turn the bot into a fully functional AI chatbot._\n_You can use the_ *.fulleva off* _command to return to normal mode._\n\n*Thanks For Using DrkBot 💌*\n    *- Eva*'
         if (DrkBotCN.user.jid == one || DrkBotCN.user.jid == two || DrkBotCN.user.jid == three || DrkBotCN.user.jid == four || DrkBotCN.user.jid == five || DrkBotCN.user.jid == six || DrkBotCN.user.jid == seven || DrkBotCN.user.jid == eight) {
