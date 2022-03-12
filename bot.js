@@ -316,6 +316,7 @@ async function myBot () {
                 }
             );
             var up_ch = await HeartBot.update(config.LANG)
+            await DrkBotCN.sendMessage(DrkBotCN.user.jid, degisiklikler + '```', MessageType.text)
             await DrkBotCN.sendMessage(DrkBotCN.user.jid, up_ch, MessageType.text)
         }
     })
@@ -346,7 +347,7 @@ async function myBot () {
             const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
 
             await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants[0]
+              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
@@ -362,7 +363,7 @@ async function myBot () {
             const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
             await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants[0]
+              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
