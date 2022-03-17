@@ -19,7 +19,7 @@ let wk = Config.WORKTYPE == 'public' ? false : true
 DrkBox.addCommand({pattern: 'ss ?(.*)', fromMe: wk}, async (message, match) => {
      if (!match[1]) return await message.sendMessage("⚠️: 🤖 *Necesito un link!*")
 
-     await axios.get(`https://api.apiflash.com/v1/urltoimage?access_key=${KLang.ss}&full_page=true&format=png&response_type=json&url=${match[1]}`).then(async (response) => {
+     await axios.get(`https://api.apiflash.com/v1/urltoimage?access_key=${KLang.SS}&full_page=true&format=png&response_type=json&url=${match[1]}`).then(async (response) => {
         const { url } = response.data
     	const rest_ss = await axios.get(url, { responseType: 'arraybuffer' })
         await message.sendMessage(Buffer.from(rest_ss.data), MessageType.image, { mimetype: Mimetype.png, caption: `${MLang.by}`, quoted: message.data })
