@@ -155,5 +155,5 @@ ${p} ${prefix}agraffiti text1,text2
 ${p} ${prefix}logoavengers text1,text2
 ${p} ${prefix}steel3d text1,text2
 ${p} ${prefix}glitch text1,text2
-╚══✪〘 *DrkBot* 〙✪══`)
+╚══✪〘 *DrkBot* 〙✪══`, MessageType.text)
 })
