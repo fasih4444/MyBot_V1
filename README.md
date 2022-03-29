@@ -1,5 +1,5 @@
 ## DrkBot es Supremo 💪 
-![Ian Vanh card name](https://cardivo.vercel.app/api?name=DrkBot%20-%20By:%20IAN&description=Hola%20a%20todos,%20Bienvenidos%20a%20DrkBot&image=https://raw.githubusercontent.com/DrkBotBase/MyBot_V1/master/media/gif/PicsArt_07-18-06.46.26.jpg?q=tbn:ANd9GcR7aMC3bf4bg4l_nhYS2Un9FXbFYcB4T83Shjk8xSUZDh_D61LFpzbpeqLW&s=10?v=4&backgroundColor=%CEECF5&instagram=iand_tv&github=DrkBotBase&)
+![Ian Vanh card name](https://cardivo.vercel.app/api?name=DrkBot%20-%20By:%20IAN&description=Hola%20a%20todos,%20Bienvenidos%20a%20DrkBot&image=https://raw.githubusercontent.com/DrkBotBase/MyBot_V1/master/media/gif/PicsArt_07-18-06.46.26.jpg?q=tbn:ANd9GcR7aMC3bf4bg4l_nhYS2Un9FXbFYcB4T83Shjk8xSUZDh_D61LFpzbpeqLW&s=10?v=4&backgroundColor=%CEECF5&fontColor=%2EFE64&instagram=iand_tv&github=DrkBotBase&)
 
 ### Redes Sociales..
 
