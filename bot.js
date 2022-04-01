@@ -344,34 +344,31 @@ async function myBot () {
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
             // goodbye
             const gb = await getMessage(msg.key.remoteJid, 'goodbye');
-            const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
-            const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+            const cteks = `╔══✪〘 *SE FUE* 〙\n╠ *LO EXTRAÑAREMOS*\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
+      try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
+            const resim = await getBuffer(ppUrl)
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
-                Buffer.from(resim.data),
+                resim,
                 MessageType.image,
-                { caption: cteks });
+                {caption: cteks});
+            }
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
             const gb = await getMessage(msg.key.remoteJid, 'welcome');
-            const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
-            const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+            const cteks = `╔══✪〘 *BIENVENIDO* 〙\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
+      try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
+            const resim = await getBuffer(ppUrl)
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
-                Buffer.from(resim.data),
+                resim,
                 MessageType.image,
-                { caption: cteks });
+                {caption: cteks});
             return;
         }
         // ==================== End Greetings ====================
