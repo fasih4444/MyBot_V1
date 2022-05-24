@@ -79,6 +79,7 @@ class ReplyMessage extends Base {
     }
 };
 
+<<<<<<< HEAD
 const shadowButton = (id, text1, desc1, but = [], options = {}) => {
       const buttonMessage = {
         contentText: text1,
@@ -91,3 +92,7 @@ const shadowButton = (id, text1, desc1, but = [], options = {}) => {
 
 
 module.exports = {ReplyMessage, shadowButton};
+=======
+
+module.exports = ReplyMessage;
+>>>>>>> 020fb12d7f90922b629dd2552e724630e5df2033

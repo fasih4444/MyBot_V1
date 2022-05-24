@@ -343,10 +343,14 @@ async function myBot () {
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const cteks = `╔══✪〘 *SE FUE* 〙\n╠ *LO EXTRAÑAREMOS*\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
       try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
+<<<<<<< HEAD
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+=======
+            const resim = await getBuffer(ppUrl)
+>>>>>>> 020fb12d7f90922b629dd2552e724630e5df2033
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
-                Buffer.from(resim.data),
+                resim,
                 MessageType.image,
                 {caption: cteks});
             }
@@ -358,10 +362,14 @@ async function myBot () {
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
             const cteks = `╔══✪〘 *BIENVENIDO* 〙\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
       try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
+<<<<<<< HEAD
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
+=======
+            const resim = await getBuffer(ppUrl)
+>>>>>>> 020fb12d7f90922b629dd2552e724630e5df2033
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
-                Buffer.from(resim.data),
+                resim,
                 MessageType.image,
                 {caption: cteks});
             return;
