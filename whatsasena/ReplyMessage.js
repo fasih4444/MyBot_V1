@@ -79,20 +79,4 @@ class ReplyMessage extends Base {
     }
 };
 
-<<<<<<< HEAD
-const shadowButton = (id, text1, desc1, but = [], options = {}) => {
-      const buttonMessage = {
-        contentText: text1,
-        footerText: desc1,
-        buttons: but,
-        headerType: 1,
-      };
-      message.sendMessage(id, buttonMessage, MessageType.buttonsMessage, options);
-    };
-
-
-module.exports = {ReplyMessage, shadowButton};
-=======
-
 module.exports = ReplyMessage;
->>>>>>> 020fb12d7f90922b629dd2552e724630e5df2033
