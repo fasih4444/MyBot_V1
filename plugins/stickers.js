@@ -71,7 +71,7 @@ else if (Config.WORKTYPE == 'public') {
                 .save('st.webp')
                 .on('end', async () => {
                     await message.sendMessage(fs.readFileSync('st.webp'), MessageType.sticker, { pack: 'DrkBot', author: 'IanVanh' });
-            });
+                })
         return await message.client.deleteMessage(message.jid, {id: downloading.key.id, remoteJid: message.jid, fromMe: true})
 
         }

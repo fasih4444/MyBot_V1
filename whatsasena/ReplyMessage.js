@@ -4,7 +4,7 @@ you may not use this file except in compliance with the License.
 DrkBot - Ian VanH
 */
 
-const {MessageType, Presence, MessageOptions} = require('@adiwajshing/baileys');
+const {MessageType, Mimetype, Presence, MessageOptions} = require('@adiwajshing/baileys');
 const Base = require('./Base');
 const Image = require('./Image');
 
@@ -36,6 +36,10 @@ class ReplyMessage extends Base {
             this.width = data.quotedMessage.videoMessage.width;
             this.mediaKey = data.quotedMessage.videoMessage.mediaKey;
             this.video = true;
+        } else if (data.quotedMessage && data.quotedMessage.listResponseMessage) {
+            this.message = data.quotedMessage.listResponseMessage.title === null ? data.message.listResponseMessage.title : '';
+        } else if (data.quotedMessage && data.quotedMessage.buttonsResponseMessage) {
+            this.message = data.quotedMessage.buttonsResponseMessage.selectedButtonId === null ? data.message.buttonsResponseMessage.selectedButtonId : '';
         } else if (data.quotedMessage && data.quotedMessage.conversation) {
             this.message = data.quotedMessage.conversation;
             this.text = data.quotedMessage.conversation;
@@ -75,4 +79,15 @@ class ReplyMessage extends Base {
     }
 };
 
-module.exports = ReplyMessage;
+const shadowButton = (id, text1, desc1, but = [], options = {}) => {
+      const buttonMessage = {
+        contentText: text1,
+        footerText: desc1,
+        buttons: but,
+        headerType: 1,
+      };
+      message.sendMessage(id, buttonMessage, MessageType.buttonsMessage, options);
+    };
+
+
+module.exports = {ReplyMessage, shadowButton};

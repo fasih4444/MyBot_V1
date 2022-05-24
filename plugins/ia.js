@@ -24,7 +24,7 @@ DrkBox.addCommand({pattern: 'bot ?(.*)', fromMe: wk, desc: Lang.DESC}, async (me
             if (text ==='Roberto' || text === 'maite' || text === 'Luis Mario.' || text === 'Ricardo milos\n') {
                 await message.client.sendMessage(message.jid, '🤖 ' + '```mi nombre es DrkBot```', MessageType.text, {quoted: message.data});
             } else {
-                console.log('🤖 ' + text)
+                //console.log('🤖 ' + text)
                 await message.client.sendMessage(message.jid, '🤖 ' + '```' + text + '```', MessageType.text, {quoted: message.data});
             }
         } catch {

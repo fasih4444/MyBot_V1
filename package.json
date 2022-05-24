@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/DrkBotBase/MyBot_V1#readme",
   "dependencies": {
-    "mybot-npm": "^2.1.1"
+    "mybot-npm": "^2.1.2"
   }
 }

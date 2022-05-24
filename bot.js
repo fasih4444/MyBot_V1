@@ -321,11 +321,6 @@ async function myBot () {
         }
     })
     // ==================== New Commands ====================
-    DrkBotCN.on('CB:call', async json => {
-        const callerId = json[2][0][1].from;
-        console.log("Llamada recibida de "+ callerId)
-       // DrkBotCN.sendMessage(from, `*${DrkBotCN.user.name}* No debiste llamar al bot, tu número se bloqueará automáticamente`, MessageType.text).then(() => DrkBotCN.blockUser(from, "add"));
-    });
     
     
     // ==================== New Commands ====================
@@ -333,7 +328,7 @@ async function myBot () {
         if (!m.hasNewMessage) return;
         if (!m.messages && !m.count) return;
         let msg = m.messages.all()[0];
-        const from = msg.key.remoteJid
+        //const from = msg.key.remoteJid
 
         if (msg.key && msg.key.remoteJid == 'status@broadcast') return;
         if (config.NO_ONLINE) {
@@ -344,34 +339,31 @@ async function myBot () {
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
             // goodbye
             const gb = await getMessage(msg.key.remoteJid, 'goodbye');
-            const cteks = '╔══✪〘 *SE FUE* 〙\n╠❖ *LO EXTRAÑAREMOS*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
+            const cteks = `╔══✪〘 *SE FUE* 〙\n╠ *LO EXTRAÑAREMOS*\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
+      try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
                 Buffer.from(resim.data),
                 MessageType.image,
-                { caption: cteks });
+                {caption: cteks});
+            }
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
             const gb = await getMessage(msg.key.remoteJid, 'welcome');
-            const cteks = '╔══✪〘 *NUEVO USUARIO* 〙\n╠❖ *Tenemos alguien nuevo*\n╚══✪〘 *DrkBot* 〙✪══'
 
-            await DrkBotCN.sendMessage(msg.key.remoteJid, cteks, MessageType.text);
-              num = msg.participants
             const mbjson = await DrkBotCN.groupMetadata(msg.key.remoteJid)
-            const ppUrl = await DrkBotCN.getProfilePicture(`${num.split('@')[0]}@c.us`)
+            const cteks = `╔══✪〘 *BIENVENIDO* 〙\n❖ *Nombre:* @${msg.messageStubParameters[0].split('@')[0]}\n❖ *Grupo:* ${mbjson.subject}\n❖ *Creador:* ${mbjson.owner}\n❖ *Descripción: ${mbjson.desc}\n❖ *BOT:* ${DrkBotCN.user.name}\n╚══✪〘 *DrkBot* 〙✪══`
+      try { const ppUrl = await DrkBotCN.getProfilePicture(msg.messageStubParameters[0]); } catch { ppUrl = await DrkBotCN.getProfilePicture(); }
             const resim = await axios.get(ppUrl, {responseType: 'arraybuffer'})
             await DrkBotCN.sendMessage(
                 msg.key.remoteJid,
                 Buffer.from(resim.data),
                 MessageType.image,
-                { caption: cteks });
+                {caption: cteks});
             return;
         }
         // ==================== End Greetings ====================
@@ -396,6 +388,10 @@ async function myBot () {
                   var text_msg = msg.message.videoMessage.caption;
                 } else if (msg.message) {
                   var text_msg = msg.message.extendedTextMessage === null ? msg.message.conversation : msg.message.extendedTextMessage.text;
+                } else if (msg.message && msg.message.buttonsResponseMessage.selectedButtonId) {
+                  var text_msg = msg.message.buttonsResponseMessage.selectedButtonId;
+                } else if (msg.message && msg.message.listResponseMessage.singleSelectReply.selectedRowId) {
+                  var text_msg = msg.message.listResponseMessage.singleSelectReply.selectedRowId;
                 } else {
                   var text_msg = undefined
                 }

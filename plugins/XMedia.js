@@ -650,7 +650,7 @@ if (Config.WORKTYPE == 'private') {
                 id: message.reply_message.id
             },
             message: message.reply_message.data.quotedMessage
-        });
+
         await message.sendMessage('_This process may take a while.._');
 
         ffmpeg(location)
