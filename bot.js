@@ -350,7 +350,6 @@ async function myBot () {
                 resim,
                 MessageType.image,
                 {caption: cteks});
-            }
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
             // welcome
